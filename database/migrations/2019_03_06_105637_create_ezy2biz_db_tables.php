@@ -30,8 +30,10 @@ class CreateEzy2bizDbTables extends Migration
             $table->string('email');
             $table->string('password');
             $table->integer('parent_id')->unsigned()->index();
+            $table->integer('referrer_id')->unsigned()->index();
             $table->tinyInteger('step');
             $table->float('point');
+            $table->boolean('is_active');
         });
 
         Schema::create('products', function (Blueprint $table) {
