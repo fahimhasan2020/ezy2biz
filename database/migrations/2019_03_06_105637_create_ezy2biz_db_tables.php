@@ -17,7 +17,7 @@ class CreateEzy2bizDbTables extends Migration
             $table->increments('id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('password');
         });
 
@@ -27,7 +27,7 @@ class CreateEzy2bizDbTables extends Migration
             $table->string('last_name');
             $table->string('phone');
             $table->string('address');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('password');
             $table->integer('parent_id')->unsigned()->index();
             $table->integer('referrer_id')->unsigned()->index();

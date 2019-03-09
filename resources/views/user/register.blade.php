@@ -9,5 +9,57 @@
 </head>
 <body>
 <h1>This is User Registration page</h1>
+<hr>
+<form action="{{route('user.register')}}" method="post">
+    @csrf
+    <label>
+        First Name:
+        <input type="text" name="first-name">
+    </label>
+    <br>
+    <label>
+        Last Name:
+        <input type="text" name="last-name">
+    </label>
+    <br>
+    <label>
+        Phone No.:
+        <input type="text" name="phone">
+    </label>
+    <br>
+    <label>
+        Address:
+        <input type="text" name="address">
+    </label>
+    <br>
+    <label>
+        Parent:
+        <input type="text" name="parent-id" >
+    </label>
+    <br>
+    <label>
+        Referrer:
+        <input type="text" name="referrer-id" >
+    </label>
+    <br>
+    <label>
+        Email:
+        <input type="email" name="email">
+    </label>
+    <br>
+    <label>
+        Password:
+        <input type="password" name="password">
+    </label>
+    <br>
+    <label>
+        Confirm Password:
+        <input type="password" name="confirm-password">
+    </label>
+    <br>
+    <label>
+        <input type="submit" name="submit" value="Register">
+    </label>
+</form>
 </body>
 </html>

@@ -13,5 +13,22 @@
 <ul>
     <li><a href="/u/dashboard">Dashboard</a></li>
 </ul>
+<hr>
+<form action="{{ route('user.login') }}" method="post">
+    @csrf
+    <label>
+        Email:
+        <input type="email" name="email">
+    </label>
+    <br>
+    <label>
+        Password:
+        <input type="password" name="password">
+    </label>
+    <br>
+    <label>
+        <input type="submit" name="submit" value="Login">
+    </label>
+</form>
 </body>
 </html>

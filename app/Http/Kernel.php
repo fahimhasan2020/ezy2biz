@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -60,6 +59,10 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'user-logged' => Middleware\RedirectIfUserLogged::class,
+        'user-not-logged' => Middleware\RedirectIfUserNotLogged::class,
+        'admin-logged' => Middleware\RedirectIfAdminLogged::class,
+        'admin-not-logged' => Middleware\RedirectIfAdminNotLogged::class
     ];
 
     /**
