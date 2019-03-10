@@ -39,11 +39,10 @@ class CreateEzy2bizDbTables extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->text('details');
+            $table->text('description');
             $table->float('selling_price');
             $table->float('wholesale_price');
-            $table->float('point');
-            $table->tinyInteger('rating');
+            $table->float('commission');
         });
 
         Schema::create('bulletins', function (Blueprint $table) {

@@ -15,13 +15,23 @@ Route::get('/', function () {
     return view('landing');
 });
 
-Route::get('/u/login', function () {
-    return view('user.login');
-})->middleware('user-logged');
-
-Route::post('/u/login', 'UserController@login')->name('user.login');
-
 Route::group(['middleware' => ['user-not-logged']], function () {
+
+    Route::get('/u/register', function () {
+        return view('user.register');
+    });
+
+    Route::post('/u/register', 'UserController@register')->name('user.register');
+
+    Route::get('/u/login', function () {
+        return view('user.login');
+    })->middleware('user-not-logged');
+
+    Route::post('/u/login', 'UserController@login')->name('user.login');
+
+});
+
+Route::group(['middleware' => ['user-logged']], function () {
 
     Route::get('/u/logout', 'UserController@logout');
 
@@ -55,12 +65,6 @@ Route::group(['middleware' => ['user-not-logged']], function () {
 
 });
 
-Route::get('/u/register', function () {
-    return view('user.register');
-});
-
-Route::post('/u/register', 'UserController@register')->name('user.register');
-
 Route::get('/products', function () {
     return view('product.all');
 });
@@ -83,11 +87,11 @@ Route::get('/bulletin/{id}', function () {
 
 Route::get('/a/login', function () {
    return view('admin.login');
-})->middleware('admin-logged');
+})->middleware('admin-not-logged');
 
 Route::post('/a/login', 'AdminController@login')->name('admin.login');
 
-Route::group(['middleware' => ['admin-not-logged']], function () {
+Route::group(['middleware' => ['admin-logged']], function () {
 
     Route::get('/a/logout', 'AdminController@logout');
 
@@ -103,25 +107,23 @@ Route::group(['middleware' => ['admin-not-logged']], function () {
         return view('admin.single-user');
     });
 
-    Route::get('/a/products', function () {
-        return view('admin.all-products');
-    });
+    Route::get('/a/products', 'ProductController@allProducts');
 
     Route::get('/a/product/add', function () {
         return view('admin.add-product');
     });
 
+    Route::post('/a/product/add', 'ProductController@add')->name('product.add');
+
     Route::get('/a/product/{id}', function () {
         return view('admin.single-product');
     });
 
-    Route::get('/a/product/{id}/edit', function () {
-        return view('admin.edit-product');
-    });
+    Route::get('/a/product/{id}/edit', 'ProductController@getProduct')->name('product.edit');
 
     Route::get('/a/product/delete', function () {
         return redirect('/a/products');
-    });
+    })->name('product.delete');
 
     Route::get('/a/bulletins', function () {
         return view('admin.all-bulletins');

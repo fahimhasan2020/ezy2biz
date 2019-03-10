@@ -11,21 +11,25 @@ class UserController extends Controller
 {
     public function register(Request $request, RegistrationValidator $validator, User $user)
     {
-        $validator->validate($request->request);
+        if (!$validator->validate($request->request)) {
+            return redirect()->back();
+        }
         if (!$user->exists($request->request)) {
             $user->register($request->request);
+            return redirect('/u/login');
         }
+        return redirect()->back();
     }
 
     public function login(Request $request, LoginValidator $validator, User $user)
     {
-        $validator->validate($request->request);
-        $userObj = $user->verify($request->request);
+        if ($validator->validate($request->request)) {
+            $userObj = $user->verify($request->request);
+        }
         if (isset($userObj) && $userObj->id) {
             $request->session()->put('user', $userObj->id);
             return redirect('/u/dashboard');
         }
-
         //Show unsuccessful login
         return redirect()->back();
     }

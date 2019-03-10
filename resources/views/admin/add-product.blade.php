@@ -16,5 +16,42 @@
     <li><a href="/a/settings">Settings</a></li>
     <li><a href="/a/logout">Logout</a></li>
 </ul>
+<hr>
+<form action="{{ route('product.add') }}" method="post" enctype="multipart/form-data">
+    @csrf
+    <label>
+        Product Name:
+        <input type="text" name="name">
+    </label>
+    <br>
+    <label>
+        Product Description:
+        <input type="text" name="description">
+    </label>
+    <br>
+    <label>
+        Sale Price:
+        <input type="number" name="sale-price">
+    </label>
+    <br>
+    <label>
+        Wholesale Price:
+        <input type="number" name="wholesale-price">
+    </label>
+    <br>
+    <label>
+        Commission: (In percentage)
+        <input type="number" name="commission"> &percnt;
+    </label>
+    <br>
+    <label>
+        Product Image:
+        <input type="file" name="image">
+    </label>
+    <br>
+    <label>
+        <input type="submit" name="submit" value="Add Product">
+    </label>
+</form>
 </body>
 </html>
