@@ -85,11 +85,11 @@ Route::get('/a/login', function () {
    return view('admin.login');
 })->middleware('admin-logged');
 
+Route::post('/a/login', 'AdminController@login')->name('admin.login');
+
 Route::group(['middleware' => ['admin-not-logged']], function () {
 
-    Route::get('/a/logout', function () {
-        return view('admin.logout');
-    });
+    Route::get('/a/logout', 'AdminController@logout');
 
     Route::get('/a/dashboard', function () {
         return view('admin.dashboard');

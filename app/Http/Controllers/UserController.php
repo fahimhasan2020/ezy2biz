@@ -21,7 +21,7 @@ class UserController extends Controller
     {
         $validator->validate($request->request);
         $userObj = $user->verify($request->request);
-        if ($userObj->id) {
+        if (isset($userObj) && $userObj->id) {
             $request->session()->put('user', $userObj->id);
             return redirect('/u/dashboard');
         }

@@ -15,6 +15,9 @@ class RedirectIfAdminLogged
      */
     public function handle($request, Closure $next)
     {
+        if ($request->session()->has('admin')) {
+            return redirect('a/dashboard');
+        }
         return $next($request);
     }
 }

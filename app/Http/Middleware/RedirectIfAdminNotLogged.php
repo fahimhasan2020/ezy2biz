@@ -15,6 +15,9 @@ class RedirectIfAdminNotLogged
      */
     public function handle($request, Closure $next)
     {
+        if (!$request->session()->has('admin')) {
+            return redirect('/a/login');
+        }
         return $next($request);
     }
 }
