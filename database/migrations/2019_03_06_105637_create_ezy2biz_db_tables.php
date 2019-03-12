@@ -40,9 +40,10 @@ class CreateEzy2bizDbTables extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('description');
-            $table->float('selling_price');
+            $table->float('sale_price');
             $table->float('wholesale_price');
             $table->float('commission');
+            $table->text('image_paths');
         });
 
         Schema::create('bulletins', function (Blueprint $table) {
@@ -96,19 +97,6 @@ class CreateEzy2bizDbTables extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
         });
-
-        Schema::create('product_images', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('product_id')->unsigned()->index();
-            $table->string('image_name')->unique();
-
-            $table
-                ->foreign('product_id')
-                ->references('id')
-                ->on('products')
-                ->onUpdate('cascade')
-                ->onDelete('restrict');
-        });
     }
 
     /**
@@ -118,7 +106,6 @@ class CreateEzy2bizDbTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_images');
         Schema::dropIfExists('cron_job_schedules');
         Schema::dropIfExists('referral_tree');
         Schema::dropIfExists('bulletins');

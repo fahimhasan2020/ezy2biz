@@ -34,10 +34,19 @@
     <br>
     Commission: {{ $product->commission }}&percnt;
     <br>
-    image: <img src="{{Storage::url('products/' . $product->image_name)}}" height="100">
-    <br>
-    <a href="{{ route('product.edit', ['id' => $product->id]) }}">Edit Product</a>
-    <a href="{{ route('product.delete', ['id' => $product->id]) }}">Delete Product</a>
+    @foreach($product->image_paths as $image)
+        <br>
+        {{ $image }}
+        image: <img src="{{Storage::url('' . $image)}}" height="100">
+        <br>
+    @endforeach
+    <a href="{{ route('product.single', ['id' => $product->id]) }}">Edit Product</a>
+    <form action="{{ route('product.delete') }}" method="post">
+        @csrf
+        @method('DELETE')
+        <input type="hidden" name="id" value="{{ $product->id }}">
+        <input type="submit" name="submit" value="Delete Product">
+    </form>
     <hr>
 @endforeach
 </body>

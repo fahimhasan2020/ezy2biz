@@ -46,7 +46,7 @@
     <br>
     <label>
         Product Image:
-        <input type="file" name="image">
+        <input type="file" name="images[]" multiple>
     </label>
     <br>
     <label>

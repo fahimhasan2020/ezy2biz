@@ -119,11 +119,11 @@ Route::group(['middleware' => ['admin-logged']], function () {
         return view('admin.single-product');
     });
 
-    Route::get('/a/product/{id}/edit', 'ProductController@getProduct')->name('product.edit');
+    Route::get('/a/product/{id}/edit', 'ProductController@getProduct')->name('product.single');
 
-    Route::get('/a/product/delete', function () {
-        return redirect('/a/products');
-    })->name('product.delete');
+    Route::put('/a/product/{id}/edit', 'ProductController@edit')->name('product.edit');
+
+    Route::delete('/a/product/delete', 'ProductController@delete')->name('product.delete');
 
     Route::get('/a/bulletins', function () {
         return view('admin.all-bulletins');
