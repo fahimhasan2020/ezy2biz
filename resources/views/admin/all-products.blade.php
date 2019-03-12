@@ -40,8 +40,8 @@
         image: <img src="{{Storage::url('' . $image)}}" height="100">
         <br>
     @endforeach
-    <a href="{{ route('product.single', ['id' => $product->id]) }}">Edit Product</a>
-    <form action="{{ route('product.delete') }}" method="post">
+    <a href="{{ route('admin.edit-product', ['id' => $product->id]) }}">Edit Product</a>
+    <form action="{{ route('admin.delete-product') }}" method="post">
         @csrf
         @method('DELETE')
         <input type="hidden" name="id" value="{{ $product->id }}">

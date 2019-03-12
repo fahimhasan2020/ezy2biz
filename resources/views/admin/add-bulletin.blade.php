@@ -16,5 +16,22 @@
     <li><a href="/a/settings">Settings</a></li>
     <li><a href="/a/logout">Logout</a></li>
 </ul>
+<hr>
+<form action="{{ route('admin.add-bulletin') }}" method="post">
+    @csrf
+    <label>
+        Title:
+        <input type="text" name="title">
+    </label>
+    <br>
+    <label>
+        Description:
+        <textarea name="description" cols="80" rows="20" placeholder="Write description..."></textarea>
+    </label>
+    <br>
+    <label>
+        <input type="submit" name="submit" value="Add Bulletin">
+    </label>
+</form>
 </body>
 </html>

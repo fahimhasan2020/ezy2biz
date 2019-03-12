@@ -113,37 +113,35 @@ Route::group(['middleware' => ['admin-logged']], function () {
         return view('admin.add-product');
     });
 
-    Route::post('/a/product/add', 'ProductController@add')->name('product.add');
+    Route::post('/a/product/add', 'ProductController@add')->name('admin.add-product');
 
     Route::get('/a/product/{id}', function () {
         return view('admin.single-product');
     });
 
-    Route::get('/a/product/{id}/edit', 'ProductController@getProduct')->name('product.single');
+    Route::get('/a/product/{id}/edit', 'ProductController@getProduct')->name('admin.edit-product');
 
-    Route::put('/a/product/{id}/edit', 'ProductController@edit')->name('product.edit');
+    Route::put('/a/product/{id}/edit', 'ProductController@edit')->name('admin.edit-product');
 
-    Route::delete('/a/product/delete', 'ProductController@delete')->name('product.delete');
+    Route::delete('/a/product/delete', 'ProductController@delete')->name('admin.delete-product');
 
-    Route::get('/a/bulletins', function () {
-        return view('admin.all-bulletins');
-    });
+    Route::get('/a/bulletins', 'BulletinController@allBulletins');
 
     Route::get('/a/bulletin/add', function () {
         return view('admin.add-bulletin');
     });
 
+    Route::post('/a/bulletin/add', 'BulletinController@addBulletin')->name('admin.add-bulletin');
+
     Route::get('/a/bulletin/{id}', function () {
         return view('admin.single-bulletin');
     });
 
-    Route::get('/a/bulletin/{id}/edit', function () {
-        return view('admin.edit-bulletin');
-    });
+    Route::get('/a/bulletin/{id}/edit', 'BulletinController@getBulletin')->name('admin.edit-bulletin');
 
-    Route::get('/a/bulletin/delete', function () {
-        return redirect('/a/bulletins');
-    });
+    Route::put('/a/bulletin/{id}/edit', 'BulletinController@editBulletin')->name('admin.edit-bulletin');
+
+    Route::delete('/a/bulletin/delete', 'BulletinController@deleteBulletin')->name('admin.delete-bulletin');
 
     Route::get('/a/settings', function () {
         return view('admin.settings');

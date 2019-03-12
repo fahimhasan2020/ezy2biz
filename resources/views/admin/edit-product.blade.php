@@ -17,7 +17,7 @@
     <li><a href="/a/logout">Logout</a></li>
 </ul>
 <hr>
-<form action="{{ route('product.edit', $product->id) }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('admin.edit-product', $product->id) }}" method="post" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <label>
@@ -27,7 +27,7 @@
     <br>
     <label>
         Product Description:
-        <input type="text" name="description" value="{{ $product->description }}">
+        <textarea name="description" cols="80" rows="20" placeholder="Write description...">{{ $product->description }}</textarea>
     </label>
     <br>
     <label>

@@ -65,8 +65,8 @@ class ProductController extends Controller
 
     public function getProduct($productId, Product $product)
     {
-        $product = $product->get($productId);
-        $product->image_paths = json_decode($product->image_paths);
-        return view('admin.edit-product')->with('product', $product);
+        $query = $product->get($productId);
+        $query->image_paths = json_decode($query->image_paths);
+        return view('admin.edit-product')->with('product', $query);
     }
 }
