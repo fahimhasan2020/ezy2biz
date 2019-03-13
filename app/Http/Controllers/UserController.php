@@ -10,13 +10,22 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function getRegistrationForm(Request $request, User $user)
+    {
+        $query = $user->getRefLink($request->get('ref'));
+        if (!$query) {
+            return redirect(404);
+        }
+        return view('user.register')->with('refInfo', $query);
+    }
+
     public function register(Request $request, RegistrationValidator $validator, User $user)
     {
         if (!$validator->validate($request->request)) {
             return redirect()->back();
         }
-        if (!$user->exists($request->request)) {
-            $user->register($request->request);
+        if (!$user->exists($request)) {
+            $user->register($request);
             return redirect('/u/login');
         }
         return redirect()->back();
@@ -25,7 +34,7 @@ class UserController extends Controller
     public function login(Request $request, LoginValidator $validator, User $user)
     {
         if ($validator->validate($request->request)) {
-            $userObj = $user->verify($request->request);
+            $userObj = $user->verify($request);
         }
         if (isset($userObj) && $userObj->id) {
             $request->session()->put('user', $userObj->id);
@@ -53,7 +62,7 @@ class UserController extends Controller
         $currentUserId = $request->session()->get('user');
         $request->request->add(['referrer-id' => $currentUserId]);
         $request->request->add(['referral-key' => $keygen->generateKey($request->request)]);
-        $user->addRefLink($request->request);
+        $user->addRefLink($request);
 
         return redirect()->route('user.ref-link');
     }

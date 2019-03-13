@@ -17,9 +17,7 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['user-not-logged']], function () {
 
-    Route::get('/u/register', function () {
-        return view('user.register');
-    });
+    Route::get('/u/register', 'UserController@getRegistrationForm')->name('user.register');
 
     Route::post('/u/register', 'UserController@register')->name('user.register');
 

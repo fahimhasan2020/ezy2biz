@@ -2,12 +2,12 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Symfony\Component\HttpFoundation\ParameterBag;
 
 class User extends Model
 {
-    public function exists(ParameterBag $userData)
+    public function exists(Request $userData)
     {
         return
             DB::table('users')
@@ -16,23 +16,28 @@ class User extends Model
                 ->count();
     }
 
-    public function register(ParameterBag $userData)
+    public function register(Request $userData)
     {
-        return
-            DB::table('users')
-                ->insert([
-                    'first_name'    => $userData->get('first-name'),
-                    'last_name'     => $userData->get('last-name'),
-                    'phone'         => $userData->get('phone'),
-                    'address'       => $userData->get('address'),
-                    'email'         => $userData->get('email'),
-                    'password'      => $userData->get('password'),
-                    'parent_id'     => $userData->get('parent-id'),
-                    'referrer_id'   => $userData->get('referrer-id')
-                ]);
+        DB::beginTransaction();
+        DB::table('users')
+            ->insert([
+                'first_name'    => $userData->get('first-name'),
+                'last_name'     => $userData->get('last-name'),
+                'phone'         => $userData->get('phone'),
+                'address'       => $userData->get('address'),
+                'email'         => $userData->get('email'),
+                'password'      => $userData->get('password'),
+                'parent_id'     => $userData->get('parent-id'),
+                'referrer_id'   => $userData->get('referrer-id')
+            ]);
+
+        DB::table('referral_links')
+            ->where('referral_key', '=', $userData->get('ref'))
+            ->update(['status' => 'complete']);
+        DB::commit();
     }
 
-    public function verify(ParameterBag $credentials)
+    public function verify(Request $credentials)
     {
         return
             DB::table('users')
@@ -52,7 +57,7 @@ class User extends Model
                 ->first();
     }
 
-    public function addRefLink(ParameterBag $referralData)
+    public function addRefLink(Request $referralData)
     {
         return
             DB::table('referral_links')
@@ -82,5 +87,23 @@ class User extends Model
                 ])
                 ->orderByDesc('referral_links.timestamp')
                 ->get();
+    }
+
+    public function getRefLink($refKey)
+    {
+        return
+            DB::table('referral_links')
+                ->select(
+                    'r.id as r_id',
+                    'r.first_name as r_fn',
+                    'r.last_name as r_ln',
+                    'p.id as p_id',
+                    'p.first_name as p_fn',
+                    'p.last_name as p_ln',
+                    'referral_key')
+                ->join('users as r', 'r.id', '=', 'referral_links.referrer_id')
+                ->join('users as p', 'p.id', '=', 'referral_links.parent_id')
+                ->where([['referral_key', '=', $refKey], ['status', '=', 'pending']])
+                ->first();
     }
 }

@@ -19,7 +19,7 @@
 <hr>
 @foreach($refLinks as $refLink)
 <ul>
-    <li>{{ url("/u/register/referral={$refLink->referral_key}") }}</li>
+    <li>{{ url("/u/register?ref={$refLink->referral_key}") }}</li>
     <li>{{ $refLink->parent_fn }} {{ $refLink->parent_ln }}</li>
     <li>{{ $refLink->parent_email }}</li>
     <li>{{ ucfirst($refLink->status) }}</li>

@@ -10,7 +10,7 @@
 <body>
 <h1>This is User Registration page</h1>
 <hr>
-<form action="{{route('user.register')}}" method="post">
+<form action="{{url()->full()}}" method="post">
     @csrf
     <label>
         First Name:
@@ -34,12 +34,14 @@
     <br>
     <label>
         Parent:
-        <input type="text" name="parent-id" >
+        <input type="hidden" name="parent-id" value="{{ $refInfo->p_id }}">
+        <input type="text" value="{{ $refInfo->p_fn }} {{$refInfo->p_ln}}" readonly >
     </label>
     <br>
     <label>
         Referrer:
-        <input type="text" name="referrer-id" >
+        <input type="hidden" name="referrer-id" value="{{ $refInfo->r_id }}">
+        <input type="text" value="{{ $refInfo->r_fn }} {{$refInfo->r_ln}}" readonly>
     </label>
     <br>
     <label>
