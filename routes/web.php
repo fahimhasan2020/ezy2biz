@@ -39,13 +39,11 @@ Route::group(['middleware' => ['user-logged']], function () {
         return view('user.dashboard');
     });
 
-    Route::get('/u/tree', function () {
-        return view('user.tree');
-    });
+    Route::get('/u/tree', 'UserController@tree');
 
-    Route::get('/u/ref-link', function () {
-        return view('user.ref-link');
-    });
+    Route::get('/u/ref-link', 'UserController@getRefLinks')->name('user.ref-link');
+
+    Route::post('/u/ref-link', 'UserController@generateRefLink')->name('user.ref-link');
 
     Route::get('/u/balance', function () {
         return view('user.balance');

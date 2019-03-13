@@ -29,11 +29,11 @@ class CreateEzy2bizDbTables extends Migration
             $table->string('address');
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('parent_id')->unsigned()->index();
-            $table->integer('referrer_id')->unsigned()->index();
-            $table->tinyInteger('step');
-            $table->float('point');
-            $table->boolean('is_active');
+            $table->integer('parent_id')->unsigned()->index()->nullable();
+            $table->integer('referrer_id')->unsigned()->index()->nullable();
+            $table->tinyInteger('step')->default(1);
+            $table->float('point')->default(0);
+            $table->boolean('is_active')->default(false);
         });
 
         Schema::create('products', function (Blueprint $table) {
@@ -57,6 +57,22 @@ class CreateEzy2bizDbTables extends Migration
                 ->foreign('publisher_id')
                 ->references('id')
                 ->on('admins')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
+        });
+
+        Schema::create('referral_links', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('referrer_id')->unsigned()->index();
+            $table->integer('parent_id')->unsigned();
+            $table->string('referral_key')->unique();
+            $table->string('status')->default('pending')->index();
+            $table->timestamp('timestamp');
+
+            $table
+                ->foreign('referrer_id')
+                ->references('id')
+                ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
         });
@@ -108,6 +124,7 @@ class CreateEzy2bizDbTables extends Migration
     {
         Schema::dropIfExists('cron_job_schedules');
         Schema::dropIfExists('referral_tree');
+        Schema::dropIfExists('referral_links');
         Schema::dropIfExists('bulletins');
         Schema::dropIfExists('products');
         Schema::dropIfExists('users');

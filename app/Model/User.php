@@ -42,4 +42,45 @@ class User extends Model
                     ['password', '=', $credentials->get('password')]
                 ])->first();
     }
+
+    public function get($userId)
+    {
+        return
+            DB::table('users')
+                ->select('id', 'first_name', 'last_name', 'email', 'is_active')
+                ->where('id', '=', $userId)
+                ->first();
+    }
+
+    public function addRefLink(ParameterBag $referralData)
+    {
+        return
+            DB::table('referral_links')
+                ->insert([
+                    'referrer_id'   => $referralData->get('referrer-id'),
+                    'parent_id'     => $referralData->get('parent-id'),
+                    'referral_key' => $referralData->get('referral-key')
+                ]);
+    }
+
+    public function getRefLinks($userId, $status)
+    {
+        return
+            DB::table('referral_links')
+                ->join('users', 'referral_links.parent_id', '=', 'users.id')
+                ->select(
+                    'referral_links.id',
+                    'referral_links.referral_key',
+                    'referral_links.parent_id',
+                    'referral_links.status',
+                    'users.first_name as parent_fn',
+                    'users.last_name as parent_ln',
+                    'users.email as parent_email'
+                )->where([
+                    ['referral_links.referrer_id', '=', $userId],
+                    ['referral_links.status', '=', $status]
+                ])
+                ->orderByDesc('referral_links.timestamp')
+                ->get();
+    }
 }
