@@ -26,10 +26,12 @@
     <hr>
     <h3>{{ $bulletin->title }}</h3>
     <ul>
-        <li>{{ $bulletin->first_name }} {{$bulletin->last_name}}</li>
+        <li>{{ $bulletin->first_name }} {{ $bulletin->last_name }}</li>
         <li>{{ date('D, j F Y', strtotime($bulletin->publish_date)) }}</li>
     </ul>
-    <p>{{ $bulletin->description }}</p>
+    <p>{{ \Illuminate\Support\Str::words($bulletin->description) }}
+        <a href="/a/bulletin/{{ $bulletin->id }}">Read More</a>
+    </p>
 
     <a href="{{ route('admin.edit-bulletin', ['id' => $bulletin->id]) }}">Edit Bulletin</a>
     <form action="{{ route('admin.delete-bulletin') }}" method="post">

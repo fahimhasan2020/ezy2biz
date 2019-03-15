@@ -18,5 +18,26 @@
     <li><a href="/u/dashboard">Dashboard</a></li>
     <li><a href="/bulletins">Bulletins</a></li>
 </ul>
+<hr>
+@foreach($products as $product)
+    Name: {{ $product->name }}
+    <br>
+    Description: {{ $product->description }}
+    <br>
+    Sale Price: {{ $product->sale_price }}
+    <br>
+    Wholesale Price: {{ $product->wholesale_price }}
+    <br>
+    Commission: {{ $product->commission }}&percnt;
+    <br>
+    @foreach($product->image_paths as $image)
+        <br>
+        {{ $image }}
+        image: <img src="{{Storage::url('' . $image)}}" height="100">
+        <br>
+    @endforeach
+    <a href="{{ route('product.buy', ['id' => $product->id]) }}">Buy Product</a>
+    <hr>
+@endforeach
 </body>
 </html>

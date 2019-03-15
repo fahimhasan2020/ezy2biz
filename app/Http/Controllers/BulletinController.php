@@ -26,15 +26,33 @@ class BulletinController extends Controller
         return redirect('/a/bulletins');
     }
 
-    public function allBulletins(Bulletin $bulletin)
+    public function adminAllBulletins(Bulletin $bulletin)
     {
         $bulletins = $bulletin->getAll();
         return view('admin.all-bulletins')->with('bulletins', $bulletins->all());
+    }
+
+    public function adminSingleBulletin($bulletinId, Bulletin $bulletin)
+    {
+        $bulletin = $bulletin->getSingle($bulletinId);
+        return view('admin.single-bulletin')->with('bulletin', $bulletin);
     }
 
     public function getBulletin($bulletinId, Bulletin $bulletin)
     {
         $query = $bulletin->get($bulletinId);
         return view('admin.edit-bulletin')->with('bulletin', $query);
+    }
+
+    public function userAllBulletins(Bulletin $bulletin)
+    {
+        $bulletins = $bulletin->getAll();
+        return view('bulletin.all')->with('bulletins', $bulletins->all());
+    }
+
+    public function userSingleBulletin($bulletinId, Bulletin $bulletin)
+    {
+        $bulletin = $bulletin->getSingle($bulletinId);
+        return view('bulletin.single')->with('bulletin', $bulletin);
     }
 }

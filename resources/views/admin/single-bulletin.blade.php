@@ -20,5 +20,19 @@
     <li><a href="/a/settings">Settings</a></li>
     <li><a href="/a/logout">Logout</a></li>
 </ul>
+<hr>
+<h3>{{ $bulletin->title }}</h3>
+<ul>
+    <li>{{ $bulletin->first_name }} {{$bulletin->last_name}}</li>
+    <li>{{ date('D, j F Y', strtotime($bulletin->publish_date)) }}</li>
+</ul>
+<p>{{ $bulletin->description }}</p>
+<a href="{{ route('admin.edit-bulletin', ['id' => $bulletin->id]) }}">Edit Bulletin</a>
+<form action="{{ route('admin.delete-bulletin') }}" method="post">
+    @csrf
+    @method('DELETE')
+    <input type="hidden" name="id" value="{{ $bulletin->id }}">
+    <input type="submit" name="submit" value="Delete Product">
+</form>
 </body>
 </html>

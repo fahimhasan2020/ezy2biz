@@ -14,5 +14,12 @@
     <li><a href="/u/dashboard">Dashboard</a></li>
     <li><a href="/bulletins">Bulletins</a></li>
 </ul>
+<hr>
+<h3>{{ $bulletin->title }}</h3>
+<ul>
+    <li>{{ $bulletin->first_name }} {{$bulletin->last_name}}</li>
+    <li>{{ date('D, j F Y', strtotime($bulletin->publish_date)) }}</li>
+</ul>
+<p>{{ $bulletin->description }}</p>
 </body>
 </html>

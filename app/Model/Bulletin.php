@@ -56,4 +56,14 @@ class Bulletin extends Model
                 ->where('id', '=', $bulletinId)
                 ->first();
     }
+
+    public function getSingle($bulletinId)
+    {
+        return
+            DB::table('bulletins')
+                ->join('admins', 'bulletins.publisher_id', '=', 'admins.id')
+                ->select('bulletins.*', 'admins.first_name', 'admins.last_name')
+                ->where('bulletins.id', '=', $bulletinId)
+                ->first();
+    }
 }

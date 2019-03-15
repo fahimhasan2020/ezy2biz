@@ -55,12 +55,22 @@ class ProductController extends Controller
         return redirect('/a/products');
     }
 
-    public function allProducts(Product $product) {
+    public function adminAllProducts(Product $product)
+    {
         $products = $product->getAll()->all();
         foreach ($products as $p) {
             $p->image_paths = json_decode($p->image_paths);
         }
         return view('admin.all-products')->with('products', $products);
+    }
+
+    public function userAllProducts(Product $product)
+    {
+        $products = $product->getAll()->all();
+        foreach ($products as $p) {
+            $p->image_paths = json_decode($p->image_paths);
+        }
+        return view('product.all')->with('products', $products);
     }
 
     public function getProduct($productId, Product $product)

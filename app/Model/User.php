@@ -19,8 +19,8 @@ class User extends Model
     public function register(Request $userData)
     {
         DB::beginTransaction();
-        DB::table('users')
-            ->insert([
+        $newUserId = DB::table('users')
+            ->insertGetId([
                 'first_name'    => $userData->get('first-name'),
                 'last_name'     => $userData->get('last-name'),
                 'phone'         => $userData->get('phone'),
@@ -34,6 +34,15 @@ class User extends Model
         DB::table('referral_links')
             ->where('referral_key', '=', $userData->get('ref'))
             ->update(['status' => 'complete']);
+
+        $time = time();
+        DB::table('cron_job_schedules')
+            ->insert([
+                'job_type'      => 'reg',
+                'issuer_id'     => $newUserId,
+                'issue_date'    => date('Y-m-d', $time),
+                'issue_time'    => date('H:i:s', $time),
+            ]);
         DB::commit();
     }
 
@@ -105,5 +114,55 @@ class User extends Model
                 ->join('users as p', 'p.id', '=', 'referral_links.parent_id')
                 ->where([['referral_key', '=', $refKey], ['status', '=', 'pending']])
                 ->first();
+    }
+
+    public function getUser($userId)
+    {
+        return
+            DB::table('users')
+                ->select('first_name', 'last_name', 'points', 'is_active')
+                ->where('id', '=', $userId)
+                ->first();
+    }
+
+    public function checkPointsAvailable($userId, $amount)
+    {
+        return
+            DB::table('users')
+                ->where([
+                    ['id', '=', $userId],
+                    ['points', '>=', $amount]
+                ])->count();
+    }
+
+    public function transferPoints($senderId, Request $request)
+    {
+        DB::beginTransaction();
+        DB::table('users')
+            ->where('id', '=', $senderId)
+            ->decrement('points', $request->get('amount'));
+        DB::table('users')
+            ->where('id', '=', $request->get('recipient'))
+            ->increment('points', $request->get('amount'));
+        DB::commit();
+    }
+
+    public function requestPoints($applicantId, Request $request)
+    {
+        return
+            DB::table('point_requests')
+                ->insert([
+                    'applicant_id'  => $applicantId,
+                    'amount'        => $request->get('amount'),
+                    'bkash_no'      => $request->get('bkash-num')
+                ]);
+    }
+
+    public function addPoints(Request $request)
+    {
+        return
+            DB::table('users')
+                ->where('id', '=', $request->get('applicant-id'))
+                ->increment('points', $request->get('points'));
     }
 }

@@ -33,7 +33,7 @@ class UserController extends Controller
 
     public function login(Request $request, LoginValidator $validator, User $user)
     {
-        if ($validator->validate($request->request)) {
+        if ($validator->validate($request)) {
             $userObj = $user->verify($request);
         }
         if (isset($userObj) && $userObj->id) {
@@ -72,5 +72,31 @@ class UserController extends Controller
         $currentUserId = $request->session()->get('user');
         $refLinks = $user->getRefLinks($currentUserId, 'pending')->all();
         return view('user.ref-link')->with('refLinks', $refLinks);
+    }
+
+    public function getPoints(Request $request, User $user)
+    {
+        $currentUserId = $request->session()->get('user');
+        $query = $user->getUser($currentUserId);
+        return view('user.points')
+            ->with('user', $query)
+            ->with('action', strtolower($request->get('action')));
+    }
+
+    public function transferPoints(Request $request, User $user)
+    {
+        $senderId = $request->session()->get('user');
+        if ($user->checkPointsAvailable($senderId, $request->get('amount'))) {
+            $user->transferPoints($senderId, $request);
+            return redirect('/u/points');
+        }
+        return redirect('/u/points?action=transfer');
+    }
+
+    public function requestPoints(Request $request, User $user)
+    {
+        $userId = $request->session()->get('user');
+        $user->requestPoints($userId, $request);
+        return redirect('u/points');
     }
 }

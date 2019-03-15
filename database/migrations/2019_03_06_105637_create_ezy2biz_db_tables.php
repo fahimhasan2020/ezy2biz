@@ -32,7 +32,7 @@ class CreateEzy2bizDbTables extends Migration
             $table->integer('parent_id')->unsigned()->index()->nullable();
             $table->integer('referrer_id')->unsigned()->index()->nullable();
             $table->tinyInteger('step')->default(1);
-            $table->float('point')->default(0);
+            $table->float('points')->default(0);
             $table->boolean('is_active')->default(false);
         });
 
@@ -104,7 +104,7 @@ class CreateEzy2bizDbTables extends Migration
             $table->integer('issuer_id')->unsigned();
             $table->date('issue_date');
             $table->time('issue_time');
-            $table->string('job_status');
+            $table->string('job_status')->default('pending');
 
             $table
                 ->foreign('issuer_id')

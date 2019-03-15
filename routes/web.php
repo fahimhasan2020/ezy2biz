@@ -15,11 +15,11 @@ Route::get('/', function () {
     return view('landing');
 });
 
+Route::get('/u/register', 'UserController@getRegistrationForm')->name('user.register');
+
+Route::post('/u/register', 'UserController@register')->name('user.register');
+
 Route::group(['middleware' => ['user-not-logged']], function () {
-
-    Route::get('/u/register', 'UserController@getRegistrationForm')->name('user.register');
-
-    Route::post('/u/register', 'UserController@register')->name('user.register');
 
     Route::get('/u/login', function () {
         return view('user.login');
@@ -43,17 +43,11 @@ Route::group(['middleware' => ['user-logged']], function () {
 
     Route::post('/u/ref-link', 'UserController@generateRefLink')->name('user.ref-link');
 
-    Route::get('/u/balance', function () {
-        return view('user.balance');
-    });
+    Route::get('/u/points', 'UserController@getPoints');
 
-    Route::get('/u/balance/transfer', function () {
-        return view('user.balance-transfer');
-    });
+    Route::post('/u/point/transfer', 'UserController@transferPoints');
 
-    Route::get('/u/balance/req', function () {
-        return view('user.balance-req');
-    });
+    Route::post('/u/point/req', 'UserController@requestPoints');
 
     Route::get('/u/settings', function () {
         return view('user.settings');
@@ -61,9 +55,7 @@ Route::group(['middleware' => ['user-logged']], function () {
 
 });
 
-Route::get('/products', function () {
-    return view('product.all');
-});
+Route::get('/products', 'ProductController@userAllProducts');
 
 Route::get('/product/{id}', function () {
     return view('product.single');
@@ -71,15 +63,11 @@ Route::get('/product/{id}', function () {
 
 Route::get('/product/{id}/buy', function () {
     return view('product.buy');
-});
+})->name('product.buy');
 
-Route::get('/bulletins', function () {
-    return view('bulletin.all');
-});
+Route::get('/bulletins', 'BulletinController@userAllBulletins');
 
-Route::get('/bulletin/{id}', function () {
-    return view('bulletin.single');
-});
+Route::get('/bulletin/{id}', 'BulletinController@userSingleBulletin');
 
 Route::get('/a/login', function () {
    return view('admin.login');
@@ -103,7 +91,7 @@ Route::group(['middleware' => ['admin-logged']], function () {
         return view('admin.single-user');
     });
 
-    Route::get('/a/products', 'ProductController@allProducts');
+    Route::get('/a/products', 'ProductController@adminAllProducts');
 
     Route::get('/a/product/add', function () {
         return view('admin.add-product');
@@ -121,7 +109,7 @@ Route::group(['middleware' => ['admin-logged']], function () {
 
     Route::delete('/a/product/delete', 'ProductController@delete')->name('admin.delete-product');
 
-    Route::get('/a/bulletins', 'BulletinController@allBulletins');
+    Route::get('/a/bulletins', 'BulletinController@adminAllBulletins');
 
     Route::get('/a/bulletin/add', function () {
         return view('admin.add-bulletin');
@@ -129,15 +117,17 @@ Route::group(['middleware' => ['admin-logged']], function () {
 
     Route::post('/a/bulletin/add', 'BulletinController@addBulletin')->name('admin.add-bulletin');
 
-    Route::get('/a/bulletin/{id}', function () {
-        return view('admin.single-bulletin');
-    });
+    Route::get('/a/bulletin/{id}', 'BulletinController@adminSingleBulletin');
 
     Route::get('/a/bulletin/{id}/edit', 'BulletinController@getBulletin')->name('admin.edit-bulletin');
 
     Route::put('/a/bulletin/{id}/edit', 'BulletinController@editBulletin')->name('admin.edit-bulletin');
 
     Route::delete('/a/bulletin/delete', 'BulletinController@deleteBulletin')->name('admin.delete-bulletin');
+
+    Route::get('/a/requests', 'AdminController@getRequests');
+
+    Route::post('/a/requests', 'AdminController@responseRequest');
 
     Route::get('/a/settings', function () {
         return view('admin.settings');
