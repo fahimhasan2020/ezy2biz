@@ -63,9 +63,9 @@ Route::get('/product/{id}', function () {
     return view('product.single');
 });
 
-Route::get('/product/{id}/buy', function () {
-    return view('product.buy');
-})->name('product.buy');
+Route::get('/product/{id}/buy', 'ProductController@getProductBuyPage')->name('product.buy');
+
+Route::post('/product/{id}/buy', 'ProductController@buyProduct');
 
 Route::get('/bulletins', 'BulletinController@userAllBulletins');
 

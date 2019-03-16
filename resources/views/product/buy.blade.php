@@ -14,5 +14,26 @@
     <li><a href="/u/dashboard">Dashboard</a></li>
     <li><a href="/bulletins">Bulletins</a></li>
 </ul>
+<hr>
+User name: {{ $user->first_name }} {{ $user->last_name }}
+Points: {{ $user->points }}
+Is active: @if($user->is_active) Yes @else No @endif
+<hr>
+Product name: {{ $product->name }}
+Product description: {{ $product->description }}
+Product price: {{ $product->sale_price }}
+Product images:
+@foreach($product->image_paths as $image)
+    <img alt="" src="{{Storage::url('' . $image)}}" height="100">
+@endforeach
+
+<form action="{{ url()->current() }}" method="post">
+    @csrf
+    <label>
+        Enter password to proceed:
+        <input type="password" name="password">
+        <input type="submit" name="submit" value="Proceed">
+    </label>
+</form>
 </body>
 </html>

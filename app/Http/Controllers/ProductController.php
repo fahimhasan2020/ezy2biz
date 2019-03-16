@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Core\ImageStore;
 use App\Core\ProductValidator;
 use App\Model\Product;
+use App\Model\User;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -78,5 +79,13 @@ class ProductController extends Controller
         $query = $product->get($productId);
         $query->image_paths = json_decode($query->image_paths);
         return view('admin.edit-product')->with('product', $query);
+    }
+
+    public function getProductBuyPage($productId, Request $request, Product $product, User $user)
+    {
+        $userQuery = $user->getUser($request->session()->get('user'));
+        $productQuery = $product->get($productId);
+        $productQuery->image_paths = json_decode($productQuery->image_paths);
+        return view('product.buy')->with('user', $userQuery)->with('product', $productQuery);
     }
 }
