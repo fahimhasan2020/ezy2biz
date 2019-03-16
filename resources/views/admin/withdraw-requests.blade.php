@@ -26,18 +26,18 @@
     bKash Number: {{ $request->bkash_no }} <br>
     Requested time: {{ $request->timestamp }} <br>
 
-    <form action="/a/point-requests" method="post">
+    <form action="/a/withdraw-requests" method="post">
         @csrf
         <input type="hidden" name="request-id" value="{{ $request->id }}">
         <input type="hidden" name="applicant-id" value="{{ $request->applicant_id }}">
         <input type="hidden" name="response" value="accept">
         <label>
-            Allow Points:
-            <input type="number" name="points" value="{{ $request->amount / 100 }}">
+            Points to be withdrawn:
+            <input type="number" name="points" value="{{ $request->amount }}">
         </label>
         <input type="submit" name="submit" value="Accept">
     </form>
-    <form action="/a/point-requests" method="post">
+    <form action="/a/withdraw-requests" method="post">
         @csrf
         <input type="hidden" name="request-id" value="{{ $request->id }}">
         <input type="hidden" name="response" value="reject">

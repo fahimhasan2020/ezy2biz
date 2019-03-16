@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Core\LoginValidator;
@@ -88,15 +87,25 @@ class UserController extends Controller
         $senderId = $request->session()->get('user');
         if ($user->checkPointsAvailable($senderId, $request->get('amount'))) {
             $user->transferPoints($senderId, $request);
-            return redirect('/u/points');
+            return redirect('/u/account');
         }
-        return redirect('/u/points?action=transfer');
+        return redirect('/u/account?action=transfer');
     }
 
     public function requestPoints(Request $request, User $user)
     {
         $userId = $request->session()->get('user');
         $user->requestPoints($userId, $request);
-        return redirect('u/points');
+        return redirect('u/account');
+    }
+
+    public function requestWithdrawal(Request $request, User $user)
+    {
+        $userId = $request->session()->get('user');
+        if ($user->checkPointsAvailable($userId, $request->get('amount'))) {
+            $user->withdrawalRequest($userId, $request);
+            return redirect('u/account');
+        }
+        return redirect('/u/account?action=withdraw');
     }
 }

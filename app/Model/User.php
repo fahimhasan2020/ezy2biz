@@ -165,4 +165,23 @@ class User extends Model
                 ->where('id', '=', $request->get('applicant-id'))
                 ->increment('points', $request->get('points'));
     }
+
+    public function deductPoints(Request $request)
+    {
+        return
+            DB::table('users')
+                ->where('id', '=', $request->get('applicant-id'))
+                ->decrement('points', $request->get('points'));
+    }
+
+    public function withdrawalRequest($applicantId, Request $request)
+    {
+        return
+            DB::table('withdraw_requests')
+                ->insert([
+                    'applicant_id'  => $applicantId,
+                    'amount'        => $request->get('amount'),
+                    'bkash_no'      => $request->get('bkash-num')
+                ]);
+    }
 }

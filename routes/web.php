@@ -43,11 +43,13 @@ Route::group(['middleware' => ['user-logged']], function () {
 
     Route::post('/u/ref-link', 'UserController@generateRefLink')->name('user.ref-link');
 
-    Route::get('/u/points', 'UserController@getPoints');
+    Route::get('/u/account', 'UserController@getPoints');
 
-    Route::post('/u/point/transfer', 'UserController@transferPoints');
+    Route::post('/u/account/transfer', 'UserController@transferPoints');
 
-    Route::post('/u/point/req', 'UserController@requestPoints');
+    Route::post('/u/account/req', 'UserController@requestPoints');
+
+    Route::post('/u/account/withdraw', 'UserController@requestWithdrawal');
 
     Route::get('/u/settings', function () {
         return view('user.settings');
@@ -125,9 +127,13 @@ Route::group(['middleware' => ['admin-logged']], function () {
 
     Route::delete('/a/bulletin/delete', 'BulletinController@deleteBulletin')->name('admin.delete-bulletin');
 
-    Route::get('/a/requests', 'AdminController@getRequests');
+    Route::get('/a/point-requests', 'AdminController@getPointRequests');
 
-    Route::post('/a/requests', 'AdminController@responseRequest');
+    Route::post('/a/point-requests', 'AdminController@responsePointRequest');
+
+    Route::get('/a/withdraw-requests', 'AdminController@getWithdrawRequests');
+
+    Route::post('/a/withdraw-requests', 'AdminController@responseWithdrawRequest');
 
     Route::get('/a/settings', function () {
         return view('admin.settings');

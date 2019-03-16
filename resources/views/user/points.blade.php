@@ -11,8 +11,9 @@
 <h1>This is User Balance page</h1>
 <hr>
 <ul>
-    <li><a href="/u/points?action=transfer">Point Transfer</a></li>
-    <li><a href="/u/points?action=request">Point Request</a></li>
+    <li><a href="/u/account?action=transfer">Point Transfer</a></li>
+    <li><a href="/u/account?action=request">Point Request</a></li>
+    <li><a href="/u/account?action=withdraw">Withdrawal Request</a></li>
 </ul>
 <ul>
     <li><a href="/u/dashboard">Dashboard</a></li>
@@ -25,7 +26,7 @@ Active: @if($user->is_active) Yes @else No @endif
 Points: {{ $user->points }}
 <hr>
 @if ($action === 'transfer')
-    <form action="/u/point/transfer" method="post">
+    <form action="/u/account/transfer" method="post">
         @csrf
         <label>
             Send To:
@@ -41,7 +42,7 @@ Points: {{ $user->points }}
     </form>
 
 @elseif($action === 'request')
-    <form action="/u/point/req" method="post">
+    <form action="/u/account/req" method="post">
         @csrf
         <label>
             bKash Number:
@@ -53,6 +54,22 @@ Points: {{ $user->points }}
         </label>
         <label>
             <input type="submit" name="submit" value="Request Points">
+        </label>
+    </form>
+
+@elseif($action === 'withdraw')
+    <form action="/u/account/withdraw" method="post">
+        @csrf
+        <label>
+            bKash Number:
+            <input type="text" name="bkash-num">
+        </label>
+        <label>
+            Amount (Points):
+            <input type="number" name="amount">
+        </label>
+        <label>
+            <input type="submit" name="submit" value="Request Withdrawal">
         </label>
     </form>
 @endif

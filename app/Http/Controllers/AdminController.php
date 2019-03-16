@@ -28,21 +28,42 @@ class AdminController extends Controller
         return view('admin.logout');
     }
 
-    public function getRequests(Admin $admin)
+    public function getPointRequests(Admin $admin)
     {
-        $pointRequests = $admin->getRequests()->all();
+        $pointRequests = $admin->getPointRequests()->all();
         return view('admin.point-requests')->with('requests', $pointRequests);
     }
 
-    public function responseRequest(Request $request, Admin $admin, User $user)
+    public function responsePointRequest(Request $request, Admin $admin, User $user)
     {
         $response = $request->get('response');
         if ('reject' === strtolower($response)) {
-            $admin->rejectRequest($request);
+            $admin->rejectPointRequest($request);
         } elseif ('accept'  === strtolower($response)) {
-            $admin->acceptRequest($request, $user);
+            $admin->acceptPointRequest($request, $user);
         }
 
-        return redirect('/a/requests');
+        return redirect('/a/point-requests');
+    }
+
+    public function getWithdrawRequests(Admin $admin)
+    {
+        $pointRequests = $admin->getWithdrawRequests()->all();
+        return view('admin.withdraw-requests')->with('requests', $pointRequests);
+    }
+
+    public function responseWithdrawRequest(Request $request, Admin $admin, User $user)
+    {
+        $response = $request->get('response');
+        if ('reject' === strtolower($response)) {
+            $admin->rejectWithdrawRequest($request);
+        } elseif ('accept'  === strtolower($response)) {
+            if ($user->checkPointsAvailable($request->get('applicant-id'), $request->get('points'))) {
+                $admin->acceptWithdrawRequest($request, $user);
+            }
+            return redirect('a/withdraw-requests');
+        }
+
+        return redirect('/a/withdraw-requests');
     }
 }

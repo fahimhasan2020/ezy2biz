@@ -14,7 +14,8 @@
     <li><a href="/a/products">All Products</a></li>
     <li><a href="/a/bulletins">All Bulletins</a></li>
     <li><a href="/a/users">All Users</a></li>
-    <li><a href="/a/requests">Point Requests</a></li>
+    <li><a href="/a/point-requests">Point Requests</a></li>
+    <li><a href="/a/withdraw-requests">Withdraw Requests</a></li>
     <li><a href="/a/settings">Settings</a></li>
     <li><a href="/a/logout">Logout</a></li>
 </ul>
