@@ -51,21 +51,23 @@ Route::group(['middleware' => ['user-logged']], function () {
 
     Route::post('/u/account/withdraw', 'UserController@requestWithdrawal');
 
+    Route::get('/u/buy/product/{id}', 'ProductController@getProductBuyPage')->name('product.buy');
+
+    Route::post('/u/buy/product/{id}', 'ProductController@buyProduct');
+
     Route::get('/u/settings', function () {
         return view('user.settings');
     });
 
 });
 
+
+
 Route::get('/products', 'ProductController@userAllProducts');
 
 Route::get('/product/{id}', function () {
     return view('product.single');
 });
-
-Route::get('/product/{id}/buy', 'ProductController@getProductBuyPage')->name('product.buy');
-
-Route::post('/product/{id}/buy', 'ProductController@buyProduct');
 
 Route::get('/bulletins', 'BulletinController@userAllBulletins');
 

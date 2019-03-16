@@ -17,7 +17,7 @@ class ProductController extends Controller
     {
         $request->request->add(['image-paths' => []]);
         if ($store->addProduct($request)) {
-            $product->add($request->request);
+            $product->add($request);
             return redirect('/a/products');
         }
         return redirect()->back();
@@ -39,7 +39,7 @@ class ProductController extends Controller
         }
 
         if($store->addProduct($request)) {
-            $product->edit($productId, $request->request);
+            $product->edit($productId, $request);
             $store->removeLeftOvers($request);
             return redirect('/a/products');
         }
@@ -87,5 +87,28 @@ class ProductController extends Controller
         $productQuery = $product->get($productId);
         $productQuery->image_paths = json_decode($productQuery->image_paths);
         return view('product.buy')->with('user', $userQuery)->with('product', $productQuery);
+    }
+
+    public function buyProduct($productId, Request $request, Product $product, User $user)
+    {
+        $userQuery = $user->getUser($request->session()->get('user'));
+        $productQuery = $product->get($productId);
+        $totalSalePrice = $productQuery->sale_price * $request->get('qty');
+        $totalWholesalePrice = $productQuery->wholesale_price * $request->get('qty');
+        if ($request->get('password') === $userQuery->password) {
+            $request->request->add(['buyer-id'     => $userQuery->id]);
+            $request->request->add(['product-id'   => $productId]);
+            $request->request->add(['cost'         => $totalSalePrice]);
+            $request->request->add(['commission'   => $productQuery->commission]);
+            $request->request->add(['wholesale'    => $totalWholesalePrice]);
+            $request->request->add(['referrer-id'  => $userQuery->referrer_id]);
+
+            if ($user->checkPointsAvailable($userQuery->id, $totalSalePrice)) {
+                $product->sell($request, $user);
+                return redirect('/products');
+            }
+        }
+
+        return redirect()->back();
     }
 }

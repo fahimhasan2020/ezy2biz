@@ -60,7 +60,7 @@ class Admin extends Model
             ->update([
                 'response'   => 'accept'
             ]);
-        $user->addPoints($request);
+        $user->addPoints($request->get('applicant-id'), $request->get('points'));
         DB::commit();
     }
 
@@ -96,7 +96,7 @@ class Admin extends Model
             ->update([
                 'response'   => 'accept'
             ]);
-        $user->deductPoints($request);
+        $user->deductPoints($request->get('applicant-id'), $request->get('points'));
         DB::commit();
     }
 }

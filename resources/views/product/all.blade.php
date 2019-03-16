@@ -2,7 +2,7 @@
 @extends('templates.shell')
 
 @section('body')
-    {{--@foreach($products as $product)
+    @foreach($products as $product)
         Name: {{ $product->name }}
         <br>
         Description: {{ $product->description }}
@@ -21,9 +21,9 @@
         @endforeach
         <a href="{{ route('product.buy', ['id' => $product->id]) }}">Buy Product</a>
         <hr>
-    @endforeach--}}
+    @endforeach
 
-    <div id="content">
+    {{--<div id="content">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -238,5 +238,5 @@
                 <!-- /.col-lg-9-->
             </div>
         </div>
-    </div>
+    </div>--}}
 @stop
