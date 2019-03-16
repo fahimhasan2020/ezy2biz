@@ -68,29 +68,22 @@ Route::group(['middleware' => ['user-logged']], function () {
 Route::get('/products', function () {
     return view('product.all');
 });
-
 Route::get('/product/{id}', function () {
     return view('product.single');
 });
-
 Route::get('/product/{id}/buy', function () {
     return view('product.buy');
 });
-
 Route::get('/bulletins', function () {
     return view('bulletin.all');
 });
-
 Route::get('/bulletin/{id}', function () {
     return view('bulletin.single');
 });
-
 Route::get('/a/login', function () {
    return view('admin.login');
 })->middleware('admin-not-logged');
-
 Route::post('/a/login', 'AdminController@login')->name('admin.login');
-
 Route::group(['middleware' => ['admin-logged']], function () {
 
     Route::get('/a/logout', 'AdminController@logout');
