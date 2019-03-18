@@ -1,34 +1,28 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<h1>This is Admin Login page</h1>
-<hr>
-<ul>
-    <li><a href="/a/dashboard">Dashboard</a></li>
-</ul>
-<hr>
-<form action="{{ route('admin.login') }}" method="post">
-    @csrf
-    <label>
-        Email:
-        <input type="email" name="email">
-    </label>
-    <br>
-    <label>
-        Password:
-        <input type="password" name="password">
-    </label>
-    <br>
-    <label>
-        <input type="submit" name="submit" value="Login">
-    </label>
-</form>
-</body>
-</html>
+@extends('templates.admin-shell')
+
+@section('body')
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Please Sign In</h3>
+                </div>
+                <div class="panel-body">
+                    <form method="post" action="/a/login">
+                        @csrf
+                        <fieldset>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Enter email" name="email" type="text" autofocus>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Enter password" name="password" type="password">
+                            </div>
+                            <!-- Change this to a button or input when using this as a form -->
+                            <button type="submit"  class="btn btn-lg btn-success btn-block">Login</button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@stop

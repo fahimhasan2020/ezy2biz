@@ -1,6 +1,31 @@
 <?php $homeClass = 'active'; $productClass = ''; $bulletinClass = ''; ?>
 @extends('templates.shell')
 
+@section('custom-css')
+    <link rel="stylesheet" href="{{ URL::asset('/css/bulletin-ticker.css') }}">
+@stop
+
+@section('bulletin-ticker')
+    <div class="onoffswitch3">
+        <input type="checkbox" name="onoffswitch3" class="onoffswitch3-checkbox" id="myonoffswitch3" checked>
+        <label class="onoffswitch3-label" for="myonoffswitch3">
+        <span class="onoffswitch3-inner">
+            <span class="onoffswitch3-active">
+                <marquee class="scroll-text">
+                    <a href="#">Avengers: Infinity War's Iron Spider Suit May Use Bleeding Edge Tech</a>
+                    <i class="fas fa-forward"></i>
+                    <a href="#">Russo brothers ask for fans not to spoil Avengers: Infinity War</a>
+                    <i class="fas fa-forward"></i>
+                    <a href="#">Bucky's Arm Miraculously Regenerates On Avengers: Infinity War Poster</a>
+                </marquee>
+                <span class="onoffswitch3-switch">BULLETINS <i class="far fa-times-circle"></i></span>
+            </span>
+            <span class="onoffswitch3-inactive"><span class="onoffswitch3-switch">SHOW BREAKING NEWS</span></span>
+        </span>
+        </label>
+    </div>
+@stop
+
 @section('body')
     <div id="content">
         <div class="container">
@@ -33,31 +58,29 @@
                 <div class="row mb-4">
                     <div class="col-md-4">
                         <div class="box clickable d-flex flex-column justify-content-center mb-0 h-100">
-                            <div class="icon"><i class="fa fa-heart"></i></div>
-                            <h3><a href="#">Top Bulletin 1</a></h3>
+                            <div class="item"><img src="{{ URL::asset('img/Michael Dell.jpg') }}" alt="Picture of Micharel Dell" class="img-fluid"></div>
+                            <h3><a href="#">Michael Dell</a></h3>
                             <p class="mb-0">We are known to provide best possible service ever</p>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-8">
                         <div class="box clickable d-flex flex-column justify-content-center mb-0 h-100">
-                            <div class="icon"><i class="fa fa-tags"></i></div>
-                            <h3><a href="#">Top Bulletin 2</a></h3>
-                            <p class="mb-0">You can check that the height of the boxes adjust when longer text like this one is used in one of them.</p>
+                            <h3><a href="#">About Michael Dell</a></h3>
+                            <p class="mb-0">Michael Dell, founder and chief executive officer of Dell Inc.
+                                The latest Forbes rankings show three of the world's five richest people earned their fortunes in tech, and 59 percent of the world's tech billionaires got richer over the past year.
+                                The 183 billionaires from tech - 23 more than a year ago - have a combined net worth of $1 trillion.
+                                Michael Dell as the richest person in the world, Microsoft co-founder Bill Gates not surprisingly tops the list of wealthiest tech billionaires with a net worth of $86 billion. He's followed by Amazon CEO Jeff Bezos ($72.8 billion) and Facebook CEO Mark Zuckerberg ($56 billion).
+                                Here's the full list of the top 10 tech billionaires in the world.
+
+                                No 10 Michael Dell ( Net worth: $20.4 billion)</p>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="box clickable d-flex flex-column justify-content-center mb-0 h-100">
-                            <div class="icon"><i class="fa fa-thumbs-up"></i></div>
-                            <h3><a href="#">Top Bulletin 3</a></h3>
-                            <p class="mb-0">Free returns on everything for 3 months.</p>
-                        </div>
-                    </div>
+                    <!-- /.row-->
                 </div>
-                <!-- /.row-->
+                <!-- /.container-->
             </div>
-            <!-- /.container-->
-        </div>
         <!-- /#advantages-->
+        </div>
         <!-- *** ADVANTAGES END ***-->
         <!--
         *** HOT PRODUCT SLIDESHOW ***

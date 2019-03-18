@@ -137,6 +137,10 @@ Route::group(['middleware' => ['admin-logged']], function () {
 
     Route::post('/a/withdraw-requests', 'AdminController@responseWithdrawRequest');
 
+    Route::get('/a/product-orders', 'AdminController@getProductOrders');
+
+    Route::post('/a/product-orders', 'AdminController@responseProductOrders');
+
     Route::get('/a/settings', function () {
         return view('admin.settings');
     });

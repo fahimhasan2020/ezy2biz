@@ -99,4 +99,30 @@ class Admin extends Model
         $user->deductPoints($request->get('applicant-id'), $request->get('points'));
         DB::commit();
     }
+
+    public function getOrders()
+    {
+        return
+            DB::table('product_orders')
+                ->join('users', 'users.id', '=', 'product_orders.buyer_id')
+                ->join('products', 'products.id', '=', 'product_orders.product_id')
+                ->select('product_orders.*',
+                    'users.first_name',
+                    'users.last_name',
+                    'users.phone',
+                    'users.address',
+                    'products.name',
+                    'products.description',
+                    'products.sale_price')
+                ->where('order_status', '=', 'pending')
+                ->get();
+    }
+
+    public function responseOrder($orderId, $response)
+    {
+        return
+            DB::table('product_orders')
+                ->where('id', '=', $orderId)
+                ->update(['order_status'   => $response]);
+    }
 }
