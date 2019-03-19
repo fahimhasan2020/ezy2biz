@@ -1,23 +1,50 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<h1>This is Admin Edit Product page</h1>
-<hr>
-<ul>
-    <li><a href="/a/bulletins">All Bulletins</a></li>
-    <li><a href="/a/users">All Users</a></li>
-    <li><a href="/a/settings">Settings</a></li>
-    <li><a href="/a/logout">Logout</a></li>
-</ul>
-<hr>
-<form action="{{ route('admin.edit-product', $product->id) }}" method="post" enctype="multipart/form-data">
+@extends('templates.admin.shell')
+
+@section('body')
+    <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/a/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="/a/products">All Products</a>
+            </li>
+            <li class="breadcrumb-item active">Edit Product</li>
+        </ol>
+
+        <!-- Page Content -->
+        <h1>Edit Product</h1>
+        <hr>
+
+        <form method="post" action="/a/product/{{ $product->id }}/edit">
+            @csrf
+            @method('PUT')
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Product Name</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Product Name">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect2">Example multiple select</label>
+                <select multiple class="form-control" id="exampleFormControlSelect2">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Example textarea</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+        </form>
+
+    </div>
+@stop
+
+{{--<form action="{{ route('admin.edit-product', $product->id) }}" method="post" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <label>
@@ -59,6 +86,4 @@
     <label>
         <input type="submit" name="submit" value="Update Product">
     </label>
-</form>
-</body>
-</html>
+</form>--}}

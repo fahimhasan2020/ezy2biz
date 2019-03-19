@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
 
+    <link rel="shortcut icon" type="image/png" href="{{ URL::asset('/favicon-96x96.png') }}">
     <link rel="icon" type="image/png" sizes="96x96" href="{{ URL::asset('/favicon-96x96.png') }}">
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="{{ URL::asset('/vendor/bootstrap/css/bootstrap.min.css')}}">

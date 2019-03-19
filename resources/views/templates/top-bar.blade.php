@@ -16,7 +16,7 @@
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Customer login</h5>
+                    <h5 class="modal-title">User login</h5>
                     <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div class="modal-body">
@@ -48,8 +48,8 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <a href="/" class="navbar-brand home">
-            <img src="{{ URL::asset('/img/ezy2biz.png') }}" alt="ezy2biz logo" class="d-none d-md-inline-block">
-            <img src="{{ URL::asset('/img/logo-small.png') }}" alt="ezy2biz logo" class="d-inline-block d-md-none">
+            <img src="{{ URL::asset('/img/ezy2biz_logo.png') }}" alt="ezy2biz logo" class="d-none d-md-inline-block">
+            <img src="{{ URL::asset('/img/ezy2biz_logo.png') }}" alt="ezy2biz logo" class="d-inline-block d-md-none">
             <span class="sr-only">ezy2biz - Go to homepage</span>
         </a>
         <div class="navbar-buttons">

@@ -18,9 +18,9 @@
                     <i class="fas fa-forward"></i>
                     <a href="#">Bucky's Arm Miraculously Regenerates On Avengers: Infinity War Poster</a>
                 </marquee>
-                <span class="onoffswitch3-switch">BULLETINS <i class="far fa-times-circle"></i></span>
+                <span class="onoffswitch3-switch">BULLETINS</span>
             </span>
-            <span class="onoffswitch3-inactive"><span class="onoffswitch3-switch">SHOW BREAKING NEWS</span></span>
+            <span class="onoffswitch3-inactive"><span class="onoffswitch3-switch">SHOW BULLETINS</span></span>
         </span>
         </label>
     </div>
@@ -32,18 +32,11 @@
             <div class="row">
                 <div class="col-md-12">
                     <div id="main-slider" class="owl-carousel owl-theme">
-                        <div class="item">
-                            <img src="{{ URL::asset('/img/main-slider1.jpg') }}" alt="" class="img-fluid">
-                        </div>
-                        <div class="item">
-                            <img src="{{ URL::asset('/img/main-slider2.jpg') }}" alt="" class="img-fluid">
-                        </div>
-                        <div class="item">
-                            <img src="{{ URL::asset('/img/main-slider3.jpg') }}" alt="" class="img-fluid">
-                        </div>
-                        <div class="item">
-                            <img src="{{ URL::asset('/img/main-slider4.jpg') }}" alt="" class="img-fluid">
-                        </div>
+                        @for($i = 1; $i <= 6; $i++)
+                            <div class="item">
+                                <img src="{{ URL::asset('/img/main-slider' . $i . '.jpg') }}" alt="" class="img-fluid">
+                            </div>
+                        @endfor
                     </div>
                     <!-- /#main-slider-->
                 </div>
