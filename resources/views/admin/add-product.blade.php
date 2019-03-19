@@ -1,57 +1,48 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<h1>This is Admin Add Product page</h1>
-<hr>
-<ul>
-    <li><a href="/a/bulletins">All Bulletins</a></li>
-    <li><a href="/a/users">All Users</a></li>
-    <li><a href="/a/settings">Settings</a></li>
-    <li><a href="/a/logout">Logout</a></li>
-</ul>
-<hr>
-<form action="{{ route('admin.add-product') }}" method="post" enctype="multipart/form-data">
-    @csrf
-    <label>
-        Product Name:
-        <input type="text" name="name">
-    </label>
-    <br>
-    <label>
-        Product Description:
-        <textarea name="description" cols="80" rows="20" placeholder="Write description..."></textarea>
-    </label>
-    <br>
-    <label>
-        Sale Price:
-        <input type="number" name="sale-price">
-    </label>
-    <br>
-    <label>
-        Wholesale Price:
-        <input type="number" name="wholesale-price">
-    </label>
-    <br>
-    <label>
-        Commission: (In percentage)
-        <input type="number" name="commission"> &percnt;
-    </label>
-    <br>
-    <label>
-        Product Image:
-        <input type="file" name="images[]" multiple>
-    </label>
-    <br>
-    <label>
-        <input type="submit" name="submit" value="Add Product">
-    </label>
-</form>
-</body>
-</html>
+@extends('templates.admin.shell')
+
+@section('body')
+    <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/a/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Add Product</li>
+        </ol>
+
+        <!-- Page Content -->
+        <h1>Add New Product</h1>
+        <hr>
+
+        <form method="post" action="/a/product/add" enctype="multipart/form-data">
+            @csrf
+            <div class="form-group">
+                <label>Product Name</label>
+                <input type="text" name="name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Product Description</label>
+                <textarea name="description" class="form-control" rows="10"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Sale Price</label>
+                <input type="number" name="sale-price" class="form-control"">
+            </div>
+            <div class="form-group">
+                <label>Wholesale Price</label>
+                <input type="number" name="wholesale-price" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Commission (in &percnt;)</label>
+                <input type="text" name="commission" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Add new photos (You can select multiple photos)</label>
+                <input type="file" name="images[]" class="form-control-file" multiple>
+            </div>
+            <button type="submit" class="btn btn-success mb-5">Add Product</button>
+        </form>
+
+    </div>
+@stop

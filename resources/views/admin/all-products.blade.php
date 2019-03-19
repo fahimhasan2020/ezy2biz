@@ -19,11 +19,11 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th scope="col"> </th>
                             <th scope="col">Product</th>
                             <th scope="col" class="text-right">Sale Price</th>
                             <th scope="col" class="text-right">Wholesale Price</th>
                             <th scope="col" class="text-right">Commission(&percnt;)</th>
+                            <th scope="col" class="text-right">Photos</th>
                             <th> </th>
                         </tr>
                         </thead>
@@ -31,11 +31,11 @@
 
                         @foreach($products as $product)
                             <tr>
-                                <td><img src="{{ Storage::url('' . $product->image_paths[0]) }}" height="50" /> </td>
                                 <td>{{ $product->name }}</td>
                                 <td class="text-right">{{ $product->sale_price }}</td>
                                 <td class="text-right">{{ $product->wholesale_price }}</td>
                                 <td class="text-right">{{ $product->commission }}</td>
+                                <td class="text-right">{{ count($product->image_paths) }}</td>
                                 <td class="text-center">
                                     <a href="/a/product/{{ $product->id }}" class="btn btn-sm btn-success">
                                         <i class="fas fa-eye" title="View"></i>
@@ -43,7 +43,9 @@
                                     <a href="/a/product/{{ $product->id }}/edit" class="btn btn-sm btn-info">
                                         <i class="far fa-edit" title="Edit"></i>
                                     </a>
-                                    <form class="d-inline">
+                                    <form class="d-inline" action="/a/product/delete" method="post">
+                                        @csrf
+                                        @method('DELETE')
                                         <input type="hidden" name="id" value="{{ $product->id }}">
                                         <button type="submit" class="btn btn-sm btn-danger">
                                             <i class="fa fa-trash" title="Delete"></i>
