@@ -12,8 +12,18 @@
 <hr>
 <ul>
     <li><a href="/u/dashboard">Dashboard</a></li>
+    <li><a href="/u/tree">Referral Tree</a></li>
     <li><a href="/products">Products</a></li>
     <li><a href="/bulletins">Bulletins</a></li>
 </ul>
+<hr>
+@foreach($refLinks as $refLink)
+<ul>
+    <li>{{ url("/u/register?ref={$refLink->referral_key}") }}</li>
+    <li>{{ $refLink->parent_fn }} {{ $refLink->parent_ln }}</li>
+    <li>{{ $refLink->parent_email }}</li>
+    <li>{{ ucfirst($refLink->status) }}</li>
+</ul>
+@endforeach
 </body>
 </html>

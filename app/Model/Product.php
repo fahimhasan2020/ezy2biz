@@ -10,41 +10,55 @@ class Product extends Model
 {
     public function add(ParameterBag $productData)
     {
-        DB::beginTransaction();
-        $productId = DB::table('products')
-            ->insertGetId([
+        $imagePaths = json_encode($productData->get('image-paths'));
+        DB::table('products')
+            ->insert([
                 'name'              => $productData->get('name'),
                 'description'       => $productData->get('description'),
                 'sale_price'        => $productData->get('sale-price'),
                 'wholesale_price'   => $productData->get('wholesale-price'),
-                'commission'        => $productData->get('commission')
+                'commission'        => $productData->get('commission'),
+                'image_paths'       => $imagePaths
             ]);
 
-        DB::table('product_images')
-            ->insert([
-                'product_id'    => $productId,
-                'image_name'    => $productData->get('image-name')
-            ]);
-        DB::commit();
         return true;
+    }
+
+    public function edit($productId, ParameterBag $productData)
+    {
+        $imagePaths = json_encode($productData->get('image-paths'));
+        DB::table('products')
+            ->where('id', '=', $productId)
+            ->update([
+                'name'              => $productData->get('name'),
+                'description'       => $productData->get('description'),
+                'sale_price'        => $productData->get('sale-price'),
+                'wholesale_price'   => $productData->get('wholesale-price'),
+                'commission'        => $productData->get('commission'),
+                'image_paths'       => $imagePaths
+            ]);
+
+        return true;
+    }
+
+    public function remove($productId)
+    {
+        return
+            DB::table('products')
+                ->where('id', '=', $productId)
+                ->delete();
     }
 
     public function getAll()
     {
-        return
-            DB::table('products')
-                ->join('product_images', 'products.id', '=', 'product_images.product_id')
-                ->select('products.*', 'product_images.image_name')
-                ->get();
+        return DB::table('products')->get();
     }
 
     public function get($productId)
     {
         return
             DB::table('products')
-                ->join('product_images', 'products.id', '=', 'product_images.product_id')
-                ->select('products.*', 'product_images.id as image_id', 'product_images.image_name')
-                ->where('products.id', '=', $productId)
-                ->get();
+                ->where('id', '=', $productId)
+                ->first();
     }
 }

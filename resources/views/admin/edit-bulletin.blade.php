@@ -16,5 +16,23 @@
     <li><a href="/a/settings">Settings</a></li>
     <li><a href="/a/logout">Logout</a></li>
 </ul>
+<hr>
+<form action="{{ route('admin.edit-bulletin', ['id' => $bulletin->id]) }}" method="post">
+    @csrf
+    @method('PUT')
+    <label>
+        Title:
+        <input type="text" name="title" value="{{ $bulletin->title }}">
+    </label>
+    <br>
+    <label>
+        Description:
+        <textarea name="description" cols="80" rows="20" placeholder="Write description...">{{ $bulletin->description }}</textarea>
+    </label>
+    <br>
+    <label>
+        <input type="submit" name="submit" value="Update Bulletin">
+    </label>
+</form>
 </body>
 </html>

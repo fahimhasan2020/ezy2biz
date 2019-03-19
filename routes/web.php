@@ -15,13 +15,11 @@ Route::get('/', function () {
     return view('landing');
 });
 
+Route::get('/u/register', 'UserController@getRegistrationForm')->name('user.register');
+
+Route::post('/u/register', 'UserController@register')->name('user.register');
+
 Route::group(['middleware' => ['user-not-logged']], function () {
-
-    Route::get('/u/register', function () {
-        return view('user.register');
-    });
-
-    Route::post('/u/register', 'UserController@register')->name('user.register');
 
     Route::get('/u/login', function () {
         return view('user.login');
@@ -39,25 +37,19 @@ Route::group(['middleware' => ['user-logged']], function () {
         return view('user.dashboard');
     });
 
-    Route::get('/u/tree', function () {
-        return view('user.tree');
-    });
+    Route::get('/u/tree', 'UserController@tree');
 
-    Route::get('/u/ref-link', function () {
-        return view('user.ref-link');
-    });
+    Route::get('/u/ref-link', 'UserController@getRefLinks')->name('user.ref-link');
 
-    Route::get('/u/balance', function () {
-        return view('user.balance');
-    });
+    Route::post('/u/ref-link', 'UserController@generateRefLink')->name('user.ref-link');
 
-    Route::get('/u/balance/transfer', function () {
-        return view('user.balance-transfer');
-    });
+    Route::get('/u/account', 'UserController@getPoints');
 
-    Route::get('/u/balance/req', function () {
-        return view('user.balance-req');
-    });
+    Route::post('/u/account/transfer', 'UserController@transferPoints');
+
+    Route::post('/u/account/req', 'UserController@requestPoints');
+
+    Route::post('/u/account/withdraw', 'UserController@requestWithdrawal');
 
     Route::get('/u/settings', function () {
         return view('user.settings');
@@ -65,21 +57,20 @@ Route::group(['middleware' => ['user-logged']], function () {
 
 });
 
-Route::get('/products', function () {
-    return view('product.all');
-});
+Route::get('/products', 'ProductController@userAllProducts');
+
 Route::get('/product/{id}', function () {
     return view('product.single');
 });
-Route::get('/product/{id}/buy', function () {
-    return view('product.buy');
-});
-Route::get('/bulletins', function () {
-    return view('bulletin.all');
-});
-Route::get('/bulletin/{id}', function () {
-    return view('bulletin.single');
-});
+
+Route::get('/product/{id}/buy', 'ProductController@getProductBuyPage')->name('product.buy');
+
+Route::post('/product/{id}/buy', 'ProductController@buyProduct');
+
+Route::get('/bulletins', 'BulletinController@userAllBulletins');
+
+Route::get('/bulletin/{id}', 'BulletinController@userSingleBulletin');
+
 Route::get('/a/login', function () {
    return view('admin.login');
 })->middleware('admin-not-logged');
@@ -100,43 +91,47 @@ Route::group(['middleware' => ['admin-logged']], function () {
         return view('admin.single-user');
     });
 
-    Route::get('/a/products', 'ProductController@allProducts');
+    Route::get('/a/products', 'ProductController@adminAllProducts');
 
     Route::get('/a/product/add', function () {
         return view('admin.add-product');
     });
 
-    Route::post('/a/product/add', 'ProductController@add')->name('product.add');
+    Route::post('/a/product/add', 'ProductController@add')->name('admin.add-product');
 
     Route::get('/a/product/{id}', function () {
         return view('admin.single-product');
     });
 
-    Route::get('/a/product/{id}/edit', 'ProductController@getProduct')->name('product.edit');
+    Route::get('/a/product/{id}/edit', 'ProductController@getProduct')->name('admin.edit-product');
 
-    Route::get('/a/product/delete', function () {
-        return redirect('/a/products');
-    })->name('product.delete');
+    Route::put('/a/product/{id}/edit', 'ProductController@edit')->name('admin.edit-product');
 
-    Route::get('/a/bulletins', function () {
-        return view('admin.all-bulletins');
-    });
+    Route::delete('/a/product/delete', 'ProductController@delete')->name('admin.delete-product');
+
+    Route::get('/a/bulletins', 'BulletinController@adminAllBulletins');
 
     Route::get('/a/bulletin/add', function () {
         return view('admin.add-bulletin');
     });
 
-    Route::get('/a/bulletin/{id}', function () {
-        return view('admin.single-bulletin');
-    });
+    Route::post('/a/bulletin/add', 'BulletinController@addBulletin')->name('admin.add-bulletin');
 
-    Route::get('/a/bulletin/{id}/edit', function () {
-        return view('admin.edit-bulletin');
-    });
+    Route::get('/a/bulletin/{id}', 'BulletinController@adminSingleBulletin');
 
-    Route::get('/a/bulletin/delete', function () {
-        return redirect('/a/bulletins');
-    });
+    Route::get('/a/bulletin/{id}/edit', 'BulletinController@getBulletin')->name('admin.edit-bulletin');
+
+    Route::put('/a/bulletin/{id}/edit', 'BulletinController@editBulletin')->name('admin.edit-bulletin');
+
+    Route::delete('/a/bulletin/delete', 'BulletinController@deleteBulletin')->name('admin.delete-bulletin');
+
+    Route::get('/a/point-requests', 'AdminController@getPointRequests');
+
+    Route::post('/a/point-requests', 'AdminController@responsePointRequest');
+
+    Route::get('/a/withdraw-requests', 'AdminController@getWithdrawRequests');
+
+    Route::post('/a/withdraw-requests', 'AdminController@responseWithdrawRequest');
 
     Route::get('/a/settings', function () {
         return view('admin.settings');

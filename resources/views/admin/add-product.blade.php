@@ -17,7 +17,7 @@
     <li><a href="/a/logout">Logout</a></li>
 </ul>
 <hr>
-<form action="{{ route('product.add') }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('admin.add-product') }}" method="post" enctype="multipart/form-data">
     @csrf
     <label>
         Product Name:
@@ -26,7 +26,7 @@
     <br>
     <label>
         Product Description:
-        <input type="text" name="description">
+        <textarea name="description" cols="80" rows="20" placeholder="Write description..."></textarea>
     </label>
     <br>
     <label>
@@ -46,7 +46,7 @@
     <br>
     <label>
         Product Image:
-        <input type="file" name="image">
+        <input type="file" name="images[]" multiple>
     </label>
     <br>
     <label>

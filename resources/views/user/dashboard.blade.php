@@ -12,7 +12,7 @@
     <hr>
     <ul>
         <li><a href="/u/tree">Tree</a></li>
-        <li><a href="/u/balance">Balance</a></li>
+        <li><a href="/u/account">Account</a></li>
         <li><a href="/u/settings">Settings</a></li>
         <li><a href="/u/ref-link">Referral Link</a></li>
         <li><a href="/u/logout">Logout</a></li>
