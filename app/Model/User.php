@@ -120,7 +120,6 @@ class User extends Model
     {
         return
             DB::table('users')
-                ->select('first_name', 'last_name', 'points', 'is_active')
                 ->where('id', '=', $userId)
                 ->first();
     }
@@ -158,20 +157,20 @@ class User extends Model
                 ]);
     }
 
-    public function addPoints(Request $request)
+    public function addPoints($userId, $points)
     {
         return
             DB::table('users')
-                ->where('id', '=', $request->get('applicant-id'))
-                ->increment('points', $request->get('points'));
+                ->where('id', '=', $userId)
+                ->increment('points', $points);
     }
 
-    public function deductPoints(Request $request)
+    public function deductPoints($userId, $points)
     {
         return
             DB::table('users')
-                ->where('id', '=', $request->get('applicant-id'))
-                ->decrement('points', $request->get('points'));
+                ->where('id', '=', $userId)
+                ->decrement('points', $points);
     }
 
     public function withdrawalRequest($applicantId, Request $request)

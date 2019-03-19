@@ -66,4 +66,16 @@ class AdminController extends Controller
 
         return redirect('/a/withdraw-requests');
     }
+
+    public function getProductOrders(Admin $admin)
+    {
+        $orders = $admin->getOrders()->all();
+        return view('admin.product-orders')->with('orders', $orders);
+    }
+
+    public function responseProductOrders(Request $request, Admin $admin)
+    {
+        $admin->responseOrder($request->get('order-id'), $request->get('response'));
+        return redirect('/a/product-orders');
+    }
 }

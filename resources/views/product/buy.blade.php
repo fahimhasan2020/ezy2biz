@@ -27,8 +27,12 @@ Product images:
     <img alt="" src="{{Storage::url('' . $image)}}" height="100">
 @endforeach
 
-<form action="{{ url()->current() }}" method="post">
+<form action="/u/buy/product/{{ $product->id }}" method="post">
     @csrf
+    <label>
+        Product Quantity:
+        <input type="number" name="qty" value="1">
+    </label>
     <label>
         Enter password to proceed:
         <input type="password" name="password">

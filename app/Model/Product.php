@@ -3,12 +3,13 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
 class Product extends Model
 {
-    public function add(ParameterBag $productData)
+    public function add(Request $productData)
     {
         $imagePaths = json_encode($productData->get('image-paths'));
         DB::table('products')
@@ -24,7 +25,7 @@ class Product extends Model
         return true;
     }
 
-    public function edit($productId, ParameterBag $productData)
+    public function edit($productId, Request $productData)
     {
         $imagePaths = json_encode($productData->get('image-paths'));
         DB::table('products')
@@ -60,5 +61,21 @@ class Product extends Model
             DB::table('products')
                 ->where('id', '=', $productId)
                 ->first();
+    }
+
+    public function sell(Request $request, User $user)
+    {
+        DB::beginTransaction();
+        DB::table('product_orders')
+            ->insert([
+                'buyer_id'      => $request->get('buyer-id'),
+                'product_id'    => $request->get('product-id'),
+                'quantity'      => $request->get('qty'),
+                'total_cost'    => $request->get('cost')
+            ]);
+        $user->deductPoints($request->get('buyer-id'), $request->get('cost'));
+        $commission = $request->get('wholesale') * $request->get('commission') / 100;
+        $user->addPoints($request->get('referrer-id'), $commission);
+        DB::commit();
     }
 }
