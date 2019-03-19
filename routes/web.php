@@ -109,7 +109,7 @@ Route::group(['middleware' => ['admin-logged']], function () {
 
     Route::get('/a/product/{id}/edit', 'ProductController@getProduct')->name('admin.edit-product');
 
-    Route::put('/a/product/{id}/edit', 'ProductController@edit')->name('admin.edit-product');
+    Route::put('/a/product/{id}', 'ProductController@edit')->name('admin.edit-product');
 
     Route::delete('/a/product/delete', 'ProductController@delete')->name('admin.delete-product');
 
@@ -125,7 +125,7 @@ Route::group(['middleware' => ['admin-logged']], function () {
 
     Route::get('/a/bulletin/{id}/edit', 'BulletinController@getBulletin')->name('admin.edit-bulletin');
 
-    Route::put('/a/bulletin/{id}/edit', 'BulletinController@editBulletin')->name('admin.edit-bulletin');
+    Route::put('/a/bulletin/{id}', 'BulletinController@editBulletin')->name('admin.edit-bulletin');
 
     Route::delete('/a/bulletin/delete', 'BulletinController@deleteBulletin')->name('admin.delete-bulletin');
 

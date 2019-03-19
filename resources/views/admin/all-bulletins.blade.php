@@ -31,7 +31,7 @@
                             <tr>
                                 <td>{{ $bulletin->title }}</td>
                                 <td>{{ $bulletin->first_name }} {{ $bulletin->last_name }}</td>
-                                <td>{{ strftime('%a, %e %B %Y', strtotime($bulletin->publish_date)) }}</td>
+                                <td>{{ strftime('%a, %B %e, %Y', strtotime($bulletin->publish_date)) }}</td>
                                 <td class="text-center">
                                     <a href="/a/bulletin/{{ $bulletin->id }}" class="btn btn-sm btn-success">
                                         <i class="fas fa-eye" title="View"></i>
@@ -39,14 +39,34 @@
                                     <a href="/a/bulletin/{{ $bulletin->id }}/edit" class="btn btn-sm btn-info">
                                         <i class="far fa-edit" title="Edit"></i>
                                     </a>
-                                    <form class="d-inline">
-                                        <input type="hidden" name="id" value="{{ $bulletin->id }}">
-                                        <button type="submit" class="btn btn-sm btn-danger">
-                                            <i class="fa fa-trash" title="Delete"></i>
-                                        </button>
-                                    </form>
+                                    <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteBulletin{{$bulletin->id}}">
+                                        <i class="fa fa-trash" title="Delete"></i>
+                                    </a>
                                 </td>
                             </tr>
+
+                            <div class="modal fade" id="deleteBulletin{{$bulletin->id}}" tabindex="-1" role="dialog" aria-labelledby="bulletin{{$bulletin->id}}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="bulletin{{$bulletin->id}}">Confirmation</h5>
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">Do you really want to delete the bulletin? Select "Yes" below if you want to proceed and remove the bulletin. Remember, this action is irreversible.</div>
+                                        <div class="modal-footer">
+                                            <form class="d-inline" action="/a/bulletin/delete" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="hidden" name="id" value="{{ $bulletin->id }}">
+                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">No</button>
+                                                <button class="btn btn-danger">Yes</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
 
                         </tbody>

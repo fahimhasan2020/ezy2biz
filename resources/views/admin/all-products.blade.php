@@ -24,7 +24,7 @@
                             <th scope="col" class="text-right">Wholesale Price</th>
                             <th scope="col" class="text-right">Commission(&percnt;)</th>
                             <th scope="col" class="text-right">Photos</th>
-                            <th> </th>
+                            <th scope="col" class="text-center">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -43,16 +43,34 @@
                                     <a href="/a/product/{{ $product->id }}/edit" class="btn btn-sm btn-info">
                                         <i class="far fa-edit" title="Edit"></i>
                                     </a>
-                                    <form class="d-inline" action="/a/product/delete" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input type="hidden" name="id" value="{{ $product->id }}">
-                                        <button type="submit" class="btn btn-sm btn-danger">
-                                            <i class="fa fa-trash" title="Delete"></i>
-                                        </button>
-                                    </form>
+                                    <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteProduct{{ $product->id }}">
+                                        <i class="fa fa-trash" title="Delete"></i>
+                                    </a>
                                 </td>
                             </tr>
+
+                            <div class="modal fade" id="deleteProduct{{ $product->id }}" tabindex="-1" role="dialog" aria-labelledby="product{{ $product->id }}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="product{{ $product->id }}">Confirmation</h5>
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">Do you really want to delete the product? Select "Yes" below if you want to proceed and remove the product. Remember, this action is irreversible.</div>
+                                        <div class="modal-footer">
+                                            <form class="d-inline" action="/a/product/delete" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="hidden" name="id" value="{{ $product->id }}">
+                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">No</button>
+                                                <button class="btn btn-danger">Yes</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
 
                         </tbody>

@@ -18,7 +18,7 @@
         <h1>Edit Product</h1>
         <hr>
 
-        <form method="post" action="/a/product/{{ $product->id }}/edit" enctype="multipart/form-data">
+        <form method="post" action="/a/product/{{ $product->id }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="form-group">
