@@ -124,6 +124,38 @@ class User extends Model
                 ->first();
     }
 
+    public function getUserFull($userId)
+    {
+        return
+            DB::table('users as u')
+                ->leftJoin('users as pu', 'u.parent_id', '=', 'pu.id')
+                ->leftJoin('users as ru', 'u.referrer_id', '=', 'ru.id')
+                ->select('u.id', 'u.first_name', 'u.last_name', 'u.phone', 'u.email', 'u.step', 'u.points',
+                    'pu.id as parent_id', 'pu.first_name as parent_fn', 'pu.last_name as parent_ln',
+                    'ru.id as referrer_id', 'ru.first_name as referrer_fn', 'ru.last_name as referrer_ln')
+                ->where('u.id', '=', $userId)
+                ->first();
+    }
+
+    public function adminEdit($id, Request $request)
+    {
+        return
+            DB::table('users')
+                ->where('id', '=', $id)
+                ->update([
+                    'referrer_id'   => $request->get('referrer-id'),
+                    'parent_id'     => $request->get('parent-id')
+                ]);
+    }
+
+    public function remove($id)
+    {
+        return
+            DB::table('users')
+                ->where('id', '=', $id)
+                ->delete();
+    }
+
     public function checkPointsAvailable($userId, $amount)
     {
         return
@@ -182,5 +214,19 @@ class User extends Model
                     'amount'        => $request->get('amount'),
                     'bkash_no'      => $request->get('bkash-num')
                 ]);
+    }
+
+    public function getAll()
+    {
+        return
+            DB::table('users as u')
+                ->leftJoin('users as pu', 'u.parent_id', '=', 'pu.id')
+                ->leftJoin('users as ru', 'u.referrer_id', '=', 'ru.id')
+                ->select('u.id', 'u.first_name', 'u.last_name', 'u.phone', 'u.email', 'u.step', 'u.points',
+                    'pu.id as parent_id', 'pu.first_name as parent_fn', 'pu.last_name as parent_ln',
+                    'ru.id as referrer_id', 'ru.first_name as referrer_fn', 'ru.last_name as referrer_ln')
+                ->orderBy('u.first_name', 'asc')
+                ->orderBy('u.last_name', 'asc')
+                ->get();
     }
 }

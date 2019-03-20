@@ -78,4 +78,35 @@ class AdminController extends Controller
         $admin->responseOrder($request->get('order-id'), $request->get('response'));
         return redirect('/a/product-orders');
     }
+
+    public function showAllUsers(User $user)
+    {
+        $query = $user->getAll()->all();
+        return view('admin.all-users')->with('users', $query);
+    }
+
+    public function getUserEditForm($userId, User $user)
+    {
+        $query = $user->getUser($userId);
+        return view('admin.edit-user')->with('user', $query);
+    }
+
+    public function editUser($userId, Request $request, User $user)
+    {
+        $user->adminEdit($userId, $request);
+        return redirect('/a/users');
+    }
+
+    public function deleteUser(Request $request, User $user)
+    {
+        $userId = $request->get('user-id');
+        $user->remove($userId);
+        return redirect('/a/users');
+    }
+
+    public function getUser($userId, User $user)
+    {
+        $query = $user->getUserFull($userId);
+        return view('admin.single-user')->with('user', $query);
+    }
 }

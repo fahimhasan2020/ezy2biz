@@ -94,7 +94,8 @@ class Admin extends Model
         DB::table('withdraw_requests')
             ->where('id', '=', $request->get('request-id'))
             ->update([
-                'response'   => 'accept'
+                'response'      => 'accept',
+                'allowed_cash'  => $request->get('cash')
             ]);
         $user->deductPoints($request->get('applicant-id'), $request->get('points'));
         DB::commit();

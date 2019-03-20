@@ -87,13 +87,15 @@ Route::group(['middleware' => ['admin-logged']], function () {
         return view('admin.dashboard');
     });
 
-    Route::get('/a/users', function () {
-        return view('admin.all-users');
-    });
+    Route::get('/a/users', 'AdminController@showAllUsers');
 
-    Route::get('/a/user/{id}', function () {
-        return view('admin.single-user');
-    });
+    Route::get('/a/user/{id}', 'AdminController@getUser');
+
+    Route::get('/a/user/{id}/edit', 'AdminController@getUserEditForm');
+
+    Route::put('/a/user/{id}', 'AdminController@editUser');
+
+    Route::delete('/a/user/delete', 'AdminController@deleteUser');
 
     Route::get('/a/products', 'ProductController@adminAllProducts');
 
