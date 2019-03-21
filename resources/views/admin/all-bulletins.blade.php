@@ -1,45 +1,78 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<h1>This is Admin All Products page</h1>
-<hr>
-<ul>
-    <li><a href="/a/bulletin/1">Single Bulletin</a></li>
-    <li><a href="/a/bulletin/1/edit">Edit Bulletin</a></li>
-    <li><a href="/a/bulletin/delete">Delete Bulletin</a></li>
-    <li><a href="/a/bulletin/add">Add Bulletin</a></li>
-</ul>
-<ul>
-    <li><a href="/a/products">All Products</a></li>
-    <li><a href="/a/users">All Users</a></li>
-    <li><a href="/a/settings">Settings</a></li>
-    <li><a href="/a/logout">Logout</a></li>
-</ul>
-@foreach($bulletins as $bulletin)
-    <hr>
-    <h3>{{ $bulletin->title }}</h3>
-    <ul>
-        <li>{{ $bulletin->first_name }} {{ $bulletin->last_name }}</li>
-        <li>{{ date('D, j F Y', strtotime($bulletin->publish_date)) }}</li>
-    </ul>
-    <p>{{ \Illuminate\Support\Str::words($bulletin->description) }}
-        <a href="/a/bulletin/{{ $bulletin->id }}">Read More</a>
-    </p>
+@extends('templates.admin.shell')
 
-    <a href="{{ route('admin.edit-bulletin', ['id' => $bulletin->id]) }}">Edit Bulletin</a>
-    <form action="{{ route('admin.delete-bulletin') }}" method="post">
-        @csrf
-        @method('DELETE')
-        <input type="hidden" name="id" value="{{ $bulletin->id }}">
-        <input type="submit" name="submit" value="Delete Product">
-    </form>
-@endforeach
-</body>
-</html>
+@section('body')
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/a/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">All Bulletins</li>
+        </ol>
+
+        <!-- Page Content -->
+        <h1>All Bulletins</h1>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Publisher</th>
+                            <th scope="col">Published Date</th>
+                            <th scope="col" class="text-center">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        @foreach($bulletins as $bulletin)
+                            <tr>
+                                <td>{{ $bulletin->title }}</td>
+                                <td>{{ $bulletin->first_name }} {{ $bulletin->last_name }}</td>
+                                <td>{{ strftime('%a, %B %e, %Y', strtotime($bulletin->publish_date)) }}</td>
+                                <td class="text-center">
+                                    <a href="/a/bulletin/{{ $bulletin->id }}" class="btn btn-sm btn-success">
+                                        <i class="fas fa-eye" title="View"></i>
+                                    </a>
+                                    <a href="/a/bulletin/{{ $bulletin->id }}/edit" class="btn btn-sm btn-info">
+                                        <i class="far fa-edit" title="Edit"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteBulletin{{$bulletin->id}}">
+                                        <i class="fa fa-trash" title="Delete"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <div class="modal fade" id="deleteBulletin{{$bulletin->id}}" tabindex="-1" role="dialog" aria-labelledby="bulletin{{$bulletin->id}}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="bulletin{{$bulletin->id}}">Confirmation</h5>
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">Do you really want to delete the bulletin? Select "Yes" below if you want to proceed and remove the bulletin. Remember, this action is irreversible.</div>
+                                        <div class="modal-footer">
+                                            <form class="d-inline" action="/a/bulletin/delete" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="hidden" name="id" value="{{ $bulletin->id }}">
+                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">No</button>
+                                                <button class="btn btn-danger">Yes</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+@stop

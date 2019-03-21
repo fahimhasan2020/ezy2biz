@@ -27,12 +27,12 @@
     -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
 }
 
-.marquee a:link {
-    color: #fff;
+marquee a:link {
+    color: #fff !important;
 }
 
 marquee a:visited {
-    color: #fff;
+    color: #fff !important;
 }
 
 .fas.fa-forward {
@@ -64,6 +64,10 @@ marquee a:visited {
 .onoffswitch3-inactive{
     background: #A1A1A1; right: 0;
     width: 20px;
+}
+.onoffswitch3-inactive .onoffswitch3-switch {
+    background: #4fbfa8; left: 0;
+    width: 160px;
 }
 .onoffswitch3-checkbox:checked + .onoffswitch3-label .onoffswitch3-inner {
     margin-left: 0;
