@@ -30,6 +30,11 @@
     <div id="content">
         <div class="container">
             <div class="row">
+                <div class="col-md-12 banner text-center">
+                    <img src="{{ URL::asset('/img/banner_top.jpg') }}" alt="ezy2biz banner">
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-12">
                     <div id="main-slider" class="owl-carousel owl-theme">
                         @for($i = 1; $i <= 6; $i++)

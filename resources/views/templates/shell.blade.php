@@ -32,7 +32,7 @@
 </head>
 <body>
 <!-- navbar-->
-<header class="header mb-5">
+<header class="header">
     @include('templates.top-bar')
 </header>
 
