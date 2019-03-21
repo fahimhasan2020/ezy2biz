@@ -76,9 +76,7 @@ Route::get('/bulletin/{id}', 'BulletinController@userSingleBulletin');
 Route::get('/a/login', function () {
    return view('admin.login');
 })->middleware('admin-not-logged');
-
 Route::post('/a/login', 'AdminController@login')->name('admin.login');
-
 Route::group(['middleware' => ['admin-logged']], function () {
 
     Route::get('/a/logout', 'AdminController@logout');

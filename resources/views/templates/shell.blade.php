@@ -11,15 +11,15 @@
     <link rel="shortcut icon" type="image/png" href="{{ URL::asset('/favicon-96x96.png') }}">
     <link rel="icon" type="image/png" sizes="96x96" href="{{ URL::asset('/favicon-96x96.png') }}">
     <!-- Bootstrap CSS-->
-    <link rel="stylesheet" href="{{ URL::asset('/vendor/bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ URL::asset('/vendors/bootstrap/css/bootstrap.min.css')}}">
     <!-- Font Awesome CSS-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" integrity="sha384-DmABxgPhJN5jlTwituIyzIUk6oqyzf3+XuP7q3VfcWA2unxgim7OSSZKKf0KSsnh" crossorigin="anonymous">
     {{--<link rel="stylesheet" href="{{ URL::asset('/vendor/font-awesome/css/font-awesome.min.css') }}">--}}
     <!-- Google fonts - Roboto -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700">
     <!-- owl carousel-->
-    <link rel="stylesheet" href="{{ URL::asset('/vendor/owl.carousel/assets/owl.carousel.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('/vendor/owl.carousel/assets/owl.theme.default.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('/vendors/owl.carousel/assets/owl.carousel.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('/vendors/owl.carousel/assets/owl.theme.default.css') }}">
     <!-- theme stylesheet-->
     <link rel="stylesheet" href="{{ URL::asset('/css/style.default.css') }}" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
@@ -50,11 +50,11 @@ _________________________________________________________
 <!-- *** COPYRIGHT END ***-->
 
 <!-- JavaScript files-->
-<script src="{{ URL::asset('/vendor/jquery/jquery.min.js') }}"></script>
-<script src="{{ URL::asset('/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ URL::asset('/vendor/jquery.cookie/jquery.cookie.js') }}"> </script>
-<script src="{{ URL::asset('/vendor/owl.carousel/owl.carousel.min.js') }}"></script>
-<script src="{{ URL::asset('/vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.js') }}"></script>
+<script src="{{ URL::asset('/vendors/jquery/jquery.min.js') }}"></script>
+<script src="{{ URL::asset('/vendors/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ URL::asset('/vendors/jquery.cookie/jquery.cookie.js') }}"> </script>
+<script src="{{ URL::asset('/vendors/owl.carousel/owl.carousel.min.js') }}"></script>
+<script src="{{ URL::asset('/vendors/owl.carousel2.thumbs/owl.carousel2.thumbs.js') }}"></script>
 <script src="{{ URL::asset('/js/front.js') }}"></script>
 </body>
 </html>
