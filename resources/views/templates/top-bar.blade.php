@@ -4,9 +4,13 @@
             <div class="col-lg-6 offer mb-3 mb-lg-0"></div>
             <div class="col-lg-6 text-center text-lg-right">
                 <ul class="menu list-inline mb-0">
-                    <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
-                    <li class="list-inline-item"><a href="/u/register">Register</a></li>
-                    <li class="list-inline-item"><a href="#">Account</a></li>
+                    @if(\Illuminate\Support\Facades\Session::has('user'))
+                        <li class="list-inline-item"><a href="/u/dashboard">Dashboard</a></li>
+                    @else
+                        <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
+                    @endif
+                    <li class="list-inline-item"><a href="#">Policy</a></li>
+                    <li class="list-inline-item"><a href="#">FAQ</a></li>
 
                 </ul>
             </div>

@@ -86,7 +86,7 @@ class ProductController extends Controller
         $userQuery = $user->getUser($request->session()->get('user'));
         $productQuery = $product->get($productId);
         $productQuery->image_paths = json_decode($productQuery->image_paths);
-        return view('product.buy')->with('user', $userQuery)->with('product', $productQuery);
+        return view('user.product-buy')->with('user', $userQuery)->with('product', $productQuery);
     }
 
     public function buyProduct($productId, Request $request, Product $product, User $user)

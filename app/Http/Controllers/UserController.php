@@ -46,7 +46,7 @@ class UserController extends Controller
     public function logout(Request $request)
     {
         $request->session()->flush();
-        return view('user.logout');
+        return redirect('/');
     }
 
     public function tree(Request $request, User $user)
@@ -77,7 +77,7 @@ class UserController extends Controller
     {
         $currentUserId = $request->session()->get('user');
         $query = $user->getUser($currentUserId);
-        return view('user.points')
+        return view('user.account')
             ->with('user', $query)
             ->with('action', strtolower($request->get('action')));
     }

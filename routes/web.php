@@ -21,10 +21,6 @@ Route::post('/u/register', 'UserController@register')->name('user.register');
 
 Route::group(['middleware' => ['user-not-logged']], function () {
 
-    Route::get('/u/login', function () {
-        return view('user.login');
-    })->middleware('user-not-logged');
-
     Route::post('/u/login', 'UserController@login')->name('user.login');
 
 });
