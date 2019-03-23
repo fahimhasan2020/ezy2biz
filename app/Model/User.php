@@ -60,6 +60,16 @@ class User extends Model
                 ])->first();
     }
 
+    public function verifyPassword($id, Request $credentials)
+    {
+        return
+            DB::table('users')
+                ->where([
+                    ['id', '=', $id],
+                    ['password', '=', $credentials->get('password')]
+                ])->first();
+    }
+
     public function get($userId)
     {
         return

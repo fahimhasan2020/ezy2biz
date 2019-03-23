@@ -19,7 +19,7 @@ class CreateWithdrawRequestsTable extends Migration
             $table->float('amount');
             $table->string('bkash_no');
             $table->string('response')->default('pending')->index();
-            $table->float('allowed_cash');
+            $table->float('allowed_cash')->default(0);
             $table->timestamp('timestamp');
 
             $table->foreign('applicant_id')

@@ -88,9 +88,11 @@ class UserController extends Controller
     public function transferPoints(Request $request, User $user)
     {
         $senderId = $request->session()->get('user');
-        if ($user->checkPointsAvailable($senderId, $request->get('amount'))) {
-            $user->transferPoints($senderId, $request);
-            return redirect('/u/account');
+        if ($user->verifyPassword($senderId, $request)) {
+            if ($user->checkPointsAvailable($senderId, $request->get('amount'))) {
+                $user->transferPoints($senderId, $request);
+                return redirect('/u/account');
+            }
         }
         return redirect('/u/account?action=transfer');
     }
@@ -98,16 +100,21 @@ class UserController extends Controller
     public function requestPoints(Request $request, User $user)
     {
         $userId = $request->session()->get('user');
-        $user->requestPoints($userId, $request);
-        return redirect('u/account');
+        if ($user->verifyPassword($userId, $request)) {
+            $user->requestPoints($userId, $request);
+            return redirect('u/account');
+        }
+        return redirect('/u/account?action=request');
     }
 
     public function requestWithdrawal(Request $request, User $user)
     {
         $userId = $request->session()->get('user');
-        if ($user->checkPointsAvailable($userId, $request->get('amount'))) {
-            $user->withdrawalRequest($userId, $request);
-            return redirect('u/account');
+        if ($user->verifyPassword($userId, $request)) {
+            if ($user->checkPointsAvailable($userId, $request->get('amount'))) {
+                $user->withdrawalRequest($userId, $request);
+                return redirect('u/account');
+            }
         }
         return redirect('/u/account?action=withdraw');
     }

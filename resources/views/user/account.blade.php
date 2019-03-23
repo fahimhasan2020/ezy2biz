@@ -19,8 +19,7 @@
         <h1>Account</h1>
 
         <div class="container emp-profile">
-            <form method="post">
-                <div class="row">
+            <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
                             <img src="{{ Storage::url('' . $user->photo) }}" alt=""/>
@@ -40,19 +39,25 @@
                             <p class="profile-rating">STEP : <span>{{ $user->step }}</span></p>
                             <p class="profile-rating">Points : <span>{{ $user->points }}</span></p>
                             <ul class="nav nav-tabs mt-2" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Profile</a>
-                                </li>
                                 @if($action)
+                                    <?php $profileClass = ''; $transactionClass = 'show active'; ?>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Transaction</a>
+                                        <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Profile</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Transaction</a>
+                                    </li>
+                                @else
+                                    <?php $profileClass = 'show active'; $transactionClass = ''; ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Profile</a>
                                     </li>
                                 @endif
                             </ul>
                         </div>
 
                         <div class="tab-content profile-tab" id="myTabContent">
-                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="tab-pane fade {{ $profileClass }}" id="home" role="tabpanel" aria-labelledby="home-tab">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>User Id</label>
@@ -95,57 +100,71 @@
                                     </div>
                                 </div>
 
-                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="tab-pane fade {{ $transactionClass }}" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                     @if($action === 'transfer')
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Experience</label>
+                                        <form action="/u/account/transfer" method="post">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label for="recipient">Send to</label>
+                                                <input id="recipient" name="recipient" type="number" class="form-control">
                                             </div>
-                                            <div class="col-md-6">
-                                                <p>Expert</p>
+                                            <div class="form-group">
+                                                <label for="amount">Send Amount (Points)</label>
+                                                <input id="amount" name="amount" type="number" class="form-control">
                                             </div>
-                                        </div>
+                                            <div class="form-group">
+                                                <label for="password">Password</label>
+                                                <input id="password" name="password" type="password" class="form-control">
+                                            </div>
+                                            <div>
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="fas fa-paper-plane"></i> Send
+                                                </button>
+                                            </div>
+                                        </form>
                                     @elseif($action === 'request')
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Hourly Rate</label>
+                                        <form action="/u/account/req" method="post">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label for="bkash-num">bKash Number</label>
+                                                <input id="bkash-num" name="bkash-num" type="text" class="form-control">
                                             </div>
-                                            <div class="col-md-6">
-                                                <p>10$/hr</p>
+                                            <div class="form-group">
+                                                <label for="amount">Send Amount (Cash)</label>
+                                                <input id="amount" name="amount" type="number" class="form-control">
                                             </div>
-                                        </div>
+                                            <div class="form-group">
+                                                <label for="password">Password</label>
+                                                <input id="password" name="password" type="password" class="form-control">
+                                            </div>
+                                            <div>
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="fas fa-exchange-alt"></i> Request
+                                                </button>
+                                            </div>
+                                        </form>
                                     @elseif($action === 'withdraw')
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Total Projects</label>
+                                        <form action="/u/account/withdraw" method="post">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label for="bkash-num">bKash Number</label>
+                                                <input id="bkash-num" name="bkash-num" type="text" class="form-control">
                                             </div>
-                                            <div class="col-md-6">
-                                                <p>230</p>
+                                            <div class="form-group">
+                                                <label for="amount">Withdraw Amount (Points)</label>
+                                                <input id="amount" name="amount" type="number" class="form-control">
                                             </div>
-                                        </div>
+                                            <div class="form-group">
+                                                <label for="password">Password</label>
+                                                <input id="password" name="password" type="password" class="form-control">
+                                            </div>
+                                            <div>
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="fas fa-upload"></i> Withdraw
+                                                </button>
+                                            </div>
+                                        </form>
                                     @endif
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>English Level</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>Expert</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Availability</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>6 months</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label>Your Bio</label><br/>
-                                            <p>Your detail description</p>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                     </div>
@@ -153,11 +172,6 @@
                         <a href="#" class="btn btn-outline-success">Edit Account</a>
                     </div>
                 </div>
-                <div class="row">
-
-
-                </div>
-            </form>
         </div>
     </div>
 @stop
