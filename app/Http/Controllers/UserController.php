@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Core\ImageStore;
 use App\Core\LoginValidator;
 use App\Core\ReferralKeyGenerator;
 use App\Core\RegistrationValidator;
@@ -13,19 +14,21 @@ class UserController extends Controller
     {
         $query = $user->getRefLink($request->get('ref'));
         if (!$query) {
-            return redirect(404);
+            return view('user.register');
         }
         return view('user.register')->with('refInfo', $query);
     }
 
-    public function register(Request $request, RegistrationValidator $validator, User $user)
+    public function register(Request $request, RegistrationValidator $validator, User $user, ImageStore $store)
     {
         if (!$validator->validate($request->request)) {
             return redirect()->back();
         }
+        $request->request->add(['image-path' => '']);
         if (!$user->exists($request)) {
+            $store->addUserPhoto($request);
             $user->register($request);
-            return redirect('/u/login');
+            return redirect('/');
         }
         return redirect()->back();
     }
@@ -73,7 +76,7 @@ class UserController extends Controller
         return view('user.ref-link')->with('refLinks', $refLinks);
     }
 
-    public function getPoints(Request $request, User $user)
+    public function getAccount(Request $request, User $user)
     {
         $currentUserId = $request->session()->get('user');
         $query = $user->getUser($currentUserId);

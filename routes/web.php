@@ -15,9 +15,9 @@ Route::get('/', function () {
     return view('landing');
 });
 
-Route::get('/u/register', 'UserController@getRegistrationForm')->name('user.register');
+Route::get('/register', 'UserController@getRegistrationForm')->name('user.register');
 
-Route::post('/u/register', 'UserController@register')->name('user.register');
+Route::post('/register', 'UserController@register')->name('user.register');
 
 Route::group(['middleware' => ['user-not-logged']], function () {
 
@@ -39,7 +39,7 @@ Route::group(['middleware' => ['user-logged']], function () {
 
     Route::post('/u/ref-link', 'UserController@generateRefLink')->name('user.ref-link');
 
-    Route::get('/u/account', 'UserController@getPoints');
+    Route::get('/u/account', 'UserController@getAccount');
 
     Route::post('/u/account/transfer', 'UserController@transferPoints');
 

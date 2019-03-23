@@ -1,16 +1,106 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<h1>This is User Registration page</h1>
-<hr>
-<form action="{{url()->full()}}" method="post">
+<?php $homeClass = $productClass = $bulletinClass = ''; ?>
+
+@extends('templates.shell')
+
+@section('body')
+    <div id="content">
+        <div class="container">
+            <div class="row mt-3">
+                <div class="col-lg-12">
+                    <!-- breadcrumb-->
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li aria-current="page" class="breadcrumb-item active">New account / Sign in</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-6">
+                    <div class="box">
+                        <h1>New account</h1>
+                        <p class="lead">Not our registered user yet?</p>
+
+                        <hr>
+                        <form action="{{ url()->full() }}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="first-name">First Name</label>
+                                <input id="first-name" name="first-name" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="last-name">Last Name</label>
+                                <input id="last-name" name="last-name" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input id="phone" name="phone" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <textarea id="address" name="address" class="form-control" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="referrer-id">Referrer ID</label>
+                                <input id="referrer-id" name="referrer-id" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="parent-id">Parent ID</label>
+                                <input id="parent-id" name="parent-id" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Add Photo</label>
+                                <input type="file" name="image" class="form-control-file">
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input id="email" name="email" type="email" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input id="password" name="password" type="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Confirm Password</label>
+                                <input id="confirm-password" name="confirm-password" type="password" class="form-control">
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-user-md"></i> Register
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="box">
+                        <h1>Login</h1>
+                        <p class="lead">Already our user?</p>
+                        <hr>
+                        <form action="/u/login" method="post">
+                            @csrf
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input id="email" name="email" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input id="password" name="password" type="password" class="form-control">
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-sign-in"></i> Log in
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@stop
+
+{{--<form action="{{url()->full()}}" method="post">
     @csrf
     <label>
         First Name:
@@ -62,6 +152,4 @@
     <label>
         <input type="submit" name="submit" value="Register">
     </label>
-</form>
-</body>
-</html>
+</form>--}}

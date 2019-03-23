@@ -34,6 +34,7 @@ class CreateEzy2bizDbTables extends Migration
             $table->tinyInteger('step')->default(1);
             $table->float('points')->default(0);
             $table->boolean('is_active')->default(false);
+            $table->string('photo');
         });
 
         Schema::create('products', function (Blueprint $table) {

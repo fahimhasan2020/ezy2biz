@@ -44,4 +44,16 @@ class ImageStore
         }
         return true;
     }
+
+    public function addUserPhoto(Request $request)
+    {
+        if (!$request->hasFile('image')) {
+            return true;
+        }
+
+        $file = $request->file('image');
+        $path = $file->store('public/users');
+        $request->request->add(['image-path' => $path]);
+        return true;
+    }
 }

@@ -8,6 +8,7 @@
                         <li class="list-inline-item"><a href="/u/dashboard">Dashboard</a></li>
                     @else
                         <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
+                        <li class="list-inline-item"><a href="/register">Register</a></li>
                     @endif
                     <li class="list-inline-item"><a href="#">Policy</a></li>
                     <li class="list-inline-item"><a href="#">FAQ</a></li>
@@ -38,7 +39,7 @@
                     </form>
                     <p class="text-center text-muted">Not registered yet?</p>
                     <p class="text-center text-muted">
-                        <a href="/u/register">
+                        <a href="/register">
                             <strong>Register now</strong>
                         </a>
                     </p>

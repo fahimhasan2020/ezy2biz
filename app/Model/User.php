@@ -28,12 +28,15 @@ class User extends Model
                 'email'         => $userData->get('email'),
                 'password'      => $userData->get('password'),
                 'parent_id'     => $userData->get('parent-id'),
-                'referrer_id'   => $userData->get('referrer-id')
+                'referrer_id'   => $userData->get('referrer-id'),
+                'photo'         => $userData->get('image-path')
             ]);
 
-        DB::table('referral_links')
-            ->where('referral_key', '=', $userData->get('ref'))
-            ->update(['status' => 'complete']);
+        if ($userData->get('ref')) {
+            DB::table('referral_links')
+                ->where('referral_key', '=', $userData->get('ref'))
+                ->update(['status' => 'complete']);
+        }
 
         $time = time();
         DB::table('cron_job_schedules')
