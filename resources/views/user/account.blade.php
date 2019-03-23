@@ -169,7 +169,7 @@
                             </div>
                     </div>
                     <div class="col-md-2">
-                        <a href="#" class="btn btn-outline-success">Edit Account</a>
+                        <a href="/u/account/edit" class="btn btn-outline-success">Edit Account</a>
                     </div>
                 </div>
         </div>

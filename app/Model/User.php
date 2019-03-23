@@ -242,4 +242,21 @@ class User extends Model
                 ->orderBy('u.last_name', 'asc')
                 ->get();
     }
+
+    public function edit($userId, Request $userData)
+    {
+        $updates = [
+            'first_name'    => $userData->get('first-name'),
+            'last_name'     => $userData->get('last-name'),
+            'phone'         => $userData->get('phone'),
+            'address'       => $userData->get('address')
+        ];
+        if (!empty($userData->get('image-path'))) {
+            $updates['photo'] = $userData->get('image-path');
+        }
+        return
+            DB::table('users')
+                ->where('id', '=', $userId)
+                ->update($updates);
+    }
 }

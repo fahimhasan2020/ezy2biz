@@ -14,6 +14,7 @@ class AdminController extends Controller
         $validator->validate($request);
         $adminObj = $admin->verify($request);
         if (isset($adminObj) && $adminObj->id) {
+            $request->session()->regenerateToken();
             $request->session()->put('admin', $adminObj->id);
             return redirect('/a/dashboard');
         }

@@ -47,13 +47,14 @@ class ImageStore
 
     public function addUserPhoto(Request $request)
     {
-        if (!$request->hasFile('image')) {
-            return true;
-        }
-
         $file = $request->file('image');
         $path = $file->store('public/users');
         $request->request->add(['image-path' => $path]);
         return true;
+    }
+
+    public function removeUserPhoto($path)
+    {
+        return Storage::delete($path);
     }
 }

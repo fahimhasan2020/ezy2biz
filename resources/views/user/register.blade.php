@@ -37,7 +37,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="address">Address</label>
-                                <textarea id="address" name="address" class="form-control" rows="3"></textarea>
+                                <input id="address" name="address" type="text" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="referrer-id">Referrer ID</label>

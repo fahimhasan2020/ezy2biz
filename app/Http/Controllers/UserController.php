@@ -26,7 +26,9 @@ class UserController extends Controller
         }
         $request->request->add(['image-path' => '']);
         if (!$user->exists($request)) {
-            $store->addUserPhoto($request);
+            if ($request->hasFile('image')) {
+                $store->addUserPhoto($request);
+            }
             $user->register($request);
             return redirect('/');
         }
@@ -39,6 +41,7 @@ class UserController extends Controller
             $userObj = $user->verify($request);
         }
         if (isset($userObj) && $userObj->id) {
+            $request->session()->regenerateToken();
             $request->session()->put('user', $userObj->id);
             return redirect('/u/dashboard');
         }
@@ -117,5 +120,30 @@ class UserController extends Controller
             }
         }
         return redirect('/u/account?action=withdraw');
+    }
+
+    public function getEditAccountPage(Request $request, User $user)
+    {
+        $userId = $request->session()->get('user');
+        $query = $user->getUser($userId);
+        return view('user.edit-account')->with('user', $query);
+    }
+
+    public function editAccount(Request $request, User $user, ImageStore $store)
+    {
+        $userId = $request->session()->get('user');
+        if ($request->hasFile('image')) {
+            $query = $user->getUser($userId);
+            $store->removeUserPhoto($query->photo);
+            if ($store->addUserPhoto($request)) {
+                $user->edit($userId,$request);
+                return redirect('/u/account');
+            }
+        } else {
+            $user->edit($userId, $request);
+            return redirect('/u/account');
+        }
+
+        return redirect()->back();
     }
 }

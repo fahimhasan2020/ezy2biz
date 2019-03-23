@@ -41,6 +41,10 @@ Route::group(['middleware' => ['user-logged']], function () {
 
     Route::get('/u/account', 'UserController@getAccount');
 
+    Route::get('/u/account/edit', 'UserController@getEditAccountPage');
+
+    Route::put('/u/account/edit', 'UserController@editAccount');
+
     Route::post('/u/account/transfer', 'UserController@transferPoints');
 
     Route::post('/u/account/req', 'UserController@requestPoints');
