@@ -25,7 +25,7 @@ class AdminController extends Controller
     public function logout(Request $request)
     {
         $request->session()->flush();
-        return view('admin.logout');
+        return redirect('/a/login');
     }
 
     public function getPointRequests(Admin $admin)
