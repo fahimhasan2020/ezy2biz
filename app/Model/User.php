@@ -259,4 +259,15 @@ class User extends Model
                 ->where('id', '=', $userId)
                 ->update($updates);
     }
+
+    public function getTree($userId)
+    {
+        return
+            DB::table('referral_tree as t')
+                ->join('users as u', 't.child_id', '=', 'u.id')
+                ->select('u.id', 'u.first_name', 'u.last_name', 'u.step', 'u.is_active', 'u.parent_id', 't.level')
+                ->where('t.user_id', '=', $userId)
+                ->orderBy('t.level')
+                ->get();
+    }
 }

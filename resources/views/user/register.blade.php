@@ -41,11 +41,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="referrer-id">Referrer ID</label>
-                                <input id="referrer-id" name="referrer-id" type="text" class="form-control">
+                                <input type="hidden" name="referrer-id" value="{{ $refInfo['r_id'] }}">
+                                <input id="parent-id" type="text" class="form-control" value="{{ $refInfo['r_fn'] }} {{ $refInfo['r_ln'] }}" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="parent-id">Parent ID</label>
-                                <input id="parent-id" name="parent-id" type="text" class="form-control">
+                                <input type="hidden" name="parent-id" value="{{ $refInfo['p_id'] }}">
+                                <input id="parent-id" type="text" class="form-control" value="{{ $refInfo['p_fn'] }} {{ $refInfo['p_ln'] }}" readonly>
                             </div>
                             <div class="form-group">
                                 <label>Add Photo</label>

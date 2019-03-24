@@ -37,7 +37,7 @@
                                 {{ $user->first_name }} {{ $user->last_name }}
                             </h5>
                             <p class="profile-rating">STEP : <span>{{ $user->step }}</span></p>
-                            <p class="profile-rating">Points : <span>{{ $user->points }}</span></p>
+                            <p class="profile-rating">POINTS : <span>{{ $user->points }}</span></p>
                             <ul class="nav nav-tabs mt-2" id="myTab" role="tablist">
                                 @if($action)
                                     <?php $profileClass = ''; $transactionClass = 'show active'; ?>

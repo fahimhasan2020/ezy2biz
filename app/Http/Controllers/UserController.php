@@ -14,9 +14,16 @@ class UserController extends Controller
     {
         $query = $user->getRefLink($request->get('ref'));
         if (!$query) {
-            return view('user.register');
+            $refInfo = [
+                'p_fn' => '', 'p_ln' => '', 'p_id' => '', 'r_fn' => '', 'r_ln' => '', 'r_id' => ''
+            ];
+            return view('user.register')->with('refInfo', $refInfo);
         }
-        return view('user.register')->with('refInfo', $query);
+        $refInfo = [
+            'p_fn' => $query->p_fn, 'p_ln' => $query->p_ln, 'p_id' => $query->p_id,
+            'r_fn' => $query->r_fn, 'r_ln' => $query->r_ln, 'r_id' => $query->r_id
+        ];
+        return view('user.register')->with('refInfo', $refInfo);
     }
 
     public function register(Request $request, RegistrationValidator $validator, User $user, ImageStore $store)
@@ -58,8 +65,31 @@ class UserController extends Controller
     public function tree(Request $request, User $user)
     {
         $currentUserId = $request->session()->get('user');
-        $userQuery = $user->get($currentUserId);
-        return view('user.tree')->with('currentUser', $userQuery);
+        $curUser = $user->getUser($currentUserId);
+        $tree = $user->getTree($currentUserId)->all();
+
+        $t = array_fill(0, 31, null);
+        $t[0] = $curUser;
+
+        for ($i = 0; $i <= 30; $i++) {
+            if (is_object($t[$i])) {
+                $t[$i * 2 + 1] = $t[$i]->id;
+                $t[$i * 2 + 2] = $t[$i]->id;
+                foreach ($tree as $key => $child) {
+                    if ($child->parent_id === $t[$i]->id) {
+                        if (!is_object($t[$i * 2 + 1])) {
+                            $t[$i * 2 + 1] = $child;
+                            unset($tree[$key]);
+                        } elseif (!is_object($t[$i * 2 + 2])) {
+                            $t[$i * 2 + 2] = $child;
+                            unset($tree[$key]);
+                        }
+                    }
+                }
+            }
+        }
+
+        return view('user.tree')->with('currentUser', $curUser)->with('tree', $t);
     }
 
     public function generateRefLink(Request $request, User $user, ReferralKeyGenerator $keygen)
