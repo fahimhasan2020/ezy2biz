@@ -34,7 +34,7 @@ class ProductController extends Controller
         $request->request->add(['image-paths' => $query->image_paths]);
         if ($request->has('delete-images')) {
             $request->request->add([
-                'image-paths' => array_diff($request->get('image-paths'), $request->get('delete-images'))
+                'image-paths' => array_values(array_diff($request->get('image-paths'), $request->get('delete-images')))
             ]);
         }
 
@@ -62,6 +62,7 @@ class ProductController extends Controller
         foreach ($products as $p) {
             $p->image_paths = json_decode($p->image_paths);
         }
+
         return view('admin.all-products')->with('products', $products);
     }
 
@@ -110,5 +111,12 @@ class ProductController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function singleProduct($productId, Product $product)
+    {
+        $query = $product->get($productId);
+        $query->image_paths = json_decode($query->image_paths);
+        return view('product.single')->with('product', $query);
     }
 }

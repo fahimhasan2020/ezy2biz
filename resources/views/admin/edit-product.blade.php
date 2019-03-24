@@ -45,7 +45,7 @@
                 <label class="mr-3">Check photos to delete:</label>
                 @foreach($product->image_paths as $image)
                     <label class="mr-5">
-                    <input type="checkbox" name="delete-images[]" class="form-check form-check-inline">
+                    <input type="checkbox" name="delete-images[]" class="form-check form-check-inline" value="{{ $image }}">
                     <img src="{{ Storage::url('' . $image) }}" alt="" height="60">
                     </label>
                 @endforeach
