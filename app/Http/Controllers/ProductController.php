@@ -56,23 +56,82 @@ class ProductController extends Controller
         return redirect('/a/products');
     }
 
-    public function adminAllProducts(Product $product)
+    public function adminAllProducts(Request $request, Product $product)
     {
-        $products = $product->getAll()->all();
+        if (!$request->get('page') || !(int) $request->get('page')) {
+            return redirect('/a/products?page=1');
+        } else {
+            $curPage = (int) $request->get('page');
+        }
+
+        $count = $product->countTotal();
+        $perPage = 10;
+        $totalPages = ceil($count / $perPage);
+        $offset = $perPage * ($curPage - 1);
+
+        if (1 <= $curPage - 1) {
+            $prevPage = $curPage - 1;
+        } else {
+            $prevPage = null;
+        }
+
+        if ($curPage + 1 <= $totalPages) {
+            $nextPage = $curPage + 1;
+        } else {
+            $nextPage = null;
+        }
+
+        $products = $product->paginate($perPage, $offset)->all();
+
         foreach ($products as $p) {
             $p->image_paths = json_decode($p->image_paths);
         }
 
-        return view('admin.all-products')->with('products', $products);
+        return view('admin.all-products')
+            ->with('products', $products)
+            ->with('totalPages', $totalPages)
+            ->with('curPage', $curPage)
+            ->with('prevPage', $prevPage)
+            ->with('nextPage', $nextPage);
     }
 
-    public function userAllProducts(Product $product)
+    public function userAllProducts(Request $request, Product $product)
     {
-        $products = $product->getAll()->all();
+        if (!$request->get('page') || !(int) $request->get('page')) {
+            return redirect('/products?page=1');
+        } else {
+            $curPage = (int) $request->get('page');
+        }
+
+        $count = $product->countTotal();
+        $perPage = 9;
+        $totalPages = ceil($count / $perPage);
+        $offset = $perPage * ($curPage - 1);
+
+        if (1 <= $curPage - 1) {
+            $prevPage = $curPage - 1;
+        } else {
+            $prevPage = null;
+        }
+
+        if ($curPage + 1 <= $totalPages) {
+            $nexPage = $curPage + 1;
+        } else {
+            $nexPage = null;
+        }
+
+        $products = $product->paginate($perPage, $offset)->all();
+
         foreach ($products as $p) {
             $p->image_paths = json_decode($p->image_paths);
         }
-        return view('product.all')->with('products', $products);
+
+        return view('product.all')
+            ->with('products', $products)
+            ->with('totalPages', $totalPages)
+            ->with('curPage', $curPage)
+            ->with('prevPage', $prevPage)
+            ->with('nextPage', $nexPage);
     }
 
     public function getProduct($productId, Product $product)

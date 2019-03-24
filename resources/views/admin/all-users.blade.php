@@ -87,6 +87,38 @@
                     </table>
                 </div>
             </div>
+
+            <nav class="container">
+                <ul class="pagination">
+                    @if($prevPage)
+                        <li class="page-item">
+                            <a class="page-link" href="/a/users?page={{ $prevPage }}" tabindex="-1">Previous</a>
+                        </li>
+                    @else
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">Previous</a>
+                        </li>
+                    @endif
+                    @for($i = 1; $i <= $totalPages; $i++)
+                        @if ($i == $curPage)
+                            <li class="page-item active"><a class="page-link" href="#">{{ $i }}</a></li>
+                        @else
+                            <li class="page-item">
+                                <a class="page-link" href="/a/users?page={{ $i }}">{{ $i }}</a>
+                            </li>
+                        @endif
+                    @endfor
+                    @if($nextPage)
+                        <li class="page-item">
+                            <a class="page-link" href="/a/users?page={{ $nextPage }}">Next</a>
+                        </li>
+                    @else
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                    @endif
+                </ul>
+            </nav>
         </div>
     </div>
 @stop

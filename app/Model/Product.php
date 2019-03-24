@@ -78,4 +78,18 @@ class Product extends Model
         $user->addPoints($request->get('referrer-id'), $commission);
         DB::commit();
     }
+
+    public function countTotal()
+    {
+        return DB::table('products')->select('id')->count();
+    }
+
+    public function paginate($limit, $offset)
+    {
+        return
+            DB::table('products')
+                ->limit($limit)
+                ->offset($offset)
+                ->get();
+    }
 }

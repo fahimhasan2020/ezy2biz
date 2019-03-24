@@ -270,4 +270,25 @@ class User extends Model
                 ->orderBy('t.level')
                 ->get();
     }
+
+    public function countTotal()
+    {
+        return DB::table('users')->select('id')->count();
+    }
+
+    public function paginate($limit, $offset)
+    {
+        return
+            DB::table('users as u')
+                ->leftJoin('users as pu', 'u.parent_id', '=', 'pu.id')
+                ->leftJoin('users as ru', 'u.referrer_id', '=', 'ru.id')
+                ->select('u.id', 'u.first_name', 'u.last_name', 'u.phone', 'u.email', 'u.step', 'u.points',
+                    'pu.id as parent_id', 'pu.first_name as parent_fn', 'pu.last_name as parent_ln',
+                    'ru.id as referrer_id', 'ru.first_name as referrer_fn', 'ru.last_name as referrer_ln')
+                ->orderBy('u.first_name', 'asc')
+                ->orderBy('u.last_name', 'asc')
+                ->limit($limit)
+                ->offset($offset)
+                ->get();
+    }
 }

@@ -80,10 +80,39 @@ class AdminController extends Controller
         return redirect('/a/product-orders');
     }
 
-    public function showAllUsers(User $user)
+    public function showAllUsers(Request $request, User $user)
     {
-        $query = $user->getAll()->all();
-        return view('admin.all-users')->with('users', $query);
+        if (!$request->get('page') || !(int) $request->get('page')) {
+            return redirect('/a/users?page=1');
+        } else {
+            $curPage = (int) $request->get('page');
+        }
+
+        $count = $user->countTotal();
+        $perPage = 20;
+        $totalPages = ceil($count / $perPage);
+        $offset = $perPage * ($curPage - 1);
+
+        if (1 <= $curPage - 1) {
+            $prevPage = $curPage - 1;
+        } else {
+            $prevPage = null;
+        }
+
+        if ($curPage + 1 <= $totalPages) {
+            $nexPage = $curPage + 1;
+        } else {
+            $nexPage = null;
+        }
+
+        $query = $user->paginate($perPage, $offset)->all();
+
+        return view('admin.all-users')
+            ->with('users', $query)
+            ->with('totalPages', $totalPages)
+            ->with('curPage', $curPage)
+            ->with('prevPage', $prevPage)
+            ->with('nextPage', $nexPage);
     }
 
     public function getUserEditForm($userId, User $user)

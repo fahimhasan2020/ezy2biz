@@ -16,7 +16,7 @@ class RedirectIfUserNotLogged
     public function handle($request, Closure $next)
     {
         if (!$request->session()->has('user')) {
-            return redirect('/u/login');
+            return redirect('/register');
         }
         return $next($request);
     }

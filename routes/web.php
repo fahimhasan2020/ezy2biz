@@ -62,14 +62,15 @@ Route::group(['middleware' => ['user-logged']], function () {
 });
 
 
-
 Route::get('/products', 'ProductController@userAllProducts');
 
 Route::get('/product/{id}', 'ProductController@singleProduct');
 
+
 Route::get('/bulletins', 'BulletinController@userAllBulletins');
 
 Route::get('/bulletin/{id}', 'BulletinController@userSingleBulletin');
+
 
 Route::get('/a/login', function () {
    return view('admin.login');

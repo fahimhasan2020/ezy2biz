@@ -26,10 +26,39 @@ class BulletinController extends Controller
         return redirect('/a/bulletins');
     }
 
-    public function adminAllBulletins(Bulletin $bulletin)
+    public function adminAllBulletins(Request $request, Bulletin $bulletin)
     {
-        $bulletins = $bulletin->getAll();
-        return view('admin.all-bulletins')->with('bulletins', $bulletins->all());
+        if (!$request->get('page') || !(int) $request->get('page')) {
+            return redirect('/a/bulletins?page=1');
+        } else {
+            $curPage = (int) $request->get('page');
+        }
+
+        $count = $bulletin->countTotal();
+        $perPage = 10;
+        $totalPages = ceil($count / $perPage);
+        $offset = $perPage * ($curPage - 1);
+
+        if (1 <= $curPage - 1) {
+            $prevPage = $curPage - 1;
+        } else {
+            $prevPage = null;
+        }
+
+        if ($curPage + 1 <= $totalPages) {
+            $nexPage = $curPage + 1;
+        } else {
+            $nexPage = null;
+        }
+
+        $bulletins = $bulletin->paginate($perPage, $offset)->all();
+
+        return view('admin.all-bulletins')
+            ->with('bulletins', $bulletins)
+            ->with('totalPages', $totalPages)
+            ->with('curPage', $curPage)
+            ->with('prevPage', $prevPage)
+            ->with('nextPage', $nexPage);
     }
 
     public function adminSingleBulletin($bulletinId, Bulletin $bulletin)
@@ -44,10 +73,38 @@ class BulletinController extends Controller
         return view('admin.edit-bulletin')->with('bulletin', $query);
     }
 
-    public function userAllBulletins(Bulletin $bulletin)
+    public function userAllBulletins(Request $request, Bulletin $bulletin)
     {
-        $bulletins = $bulletin->getAll();
-        return view('bulletin.all')->with('bulletins', $bulletins->all());
+        if (!$request->get('page') || !(int) $request->get('page')) {
+            return redirect('/bulletins?page=1');
+        } else {
+            $curPage = (int) $request->get('page');
+        }
+
+        $count = $bulletin->countTotal();
+        $perPage = 5;
+        $totalPages = ceil($count / $perPage);
+        $offset = $perPage * ($curPage - 1);
+
+        if (1 <= $curPage - 1) {
+            $prevPage = $curPage - 1;
+        } else {
+            $prevPage = null;
+        }
+
+        if ($curPage + 1 <= $totalPages) {
+            $nextPage = $curPage + 1;
+        } else {
+            $nextPage = null;
+        }
+
+        $bulletins = $bulletin->paginate($perPage, $offset)->all();
+
+        return view('bulletin.all')
+            ->with('bulletins', $bulletins)
+            ->with('totalPages', $totalPages)
+            ->with('prevPage', $prevPage)
+            ->with('nextPage', $nextPage);
     }
 
     public function userSingleBulletin($bulletinId, Bulletin $bulletin)

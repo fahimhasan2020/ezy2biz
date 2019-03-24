@@ -66,4 +66,20 @@ class Bulletin extends Model
                 ->where('bulletins.id', '=', $bulletinId)
                 ->first();
     }
+
+    public function countTotal()
+    {
+        return DB::table('bulletins')->select('id')->count();
+    }
+
+    public function paginate($limit, $offset)
+    {
+        return
+            DB::table('bulletins')
+                ->join('admins', 'bulletins.publisher_id', '=', 'admins.id')
+                ->select('bulletins.*', 'admins.first_name', 'admins.last_name')
+                ->limit($limit)
+                ->offset($offset)
+                ->get();
+    }
 }
