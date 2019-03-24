@@ -19,23 +19,7 @@
                     <div class="box">
                         <h1>Our Products</h1>
                     </div>
-                    <div class="box info-bar">
-                        <div class="row">
-                            <div class="col-md-12 col-lg-4 products-showing">Showing <strong>12</strong> of <strong>25</strong> products</div>
-                            <div class="col-md-12 col-lg-7 products-number-sort">
-                                <form class="form-inline d-block d-lg-flex justify-content-between flex-column flex-md-row">
-                                    <div class="products-number"><strong>Show</strong><a href="#" class="btn btn-sm btn-primary">12</a><a href="#" class="btn btn-outline-secondary btn-sm">24</a><a href="#" class="btn btn-outline-secondary btn-sm">All</a><span>products</span></div>
-                                    <div class="products-sort-by mt-2 mt-lg-0"><strong>Sort by</strong>
-                                        <select name="sort-by" class="form-control">
-                                            <option>Price</option>
-                                            <option>Name</option>
 
-                                        </select>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                     <div class="row products">
                         @foreach($products as $product)
                             <div class="col-lg-4 col-md-6">
@@ -80,7 +64,6 @@
                         <!-- /.products-->
                     </div>
                     <div class="pages">
-                        <p class="loadMore"><a href="#" class="btn btn-primary btn-lg"><i class="fa fa-chevron-down"></i> Load more</a></p>
                         <nav aria-label="Page navigation example" class="d-flex justify-content-center">
                             <ul class="pagination">
                                 <li class="page-item"><a href="#" aria-label="Previous" class="page-link"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
