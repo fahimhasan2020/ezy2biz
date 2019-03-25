@@ -29,12 +29,18 @@
 @section('body')
     <div id="content">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12 banner text-center">
+        <div class="row">
+            <div class="col-md-12 banner text-center ">
+
+            <div class="box clickable d-flex flex-column justify-content-center mb-0 h-100" style="padding:0;">
+
                     <img src="{{ URL::asset('/img/banner_top.jpg') }}" alt="ezy2biz banner">
                 </div>
+                </div>
+                
             </div>
             <div class="row">
+            
                 <div class="col-md-12">
                     <div id="main-slider" class="owl-carousel owl-theme">
                         @for($i = 1; $i <= 6; $i++)
