@@ -47,7 +47,7 @@
                                     <a href="/a/user/{{ $user->parent_id }}">{{ $user->referrer_fn }} {{ $user->referrer_ln }}</a>
                                 </td>
                                 <td class="text-center">
-                                    <a href="/a/user/{{ $user->id }}" class="btn btn-sm btn-success">
+                                    <a href="#" class="btn btn-sm btn-success">
                                         <i class="fas fa-eye" title="View"></i>
                                     </a>
                                     <a href="/a/user/{{ $user->id }}/edit" class="btn btn-sm btn-info">

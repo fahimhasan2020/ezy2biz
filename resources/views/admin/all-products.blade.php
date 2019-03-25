@@ -37,7 +37,7 @@
                                 <td class="text-right">{{ $product->commission }}</td>
                                 <td class="text-right">{{ count($product->image_paths) }}</td>
                                 <td class="text-center">
-                                    <a href="/a/product/{{ $product->id }}" class="btn btn-sm btn-success">
+                                    <a href="#" class="btn btn-sm btn-success">
                                         <i class="fas fa-eye" title="View"></i>
                                     </a>
                                     <a href="/a/product/{{ $product->id }}/edit" class="btn btn-sm btn-info">
