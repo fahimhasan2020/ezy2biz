@@ -18,7 +18,6 @@ class User extends Model
 
     public function register(Request $userData)
     {
-        DB::beginTransaction();
         $newUserId = DB::table('users')
             ->insertGetId([
                 'first_name'    => $userData->get('first-name'),
@@ -37,16 +36,7 @@ class User extends Model
                 ->where('referral_key', '=', $userData->get('ref'))
                 ->update(['status' => 'complete']);
         }
-
-        $time = time();
-        DB::table('cron_job_schedules')
-            ->insert([
-                'job_type'      => 'reg',
-                'issuer_id'     => $newUserId,
-                'issue_date'    => date('Y-m-d', $time),
-                'issue_time'    => date('H:i:s', $time),
-            ]);
-        DB::commit();
+        return $newUserId;
     }
 
     public function verify(Request $credentials)
@@ -290,5 +280,39 @@ class User extends Model
                 ->limit($limit)
                 ->offset($offset)
                 ->get();
+    }
+
+    public function makeActive($userId)
+    {
+        return
+            DB::table('users')
+                ->where([
+                    ['id', '=', $userId],
+                    ['is_active', '=', false]
+                ])
+                ->update([
+                    'is_active' => true
+                ]);
+    }
+
+    public function begin()
+    {
+        DB::beginTransaction();
+    }
+
+    public function finish()
+    {
+        DB::commit();
+    }
+
+    public function addToTree($parentId, $childId, $level)
+    {
+        return
+            DB::table('referral_tree')
+                ->insert([
+                    'user_id'    => $parentId,
+                    'child_id'   => $childId,
+                    'level'      => $level
+                ]);
     }
 }

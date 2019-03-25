@@ -18,7 +18,7 @@ class CreateEzy2bizDbTables extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('password')->index();
         });
 
         Schema::create('users', function (Blueprint $table) {
@@ -28,12 +28,12 @@ class CreateEzy2bizDbTables extends Migration
             $table->string('phone');
             $table->string('address');
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('password')->index();
             $table->integer('parent_id')->unsigned()->index()->nullable();
             $table->integer('referrer_id')->unsigned()->index()->nullable();
-            $table->tinyInteger('step')->default(1);
+            $table->tinyInteger('step')->default(1)->index();
             $table->float('points')->default(0);
-            $table->boolean('is_active')->default(false);
+            $table->boolean('is_active')->default(false)->index();
             $table->string('photo');
         });
 
@@ -59,7 +59,7 @@ class CreateEzy2bizDbTables extends Migration
                 ->references('id')
                 ->on('admins')
                 ->onUpdate('cascade')
-                ->onDelete('restrict');
+                ->onDelete('cascade');
         });
 
         Schema::create('referral_links', function (Blueprint $table) {
@@ -75,7 +75,7 @@ class CreateEzy2bizDbTables extends Migration
                 ->references('id')
                 ->on('users')
                 ->onUpdate('cascade')
-                ->onDelete('restrict');
+                ->onDelete('cascade');
         });
 
         Schema::create('referral_tree', function (Blueprint $table) {
@@ -103,16 +103,15 @@ class CreateEzy2bizDbTables extends Migration
             $table->increments('id');
             $table->string('job_type');
             $table->integer('issuer_id')->unsigned();
-            $table->date('issue_date');
-            $table->time('issue_time');
-            $table->string('job_status')->default('pending');
+            $table->dateTime('issue_datetime')->index();
+            $table->string('job_status')->default('pending')->index();
 
             $table
                 ->foreign('issuer_id')
                 ->references('id')
                 ->on('users')
                 ->onUpdate('cascade')
-                ->onDelete('restrict');
+                ->onDelete('cascade');
         });
     }
 

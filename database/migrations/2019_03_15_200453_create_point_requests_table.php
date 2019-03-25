@@ -17,7 +17,7 @@ class CreatePointRequestsTable extends Migration
             $table->increments('id');
             $table->integer('applicant_id')->unsigned()->index();
             $table->float('amount');
-            $table->string('bkash_no')->index();
+            $table->string('bkash_no');
             $table->string('response')->default('pending')->index();
             $table->timestamp('timestamp');
 
@@ -25,7 +25,7 @@ class CreatePointRequestsTable extends Migration
                 ->references('id')
                 ->on('users')
                 ->onUpdate('cascade')
-                ->onDelete('restrict');
+                ->onDelete('cascade');
         });
     }
 

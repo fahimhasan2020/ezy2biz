@@ -60,6 +60,7 @@
                     <td colspan="16"><a href="#"><i class="fas fa-user-circle fa-2x"></i></a>
                         <p>
                             {{ $currentUser->first_name }} {{ $currentUser->last_name }} <br>
+                            ID: {{ $currentUser->id }} <br>
                             STEP: {{ $currentUser->step }} <br>
                             ACTIVE: @if($currentUser->is_active) Yes @else No @endif
                         </p>
@@ -72,6 +73,7 @@
                                 <a href="#"><i class="fas fa-user-circle fa-2x"></i></a>
                                 <p>
                                     {{ $tree[$i]->first_name }} {{ $tree[$i]->last_name }} <br>
+                                    ID: {{ $tree[$i]->id }} <br>
                                     STEP: {{ $tree[$i]->step }} <br>
                                     ACTIVE: @if($tree[$i]->is_active) Yes @else No @endif
                                 </p>
@@ -113,6 +115,7 @@
                                 <a href="#"><i class="fas fa-user-circle fa-2x"></i></a>
                                 <p>
                                     {{ $tree[$i]->first_name }} {{ $tree[$i]->last_name }} <br>
+                                    ID: {{ $tree[$i]->id }} <br>
                                     STEP: {{ $tree[$i]->step }} <br>
                                     ACTIVE: @if($tree[$i]->is_active) Yes @else No @endif
                                 </p>
@@ -154,6 +157,7 @@
                                 <a href="#"><i class="fas fa-user-circle fa-2x"></i></a>
                                 <p>
                                     {{ $tree[$i]->first_name }} {{ $tree[$i]->last_name }} <br>
+                                    ID: {{ $tree[$i]->id }} <br>
                                     STEP: {{ $tree[$i]->step }} <br>
                                     ACTIVE: @if($tree[$i]->is_active) Yes @else No @endif
                                 </p>
@@ -195,6 +199,7 @@
                                 <a href="#"><i class="fas fa-user-circle fa-2x"></i></a>
                                 <p>
                                     {{ $tree[$i]->first_name }} {{ $tree[$i]->last_name }} <br>
+                                    ID: {{ $tree[$i]->id }} <br>
                                     STEP: {{ $tree[$i]->step }} <br>
                                     ACTIVE: @if($tree[$i]->is_active) Yes @else No @endif
                                 </p>
@@ -233,22 +238,3 @@
         </div>
     </div>
 @stop
-
-{{--
-<template>
-Name: {{ $currentUser->first_name }} {{ $currentUser->last_name }} <br>
-Email: {{ $currentUser->email }} <br>
-Active: @if($currentUser->is_active) Yes @else No @endif <br>
-ID: {{ $currentUser->id }} <br>
-<hr>
-<form action="{{ route('user.ref-link') }}" method="post">
-    @csrf
-    <labe>
-        Parent:
-        <input type="text" name="parent-id">
-    </labe>
-    <labe>
-        <input type="submit" name="submit" value="Generate Referral Link">
-    </labe>
-</form>
-</template>--}}

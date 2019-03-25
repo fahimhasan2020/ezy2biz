@@ -36,9 +36,14 @@ class UserController extends Controller
             if ($request->hasFile('image')) {
                 $store->addUserPhoto($request);
             }
-            $user->register($request);
-            return redirect('/');
+
+            $user->begin();
+            $newUserId = $user->register($request);
+            $this->populateTree($newUserId, $user);
+            $user->finish();
+            return redirect('/u/dashboard');
         }
+
         return redirect()->back();
     }
 
@@ -175,5 +180,33 @@ class UserController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    private function populateTree($newUserId, User $user)
+    {
+        $issuer = $user->getUser($newUserId);
+
+        $parentLvl2 = $user->getUser($issuer->parent_id);
+        if (isset($parentLvl2)) {
+            $user->addToTree($parentLvl2->id, $issuer->id, 2);
+
+            $parentLvl3 = $user->getUser($parentLvl2->parent_id);
+        }
+
+        if (isset($parentLvl3)) {
+            $user->addToTree($parentLvl3->id, $issuer->id, 3);
+
+            $parentLvl4 = $user->getUser($parentLvl3->parent_id);
+        }
+
+        if (isset($parentLvl4)) {
+            $user->addToTree($parentLvl4->id, $issuer->id, 4);
+
+            $parentLvl5 = $user->getUser($parentLvl4->parent_id);
+        }
+
+        if (isset($parentLvl5)) {
+            $user->addToTree($parentLvl5->id, $issuer->id, 5);
+        }
     }
 }
