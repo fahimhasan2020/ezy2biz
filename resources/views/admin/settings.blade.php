@@ -29,7 +29,7 @@
             <hr>
             <div class="form-group">
                 <label for="password">Enter Current Password to Proceed</label>
-                <input id="password" name="password" type="password" class="form-control">
+                <input id="password" name="password" type="password" class="form-control" required>
             </div>
             <div>
                 <button type="submit" class="btn btn-primary">

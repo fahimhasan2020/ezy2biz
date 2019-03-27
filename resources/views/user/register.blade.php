@@ -25,19 +25,19 @@
                             @csrf
                             <div class="form-group">
                                 <label for="first-name">First Name</label>
-                                <input id="first-name" name="first-name" type="text" class="form-control">
+                                <input id="first-name" name="first-name" type="text" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="last-name">Last Name</label>
-                                <input id="last-name" name="last-name" type="text" class="form-control">
+                                <input id="last-name" name="last-name" type="text" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="phone">Phone</label>
-                                <input id="phone" name="phone" type="text" class="form-control">
+                                <input id="phone" name="phone" type="text" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="address">Address</label>
-                                <input id="address" name="address" type="text" class="form-control">
+                                <input id="address" name="address" type="text" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="referrer-id">Referrer ID</label>
@@ -56,15 +56,15 @@
                             <hr>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input id="email" name="email" type="email" class="form-control">
+                                <input id="email" name="email" type="email" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
-                                <input id="password" name="password" type="password" class="form-control">
+                                <input id="password" name="password" type="password" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="confirm-password">Confirm Password</label>
-                                <input id="confirm-password" name="confirm-password" type="password" class="form-control">
+                                <input id="confirm-password" name="confirm-password" type="password" class="form-control" required>
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary">
@@ -101,57 +101,3 @@
         </div>
     </div>
 @stop
-
-{{--<form action="{{url()->full()}}" method="post">
-    @csrf
-    <label>
-        First Name:
-        <input type="text" name="first-name">
-    </label>
-    <br>
-    <label>
-        Last Name:
-        <input type="text" name="last-name">
-    </label>
-    <br>
-    <label>
-        Phone No.:
-        <input type="text" name="phone">
-    </label>
-    <br>
-    <label>
-        Address:
-        <input type="text" name="address">
-    </label>
-    <br>
-    <label>
-        Parent:
-        <input type="hidden" name="parent-id" value="{{ $refInfo->p_id }}">
-        <input type="text" value="{{ $refInfo->p_fn }} {{$refInfo->p_ln}}" readonly >
-    </label>
-    <br>
-    <label>
-        Referrer:
-        <input type="hidden" name="referrer-id" value="{{ $refInfo->r_id }}">
-        <input type="text" value="{{ $refInfo->r_fn }} {{$refInfo->r_ln}}" readonly>
-    </label>
-    <br>
-    <label>
-        Email:
-        <input type="email" name="email">
-    </label>
-    <br>
-    <label>
-        Password:
-        <input type="password" name="password">
-    </label>
-    <br>
-    <label>
-        Confirm Password:
-        <input type="password" name="confirm-password">
-    </label>
-    <br>
-    <label>
-        <input type="submit" name="submit" value="Register">
-    </label>
-</form>--}}

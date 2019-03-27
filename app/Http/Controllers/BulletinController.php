@@ -61,12 +61,6 @@ class BulletinController extends Controller
             ->with('nextPage', $nexPage);
     }
 
-    public function adminSingleBulletin($bulletinId, Bulletin $bulletin)
-    {
-        $bulletin = $bulletin->getSingle($bulletinId);
-        return view('admin.single-bulletin')->with('bulletin', $bulletin);
-    }
-
     public function getBulletin($bulletinId, Bulletin $bulletin)
     {
         $query = $bulletin->get($bulletinId);

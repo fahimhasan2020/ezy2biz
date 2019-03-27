@@ -6,6 +6,10 @@
                 <ul class="menu list-inline mb-0">
                     @if(\Illuminate\Support\Facades\Session::has('user'))
                         <li class="list-inline-item"><a href="/u/dashboard">Dashboard</a></li>
+                        <li class="list-inline-item"><a href="/u/logout">Logout</a></li>
+                    @elseif(\Illuminate\Support\Facades\Session::has('admin'))
+                        <li class="list-inline-item"><a href="/a/dashboard">Dashboard</a></li>
+                        <li class="list-inline-item"><a href="/a/logout">Logout</a></li>
                     @else
                         <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
                         <li class="list-inline-item"><a href="/register">Register</a></li>
@@ -28,10 +32,10 @@
                     <form action="/u/login" method="post">
                         @csrf
                         <div class="form-group">
-                            <input id="email-modal" name="email" type="text" placeholder="Enter email" class="form-control">
+                            <input id="email-modal" name="email" type="text" placeholder="Enter email" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <input id="password-modal" name="password" type="password" placeholder="Enter password" class="form-control">
+                            <input id="password-modal" name="password" type="password" placeholder="Enter password" class="form-control" required>
                         </div>
                         <p class="text-center">
                             <button class="btn btn-primary"><i class="fa fa-sign-in"></i> Log in</button>

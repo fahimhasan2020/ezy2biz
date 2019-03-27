@@ -78,11 +78,11 @@
                             @csrf
                             <div class="form-group">
                                 <label for="qty">Product Quantity</label>
-                                <input id="qty" name="qty" type="number" class="form-control" value="1">
+                                <input id="qty" name="qty" type="number" class="form-control" value="1" required>
                             </div>
                             <div class="form-group">
                                 <label for="password">Enter password to proceed</label>
-                                <input id="password" name="password" type="password" class="form-control">
+                                <input id="password" name="password" type="password" class="form-control" required>
                             </div>
                             <div>
                                 <button type="submit" class="btn btn-primary">
@@ -137,32 +137,3 @@
         </div>
     </div>
 @stop
-
-
-{{--<template>
-<hr>
-User name: {{ $user->first_name }} {{ $user->last_name }}
-Points: {{ $user->points }}
-Is active: @if($user->is_active) Yes @else No @endif
-<hr>
-Product name: {{ $product->name }}
-Product description: {{ $product->description }}
-Product price: {{ $product->sale_price }}
-Product images:
-@foreach($product->image_paths as $image)
-    <img alt="" src="{{Storage::url('' . $image)}}" height="100">
-@endforeach
-
-<form action="/u/buy/product/{{ $product->id }}" method="post">
-    @csrf
-    <label>
-        Product Quantity:
-        <input type="number" name="qty" value="1">
-    </label>
-    <label>
-        Enter password to proceed:
-        <input type="password" name="password">
-        <input type="submit" name="submit" value="Proceed">
-    </label>
-</form>
-</template>--}}

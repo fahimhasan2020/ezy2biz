@@ -23,11 +23,11 @@
             @method('PUT')
             <div class="form-group">
                 <label>Title</label>
-                <input type="text" name="title" class="form-control" value="{{ $bulletin->title }}">
+                <input type="text" name="title" class="form-control" value="{{ $bulletin->title }}" required>
             </div>
             <div class="form-group">
                 <label>Description</label>
-                <textarea name="description" class="form-control" rows="10">{{ $bulletin->description }}</textarea>
+                <textarea name="description" class="form-control" rows="10" required>{{ $bulletin->description }}</textarea>
             </div>
             <button type="submit" class="btn btn-success mb-5">Create Bulletin</button>
         </form>

@@ -43,7 +43,7 @@ class User extends Model
     {
         return
             DB::table('users')
-                ->select('id')
+                ->select('id', 'first_name', 'last_name')
                 ->where([
                     ['email', '=', $credentials->get('email')],
                     ['password', '=', $credentials->get('password')]
@@ -134,8 +134,9 @@ class User extends Model
                 ->leftJoin('users as pu', 'u.parent_id', '=', 'pu.id')
                 ->leftJoin('users as ru', 'u.referrer_id', '=', 'ru.id')
                 ->select('u.id', 'u.first_name', 'u.last_name', 'u.phone', 'u.email', 'u.step', 'u.points',
-                    'pu.id as parent_id', 'pu.first_name as parent_fn', 'pu.last_name as parent_ln',
-                    'ru.id as referrer_id', 'ru.first_name as referrer_fn', 'ru.last_name as referrer_ln')
+                    'u.photo', 'u.address', 'pu.id as parent_id', 'pu.first_name as parent_fn',
+                    'pu.last_name as parent_ln', 'ru.id as referrer_id', 'ru.first_name as referrer_fn',
+                    'ru.last_name as referrer_ln')
                 ->where('u.id', '=', $userId)
                 ->first();
     }
@@ -333,5 +334,15 @@ class User extends Model
         }
 
         return DB::table('users')->where('id', '=', $userId)->update($updates);
+    }
+
+    public function getTopUsers()
+    {
+        return DB::table('users')
+            ->select('first_name', 'last_name', 'step', 'points', 'photo')
+            ->orderBy('points', 'desc')
+            ->orderBy('step', 'desc')
+            ->limit(10)
+            ->get();
     }
 }

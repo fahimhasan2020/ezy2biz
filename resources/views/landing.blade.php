@@ -12,11 +12,10 @@
         <span class="onoffswitch3-inner">
             <span class="onoffswitch3-active">
                 <marquee class="scroll-text">
-                    <a href="#">Avengers: Infinity War's Iron Spider Suit May Use Bleeding Edge Tech</a>
-                    <i class="fas fa-forward"></i>
-                    <a href="#">Russo brothers ask for fans not to spoil Avengers: Infinity War</a>
-                    <i class="fas fa-forward"></i>
-                    <a href="#">Bucky's Arm Miraculously Regenerates On Avengers: Infinity War Poster</a>
+                    @foreach($bulletins as $bulletin)
+                        <i class="fas fa-forward"></i>
+                        <a href="/bulletin/{{ $bulletin->id }}">{{ $bulletin->title }}</a>
+                    @endforeach
                 </marquee>
                 <span class="onoffswitch3-switch">BULLETINS</span>
             </span>
@@ -102,228 +101,39 @@
             </div>
             <div class="container">
                 <div class="product-slider owl-carousel owl-theme">
-                    <div class="item">
-                        <div class="product">
-                            <div class="flip-container">
-                                <div class="flipper">
-                                    <div class="front">
-                                        <a href="detail.html">
-                                            <img src="{{ URL::asset('img/product1.jpg') }}" alt="" class="img-fluid">
-                                        </a>
-                                    </div>
-                                    <div class="back">
-                                        <a href="detail.html">
-                                            <img src="{{ URL::asset('img/product1_2.jpg') }}" alt="" class="img-fluid">
-                                        </a>
+                    @foreach($users as $user)
+                        <div class="item">
+                            <div class="product">
+                                <div class="flip-container">
+                                    <div class="flipper">
+                                        <div class="front">
+                                            <a href="#">
+                                                <img src="{{ Storage::url('' . $user->photo) }}" alt="" class="img-fluid">
+                                            </a>
+                                        </div>
+                                        <div class="back">
+                                            <a href="#">
+                                                <img src="{{ Storage::url('' . $user->photo) }}" alt="" class="img-fluid">
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <a href="detail.html" class="invisible">
-                                <img src="{{ URL::asset('img/product1.jpg') }}" alt="" class="img-fluid">
-                            </a>
-                            <div class="text">
-                                <h3><a href="detail.html">some text</a></h3>
-                                <p class="price">ID:01</p>
-                            </div>
+                                <a href="#" class="invisible">
+                                    <img src="{{ Storage::url('' . $user->photo) }}" alt="" class="img-fluid">
+                                </a>
+                                <div class="text">
+                                    <h3><a href="#">{{ $user->first_name }} {{ $user->last_name }}</a></h3>
+                                    <p class="price">
+                                        STEP: {{ $user->step }}
+                                        <br>
+                                        POINTS: {{ $user->points }}
+                                    </p>
+                                </div>
 
+                            </div>
+                            <!-- /.product-->
                         </div>
-                        <!-- /.product-->
-                    </div>
-                    <div class="item">
-                        <div class="product">
-                            <div class="flip-container">
-                                <div class="flipper">
-                                    <div class="front">
-                                        <a href="detail.html">
-                                            <img src="{{ URL::asset('img/product2.jpg') }}" alt="" class="img-fluid">
-                                        </a>
-                                    </div>
-                                    <div class="back">
-                                        <a href="detail.html">
-                                            <img src="{{ URL::asset('img/product2_2.jpg') }}" alt="" class="img-fluid">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="detail.html" class="invisible">
-                                <img src="{{ URL::asset('img/product2.jpg') }}" alt="" class="img-fluid">
-                            </a>
-                            <div class="text">
-                                <h3><a href="detail.html">text</a></h3>
-                                <p class="price">ID:02</p>
-                            </div>
-
-                        </div>
-                        <!-- /.product-->
-                    </div>
-                    <div class="item">
-                        <div class="product">
-                            <div class="flip-container">
-                                <div class="flipper">
-                                    <div class="front">
-                                        <a href="detail.html">
-                                            <img src="{{ URL::asset('img/product3.jpg') }}" alt="" class="img-fluid">
-                                        </a>
-                                    </div>
-                                    <div class="back">
-                                        <a href="detail.html">
-                                            <img src="{{ URL::asset('img/product3_2.jpg') }}" alt="" class="img-fluid">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="detail.html" class="invisible">
-                                <img src="{{ URL::asset('img/product3.jpg') }}" alt="" class="img-fluid">
-                            </a>
-                            <div class="text">
-                                <h3><a href="detail.html">something</a></h3>
-                                <p class="price">
-                                    ID:03
-                                </p>
-                            </div>
-                            <!-- /.text-->
-                        </div>
-                        <!-- /.product-->
-                    </div>
-                    <div class="item">
-                        <div class="product">
-                            <div class="flip-container">
-                                <div class="flipper">
-                                    <div class="front">
-                                        <a href="detail.html">
-                                            <img src="{{ URL::asset('img/product3.jpg') }}" alt="" class="img-fluid">
-                                        </a>
-                                    </div>
-                                    <div class="back">
-                                        <a href="detail.html">
-                                            <img src="{{ URL::asset('img/product3_2.jpg') }}" alt="" class="img-fluid">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="detail.html" class="invisible">
-                                <img src="{{ URL::asset('img/product3.jpg') }}" alt="" class="img-fluid">
-                            </a>
-                            <div class="text">
-                                <h3><a href="detail.html">something</a></h3>
-                                <p class="price">
-                                    ID:03
-                                </p>
-                            </div>
-                            <!-- /.text-->
-                        </div>
-                        <!-- /.product-->
-                    </div>
-                    <div class="item">
-                        <div class="product">
-                            <div class="flip-container">
-                                <div class="flipper">
-                                    <div class="front">
-                                        <a href="detail.html">
-                                            <img src="{{ URL::asset('img/product2.jpg') }}" alt="" class="img-fluid">
-                                        </a>
-                                    </div>
-                                    <div class="back">
-                                        <a href="detail.html">
-                                            <img src="{{ URL::asset('img/product2_2.jpg') }}" alt="" class="img-fluid">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="detail.html" class="invisible">
-                                <img src="{{ URL::asset('img/product2.jpg') }}" alt="" class="img-fluid">
-                            </a>
-                            <div class="text">
-                                <h3><a href="detail.html">text</a></h3>
-                                <p class="price">ID:02</p>
-                            </div>
-
-                        </div>
-                        <!-- /.product-->
-                    </div>
-                    <div class="item">
-                        <div class="product">
-                            <div class="flip-container">
-                                <div class="flipper">
-                                    <div class="front">
-                                        <a href="detail.html">
-                                            <img src="{{ URL::asset('img/product1.jpg') }}" alt="" class="img-fluid">
-                                        </a>
-                                    </div>
-                                    <div class="back">
-                                        <a href="detail.html">
-                                            <img src="{{ URL::asset('img/product1_2.jpg') }}" alt="" class="img-fluid">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="detail.html" class="invisible">
-                                <img src="{{ URL::asset('img/product1.jpg') }}" alt="" class="img-fluid">
-                            </a>
-                            <div class="text">
-                                <h3><a href="detail.html">some text</a></h3>
-                                <p class="price">ID:01</p>
-                            </div>
-
-                        </div>
-                        <!-- /.product-->
-                    </div>
-                    <div class="item">
-                        <div class="product">
-                            <div class="flip-container">
-                                <div class="flipper">
-                                    <div class="front">
-                                        <a href="detail.html">
-                                            <img src="{{ URL::asset('img/product2.jpg') }}" alt="" class="img-fluid">
-                                        </a>
-                                    </div>
-                                    <div class="back">
-                                        <a href="detail.html">
-                                            <img src="{{ URL::asset('img/product2_2.jpg') }}" alt="" class="img-fluid">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="detail.html" class="invisible">
-                                <img src="{{ URL::asset('img/product2.jpg') }}" alt="" class="img-fluid">
-                            </a>
-                            <div class="text">
-                                <h3><a href="detail.html">text</a></h3>
-                                <p class="price">ID:02</p>
-                            </div>
-
-                        </div>
-                        <!-- /.product-->
-                    </div>
-                    <div class="item">
-                        <div class="product">
-                            <div class="flip-container">
-                                <div class="flipper">
-                                    <div class="front">
-                                        <a href="detail.html">
-                                            <img src="{{ URL::asset('img/product3.jpg') }}" alt="" class="img-fluid">
-                                        </a>
-                                    </div>
-                                    <div class="back">
-                                        <a href="detail.html">
-                                            <img src="{{ URL::asset('img/product3_2.jpg') }}" alt="" class="img-fluid">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="detail.html" class="invisible">
-                                <img src="{{ URL::asset('img/product3.jpg') }}" alt="" class="img-fluid">
-                            </a>
-                            <div class="text">
-                                <h3><a href="detail.html">something</a></h3>
-                                <p class="price">
-                                    ID:03
-                                </p>
-                            </div>
-                            <!-- /.text-->
-                        </div>
-                        <!-- /.product-->
-                    </div>
+                    @endforeach
                     <!-- /.product-slider-->
                 </div>
                 <!-- /.container-->

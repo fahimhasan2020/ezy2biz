@@ -49,15 +49,20 @@ class UserController extends Controller
 
     public function login(Request $request, LoginValidator $validator, User $user)
     {
-        if ($validator->validate($request)) {
-            $userObj = $user->verify($request);
-        }
+        $validator->validate($request);
+        $userObj = $user->verify($request);
+
         if (isset($userObj) && $userObj->id) {
+            $request->session()->flush();
             $request->session()->regenerateToken();
             $request->session()->put('user', $userObj->id);
+            $request->session()->put('user-name', "{$userObj->first_name} {$userObj->last_name}");
+
+            session()->flash('s', 'Login successful! Welcome!');
             return redirect('/u/dashboard');
         }
         //Show unsuccessful login
+        session()->flash('e', 'Sorry! Login failed');
         return redirect()->back();
     }
 

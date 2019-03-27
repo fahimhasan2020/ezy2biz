@@ -19,23 +19,23 @@
             @csrf
             <div class="form-group">
                 <label>Product Name</label>
-                <input type="text" name="name" class="form-control">
+                <input type="text" name="name" class="form-control" required>
             </div>
             <div class="form-group">
                 <label>Product Description</label>
-                <textarea name="description" class="form-control" rows="10"></textarea>
+                <textarea name="description" class="form-control" rows="10" required></textarea>
             </div>
             <div class="form-group">
                 <label>Sale Price</label>
-                <input type="number" name="sale-price" class="form-control"">
+                <input type="number" name="sale-price" class="form-control" required>
             </div>
             <div class="form-group">
                 <label>Wholesale Price</label>
-                <input type="number" name="wholesale-price" class="form-control">
+                <input type="number" name="wholesale-price" class="form-control" required>
             </div>
             <div class="form-group">
                 <label>Commission (in &percnt;)</label>
-                <input type="text" name="commission" class="form-control">
+                <input type="text" name="commission" class="form-control" required>
             </div>
             <div class="form-group">
                 <label>Add new photos (You can select multiple photos)</label>

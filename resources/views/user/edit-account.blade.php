@@ -23,19 +23,19 @@
             @method('PUT')
             <div class="form-group">
                 <label for="first-name">First Name</label>
-                <input id="first-name" name="first-name" type="text" class="form-control" value="{{ $user->first_name }}">
+                <input id="first-name" name="first-name" type="text" class="form-control" value="{{ $user->first_name }}" required>
             </div>
             <div class="form-group">
                 <label for="last-name">Last Name</label>
-                <input id="last-name" name="last-name" type="text" class="form-control" value="{{ $user->last_name }}">
+                <input id="last-name" name="last-name" type="text" class="form-control" value="{{ $user->last_name }}" required>
             </div>
             <div class="form-group">
                 <label for="phone">Phone</label>
-                <input id="phone" name="phone" type="text" class="form-control" value="{{ $user->phone }}">
+                <input id="phone" name="phone" type="text" class="form-control" value="{{ $user->phone }}" required>
             </div>
             <div class="form-group">
                 <label for="address">Address</label>
-                <input id="address" name="address" type="text" class="form-control" value="{{ $user->address }}">
+                <input id="address" name="address" type="text" class="form-control" value="{{ $user->address }}" required>
             </div>
             <div class="row">
                 <div class="col-md-2">

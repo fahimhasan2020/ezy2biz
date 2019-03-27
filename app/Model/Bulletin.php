@@ -82,4 +82,13 @@ class Bulletin extends Model
                 ->offset($offset)
                 ->get();
     }
+
+    public function getLatest()
+    {
+        return DB::table('bulletins')
+            ->select('id', 'title')
+            ->orderBy('publish_date', 'desc')
+            ->limit(5)
+            ->get();
+    }
 }

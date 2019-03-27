@@ -106,15 +106,15 @@
                                             @csrf
                                             <div class="form-group">
                                                 <label for="recipient">Send to</label>
-                                                <input id="recipient" name="recipient" type="number" class="form-control">
+                                                <input id="recipient" name="recipient" type="number" class="form-control" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="amount">Send Amount (Points)</label>
-                                                <input id="amount" name="amount" type="number" class="form-control">
+                                                <input id="amount" name="amount" type="number" class="form-control" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="password">Password</label>
-                                                <input id="password" name="password" type="password" class="form-control">
+                                                <input id="password" name="password" type="password" class="form-control" required>
                                             </div>
                                             <div>
                                                 <button type="submit" class="btn btn-primary">
@@ -127,15 +127,15 @@
                                             @csrf
                                             <div class="form-group">
                                                 <label for="bkash-num">bKash Number</label>
-                                                <input id="bkash-num" name="bkash-num" type="text" class="form-control">
+                                                <input id="bkash-num" name="bkash-num" type="text" class="form-control" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="amount">Send Amount (Cash)</label>
-                                                <input id="amount" name="amount" type="number" class="form-control">
+                                                <input id="amount" name="amount" type="number" class="form-control" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="password">Password</label>
-                                                <input id="password" name="password" type="password" class="form-control">
+                                                <input id="password" name="password" type="password" class="form-control" required>
                                             </div>
                                             <div>
                                                 <button type="submit" class="btn btn-primary">
@@ -148,15 +148,15 @@
                                             @csrf
                                             <div class="form-group">
                                                 <label for="bkash-num">bKash Number</label>
-                                                <input id="bkash-num" name="bkash-num" type="text" class="form-control">
+                                                <input id="bkash-num" name="bkash-num" type="text" class="form-control" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="amount">Withdraw Amount (Points)</label>
-                                                <input id="amount" name="amount" type="number" class="form-control">
+                                                <input id="amount" name="amount" type="number" class="form-control" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="password">Password</label>
-                                                <input id="password" name="password" type="password" class="form-control">
+                                                <input id="password" name="password" type="password" class="form-control" required>
                                             </div>
                                             <div>
                                                 <button type="submit" class="btn btn-primary">

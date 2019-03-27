@@ -38,7 +38,7 @@
                                     <td class="text-right">{{ $request->amount }}</td>
                                     <td class="text-right">{{ $request->bkash_no }}</td>
                                     <td class="text-right">
-                                        <input class="form-control" name="points" type="number" />
+                                        <input class="form-control" name="points" type="number" required/>
                                     </td>
                                     <td class="text-center">
 

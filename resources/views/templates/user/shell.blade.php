@@ -35,6 +35,27 @@
 
     <div id="content-wrapper">
 
+    @if(\Illuminate\Support\Facades\Session::has('e'))
+        <div class="col-md-6 offset-md-3 mt-3">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ \Illuminate\Support\Facades\Session::get('e') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+
+    @elseif(\Illuminate\Support\Facades\Session::has('s'))
+        <div class="col-md-6 offset-md-3 mt-3">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ \Illuminate\Support\Facades\Session::get('s') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    @endif
+
     @yield('body')
     <!-- /.container-fluid -->
 

@@ -23,11 +23,11 @@
             @method('PUT')
             <div class="form-group">
                 <label>Referrer ID</label>
-                <input type="text" name="referrer-id" class="form-control" value="{{ $user->referrer_id }}">
+                <input type="text" name="referrer-id" class="form-control" value="{{ $user->referrer_id }}" required>
             </div>
             <div class="form-group">
                 <label>Parent ID</label>
-                <input type="text" name="parent-id" class="form-control" value="{{ $user->parent_id }}">
+                <input type="text" name="parent-id" class="form-control" value="{{ $user->parent_id }}" required>
             </div>
 
             <button type="submit" class="btn btn-info">Update User</button>

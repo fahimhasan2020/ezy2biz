@@ -14,7 +14,9 @@ class AdminController extends Controller
         $validator->validate($request);
         $adminObj = $admin->verify($request);
         if (isset($adminObj) && $adminObj->id) {
+            $request->session()->flush();
             $request->session()->regenerateToken();
+            $request->session()->put('admin-name', "{$adminObj->first_name} {$adminObj->last_name}");
             $request->session()->put('admin', $adminObj->id);
             return redirect('/a/dashboard');
         }
@@ -165,5 +167,43 @@ class AdminController extends Controller
     {
         $adminId = $request->session()->get('admin');
         $query = $admin->getAdmin($adminId);
+        $accounts = $admin->getBankingAccounts()->all();
+
+        return view('admin.account')
+            ->with('admin', $query)
+            ->with('accounts', $accounts)
+            ->with('action', strtolower($request->get('action')));
+    }
+
+    public function editProfile(Request $request, Admin $admin)
+    {
+        $adminId = $request->session()->get('admin');
+        $admin->editAdmin($adminId, $request);
+
+        return redirect('/a/account');
+    }
+
+    public function editBkash(Request $request, Admin $admin)
+    {
+        $adminId = $request->session()->get('admin');
+        if ($admin->verifyPassword($adminId, $request->get('password'))) {
+            $admin->editBkash($request);
+
+            return redirect('/a/account');
+        }
+
+        return redirect()->back();
+    }
+
+    public function editRocket(Request $request, Admin $admin)
+    {
+        $adminId = $request->session()->get('admin');
+        if ($admin->verifyPassword($adminId, $request->get('password'))) {
+            $admin->editRocket($request);
+
+            return redirect('/a/account');
+        }
+
+        return redirect()->back();
     }
 }

@@ -13,7 +13,7 @@
     <ul class="navbar-nav ml-auto ml-md-0">
         <li class="nav-item dropdown no-arrow mx-1"></li>
         <li class="nav-item dropdown no-arrow mx-1">
-            <div class="nav-link">Admin Name</div>
+            <div class="nav-link">{{ \Illuminate\Support\Facades\Session::get('admin-name') }}</div>
         </li>
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

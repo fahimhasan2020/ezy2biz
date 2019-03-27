@@ -23,23 +23,23 @@
             @method('PUT')
             <div class="form-group">
                 <label>Product Name</label>
-                <input type="text" name="name" class="form-control" value="{{ $product->name }}">
+                <input type="text" name="name" class="form-control" value="{{ $product->name }}" required>
             </div>
             <div class="form-group">
                 <label>Product Description</label>
-                <textarea name="description" class="form-control" rows="10">{{ $product->description }}</textarea>
+                <textarea name="description" class="form-control" rows="10" required>{{ $product->description }}</textarea>
             </div>
             <div class="form-group">
                 <label>Sale Price</label>
-                <input type="number" name="sale-price" class="form-control" value="{{ $product->sale_price }}">
+                <input type="number" name="sale-price" class="form-control" value="{{ $product->sale_price }}" required>
             </div>
             <div class="form-group">
                 <label>Wholesale Price</label>
-                <input type="number" name="wholesale-price" class="form-control" value="{{ $product->wholesale_price }}">
+                <input type="number" name="wholesale-price" class="form-control" value="{{ $product->wholesale_price }}" required>
             </div>
             <div class="form-group">
                 <label>Commission (in &percnt;)</label>
-                <input type="text" name="commission" class="form-control" value="{{ $product->commission }}">
+                <input type="text" name="commission" class="form-control" value="{{ $product->commission }}" required>
             </div>
             <div class="form-group">
                 <label class="mr-3">Check photos to delete:</label>

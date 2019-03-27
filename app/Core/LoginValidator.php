@@ -9,6 +9,9 @@ class LoginValidator
 
     public function validate(Request $request)
     {
-        return true;
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
     }
 }

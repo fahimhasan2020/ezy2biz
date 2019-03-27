@@ -33,7 +33,7 @@
                                 <td>{{ $bulletin->first_name }} {{ $bulletin->last_name }}</td>
                                 <td>{{ strftime('%a, %B %e, %Y', strtotime($bulletin->publish_date)) }}</td>
                                 <td class="text-center">
-                                    <a href="#" class="btn btn-sm btn-success">
+                                    <a href="/bulletin/{{ $bulletin->id }}" class="btn btn-sm btn-success">
                                         <i class="fas fa-eye" title="View"></i>
                                     </a>
                                     <a href="/a/bulletin/{{ $bulletin->id }}/edit" class="btn btn-sm btn-info">

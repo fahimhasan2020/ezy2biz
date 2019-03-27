@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('landing');
-});
+Route::get('/', 'LandingPageController@home');
 
 Route::get('/register', 'UserController@getRegistrationForm')->name('user.register');
 
@@ -102,10 +100,6 @@ Route::group(['middleware' => ['admin-logged']], function () {
 
     Route::post('/a/product/add', 'ProductController@add')->name('admin.add-product');
 
-    Route::get('/a/product/{id}', function () {
-        return view('admin.single-product');
-    });
-
     Route::get('/a/product/{id}/edit', 'ProductController@getProduct')->name('admin.edit-product');
 
     Route::put('/a/product/{id}', 'ProductController@edit')->name('admin.edit-product');
@@ -119,8 +113,6 @@ Route::group(['middleware' => ['admin-logged']], function () {
     });
 
     Route::post('/a/bulletin/add', 'BulletinController@addBulletin')->name('admin.add-bulletin');
-
-    Route::get('/a/bulletin/{id}', 'BulletinController@adminSingleBulletin');
 
     Route::get('/a/bulletin/{id}/edit', 'BulletinController@getBulletin')->name('admin.edit-bulletin');
 
@@ -145,5 +137,11 @@ Route::group(['middleware' => ['admin-logged']], function () {
     Route::put('/a/settings', 'AdminController@editSettings');
 
     Route::get('/a/account', 'AdminController@getAccount');
+
+    Route::post('/a/account/profile', 'AdminController@editProfile');
+
+    Route::post('/a/account/bkash', 'AdminController@editBkash');
+
+    Route::post('/a/account/rocket', 'AdminController@editRocket');
 
 });

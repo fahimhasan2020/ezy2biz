@@ -15,6 +15,16 @@ class Admin extends Model
             ->first();
     }
 
+    public function editAdmin($adminId, Request $request)
+    {
+        return DB::table('admins')
+            ->where('id', '=', $adminId)
+            ->update([
+                'first_name'    => $request->get('first-name'),
+                'last_name'     => $request->get('last-name')
+            ]);
+    }
+
     public function exists(Request $userData)
     {
         return
@@ -28,7 +38,7 @@ class Admin extends Model
     {
         return
             DB::table('admins')
-                ->select('id')
+                ->select('id', 'first_name', 'last_name')
                 ->where([
                     ['email', '=', $credentials->get('email')],
                     ['password', '=', $credentials->get('password')]
@@ -154,5 +164,51 @@ class Admin extends Model
             DB::table('product_orders')
                 ->where('id', '=', $orderId)
                 ->update(['order_status'   => $response]);
+    }
+
+    public function getBankingAccounts()
+    {
+        return
+            DB::table('banking_accounts')->get();
+    }
+
+    public function editBkash(Request $request)
+    {
+        $idQuery = DB::table('banking_accounts')
+            ->select('id')
+            ->where('account_name', '=', 'bkash')
+            ->first();
+
+        if (!$idQuery) {
+            return DB::table('banking_accounts')
+                ->insert([
+                    ['account_name' => 'bkash'],
+                    ['account_number' => $request->get('bkash')]
+                ]);
+        } else {
+            return DB::table('banking_accounts')
+                ->where('id', '=', $idQuery->id)
+                ->update(['account_number' => $request->get('bkash')]);
+        }
+    }
+
+    public function editRocket(Request $request)
+    {
+        $idQuery = DB::table('banking_accounts')
+            ->select('id')
+            ->where('account_name', '=', 'rocket')
+            ->first();
+
+        if (!$idQuery) {
+            return DB::table('banking_accounts')
+                ->insert([
+                    ['account_name' => 'rocket'],
+                    ['account_number' => $request->get('rocket')]
+                ]);
+        } else {
+            return DB::table('banking_accounts')
+                ->where('id', '=', $idQuery->id)
+                ->update(['account_number' => $request->get('rocket')]);
+        }
     }
 }
