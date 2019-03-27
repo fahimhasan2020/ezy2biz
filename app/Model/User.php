@@ -321,4 +321,17 @@ class User extends Model
                     'level'      => $level
                 ]);
     }
+
+    public function changeCredentials($userId, Request $request)
+    {
+        $updates = [];
+        if ($request->has('change-email') && !empty($request->get('change-email'))) {
+            $updates['email'] = $request->get('change-email');
+        }
+        if ($request->has('change-password') && !empty($request->get('change-password'))) {
+            $updates['password'] = $request->get('change-password');
+        }
+
+        return DB::table('users')->where('id', '=', $userId)->update($updates);
+    }
 }

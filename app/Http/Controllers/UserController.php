@@ -241,4 +241,25 @@ class UserController extends Controller
             }
         }
     }
+
+    public function getSettings(Request $request, User $user)
+    {
+        $userId = $request->session()->get('user');
+        $query = $user->getUser($userId);
+
+        return view('user.settings')->with('user', $query);
+    }
+
+    public function editSettings(Request $request, User $user)
+    {
+        $userId = $request->session()->get('user');
+        if ($user->verifyPassword($userId, $request)) {
+            $user->changeCredentials($userId, $request);
+
+            $request->session()->flush();
+            return redirect('/');
+        }
+
+        return redirect()->back();
+    }
 }

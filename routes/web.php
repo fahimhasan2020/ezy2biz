@@ -55,9 +55,9 @@ Route::group(['middleware' => ['user-logged']], function () {
 
     Route::post('/u/buy/product/{id}', 'ProductController@buyProduct');
 
-    Route::get('/u/settings', function () {
-        return view('user.settings');
-    });
+    Route::get('/u/settings', 'UserController@getSettings');
+
+    Route::put('/u/settings', 'UserController@editSettings');
 
 });
 
@@ -140,8 +140,10 @@ Route::group(['middleware' => ['admin-logged']], function () {
 
     Route::post('/a/product-orders', 'AdminController@responseProductOrders');
 
-    Route::get('/a/settings', function () {
-        return view('admin.settings');
-    });
+    Route::get('/a/settings', 'AdminController@getSettings');
+
+    Route::put('/a/settings', 'AdminController@editSettings');
+
+    Route::get('/a/account', 'AdminController@getAccount');
 
 });

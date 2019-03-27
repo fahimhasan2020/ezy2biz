@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\DB;
 
 class Admin extends Model
 {
+    public function getAdmin($adminId)
+    {
+        return DB::table('admins')
+            ->where('id', '=', $adminId)
+            ->first();
+    }
+
     public function exists(Request $userData)
     {
         return
@@ -26,6 +33,28 @@ class Admin extends Model
                     ['email', '=', $credentials->get('email')],
                     ['password', '=', $credentials->get('password')]
                 ])->first();
+    }
+
+    public function verifyPassword($adminId, $password)
+    {
+        return DB::table('admins')
+            ->where([
+                ['id', '=', $adminId],
+                ['password', '=', $password]
+            ])->first();
+    }
+
+    public function changeCredentials($userId, Request $request)
+    {
+        $updates = [];
+        if ($request->has('change-email') && !empty($request->get('change-email'))) {
+            $updates['email'] = $request->get('change-email');
+        }
+        if ($request->has('change-password') && !empty($request->get('change-password'))) {
+            $updates['password'] = $request->get('change-password');
+        }
+
+        return DB::table('admins')->where('id', '=', $userId)->update($updates);
     }
 
     public function getPointRequests()

@@ -55,4 +55,10 @@
             <a class="dropdown-item" href="/a/user/ref-link">Reference Link</a>
         </div>
     </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/a/account">
+            <i class="fas fa-toolbox"></i>
+            <span>Account</span></a>
+    </li>
 </ul>

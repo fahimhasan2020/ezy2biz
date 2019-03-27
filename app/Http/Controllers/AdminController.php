@@ -139,4 +139,31 @@ class AdminController extends Controller
         $query = $user->getUserFull($userId);
         return view('admin.single-user')->with('user', $query);
     }
+
+    public function getSettings(Request $request, Admin $admin)
+    {
+        $adminId = $request->session()->get('admin');
+        $query = $admin->getAdmin($adminId);
+
+        return view('admin.settings')->with('admin', $query);
+    }
+
+    public function editSettings(Request $request, Admin $admin)
+    {
+        $adminId = $request->session()->get('admin');
+        if ($admin->verifyPassword($adminId, $request->get('password'))) {
+            $admin->changeCredentials($adminId, $request);
+
+            $request->session()->flush();
+            return redirect('/a/login');
+        }
+
+        return redirect()->back();
+    }
+
+    public function getAccount(Request $request, Admin $admin)
+    {
+        $adminId = $request->session()->get('admin');
+        $query = $admin->getAdmin($adminId);
+    }
 }

@@ -1,19 +1,41 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<h1>This is User Settings page</h1>
-<hr>
-<ul>
-    <li><a href="/u/dashboard">Dashboard</a></li>
-    <li><a href="/products">Products</a></li>
-    <li><a href="/bulletins">Bulletins</a></li>
-</ul>
-</body>
-</html>
+@extends('templates.user.shell')
+
+@section('body')
+    <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/u/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Settings</li>
+        </ol>
+
+        <!-- Page Content -->
+        <h1 class="col-md-8">Settings</h1>
+        <hr>
+
+        <form class="col-md-8" action="/u/settings" method="post">
+            @csrf
+            @method('PUT')
+            <div class="form-group">
+                <label for="change-email">Change Email (Leave it blank if you don't want to change email)</label>
+                <input id="change-email" name="change-email" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="change-password">Change Password (Leave it blank if you don't want to change password)</label>
+                <input id="change-password" name="change-password" type="password" class="form-control">
+            </div>
+            <hr>
+            <div class="form-group">
+                <label for="password">Enter Current Password to Proceed</label>
+                <input id="password" name="password" type="password" class="form-control">
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-edit"></i> Update
+                </button>
+            </div>
+        </form>
+    </div>
+@stop
