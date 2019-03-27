@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
@@ -56,7 +57,5 @@ $response = $kernel->handle(
 
 $cron = new \App\Core\CronJob(new \App\Model\CronJobModel());
 $cron->start();
-
-$response->send();
 
 $kernel->terminate($request, $response);

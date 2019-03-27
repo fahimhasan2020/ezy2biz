@@ -284,15 +284,21 @@ class User extends Model
 
     public function makeActive($userId)
     {
-        return
-            DB::table('users')
-                ->where([
-                    ['id', '=', $userId],
-                    ['is_active', '=', false]
-                ])
-                ->update([
-                    'is_active' => true
-                ]);
+        DB::table('users')
+            ->where([
+                ['id', '=', $userId],
+                ['is_active', '=', false]
+            ])
+            ->update([
+                'is_active' => true
+            ]);
+
+        DB::table('cron_job_schedules')
+            ->insert([
+                'job_type'          => 'promote',
+                'issuer_id'         => $userId,
+                'issue_datetime'    => date('Y-m-d H:i:s', time())
+            ]);
     }
 
     public function begin()

@@ -5,188 +5,143 @@ use App\Model\CronJobModel;
 
 class CronJob
 {
-    private $cronJobModel;
-    private $regJobs = [];
-    private $promoteJobs = [];
+    private $cronModel;
+    private $jobs = [];
+    private $commission = [];
+    private $commissionMap = [
+        2 => [
+            1 => 100,
+            2 => 25,
+            3 => 10,
+            4 => 10,
+            5 => 10
+        ],
 
-    public function __construct(CronJobModel $cronJobModel)
-    {
-        $this->cronJobModel = $cronJobModel;
-    }
+        3 => [
+            1 => 200,
+            2 => 100,
+            3 => 50,
+            4 => 50,
+            5 => 50
+        ],
 
-    private function init()
+        4 => [
+            1 => 500,
+            2 => 500,
+            3 => 100,
+            4 => 100,
+            5 => 100
+        ]
+    ];
+
+    public function __construct(CronJobModel $cronModel)
     {
-        $datetime = date('Y-m-d H:i:s', time());
-        $jobs = $this->cronJobModel->searchJob($datetime)->all();
-        $this->permute($jobs);
+        $this->cronModel = $cronModel;
     }
 
     public function start()
     {
         $this->init();
-
-        foreach ($this->regJobs as $job) {
-            $this->runRegJob($job);
-        }
-        foreach ($this->promoteJobs as $job) {
-            $this->runPromoteJob($job);
+        foreach ($this->jobs as &$job) {
+            $this->commission = [];
+            $this->runJob($job);
         }
     }
 
-    private function permute(Array $jobs)
+    private function init()
     {
-        foreach ($jobs as $job) {
-            if ($job->job_type === 'reg') {
-                $this->regJobs[] = $job;
-            }
-            if ($job->job_type === 'promote') {
-                $this->promoteJobs[] = $job;
-            }
-        }
+        $this->jobs = $this->cronModel->findJobs()->all();
     }
 
-    private function runRegJob($job)
-    {
-        $this->cronJobModel->begin();
-        $issuer = $this->cronJobModel->getUser($job->issuer_id);
+    private function runJob($job) {
+        $this->cronModel->begin();
 
-        $parentLvl2 = $this->cronJobModel->getUser($issuer->parent_id);
-        if (isset($parentLvl2)) {
-            $this->cronJobModel->addToTree($parentLvl2->id, $issuer->id, 2);
+        for ($level = 1, $userId = $job->issuer_id; $level <= 5; $level++) {
+            echo ('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>') . PHP_EOL;
+            if (!$userId) {
+                break;
+            }
 
-            if ($parentLvl2->is_active) {
-                if ($issuer->referrer_id === $parentLvl2->id) {
-                    $this->cronJobModel->addPoints($parentLvl2->id, 1.5);
-                } else {
-                    $this->cronJobModel->addPoints($parentLvl2->id, 1);
-                }
+            $currentUserNode = $this->cronModel->getUser($userId);
+            echo 'Jobs :' . PHP_EOL;
+            print_r($this->jobs);
 
-                if ($this->checkPromotion($parentLvl2->id)) {
-                    $this->cronJobModel->schedulePromoteJob($parentLvl2->id);
+            foreach($this->jobs as $key => $job) {
+                if ($job->issuer_id === $currentUserNode->id) {
+                    $this->cronModel->jobComplete($job->id);
+                    unset($this->jobs[$key]);
                 }
             }
 
-            $parentLvl3 = $this->cronJobModel->getUser($parentLvl2->parent_id);
-        }
-
-        if (isset($parentLvl3)) {
-            $this->cronJobModel->addToTree($parentLvl3->id, $issuer->id, 3);
-
-            if ($parentLvl3->is_active) {
-                if ($issuer->referrer_id === $parentLvl3->id) {
-                    $this->cronJobModel->addPoints($parentLvl3->id, 1.5);
-                } else {
-                    $this->cronJobModel->addPoints($parentLvl3->id, 1);
-                }
-
-                if ($this->checkPromotion($parentLvl3->id)) {
-                    $this->cronJobModel->schedulePromoteJob($parentLvl3->id);
-                }
+            echo ("User : {$currentUserNode->id}") . PHP_EOL;
+            echo ("Parent : {$currentUserNode->parent_id}") . PHP_EOL;
+            $promotionStep = $this->hasPromotion($currentUserNode);
+            echo ("Promotion Step : {$promotionStep}") . PHP_EOL;
+            echo ('Comission Tree : ') . PHP_EOL;
+            print_r($this->commission);
+            $commission = array_shift($this->commission);
+            echo ("Commission : $commission") . PHP_EOL;
+            if (!$currentUserNode->is_active) {
+                echo ('User is not active') . PHP_EOL;
+                $userId = $currentUserNode->parent_id;
+                continue;
             }
 
-            $parentLvl4 = $this->cronJobModel->getUser($parentLvl3->parent_id);
-        }
-
-
-        if (isset($parentLvl4)) {
-            $this->cronJobModel->addToTree($parentLvl4->id, $issuer->id, 4);
-
-            if ($parentLvl4->is_active) {
-                if ($issuer->referrer_id === $parentLvl4->id) {
-                    $this->cronJobModel->addPoints($parentLvl4->id, 1.5);
-                } else {
-                    $this->cronJobModel->addPoints($parentLvl4->id, 1);
+            if (!$promotionStep) {
+                if ($commission) {
+                    $this->cronModel->addCommission($currentUserNode->id, $commission);
                 }
-
-                if ($this->checkPromotion($parentLvl4->id)) {
-                    $this->cronJobModel->schedulePromoteJob($parentLvl4->id);
-                }
+                $userId = $currentUserNode->parent_id;
+                continue;
             }
 
-            $parentLvl5 = $this->cronJobModel->getUser($parentLvl4->parent_id);
+            $this->cronModel->promote(
+                $currentUserNode->id, $promotionStep, $commission);
+
+            $userId = $currentUserNode->parent_id;
+            $level = 1;
         }
 
-
-        if (isset($parentLvl5)) {
-            $this->cronJobModel->addToTree($parentLvl5->id, $issuer->id, 5);
-
-            if ($parentLvl5->is_active) {
-                if ($issuer->referrer_id === $parentLvl5->id) {
-                    $this->cronJobModel->addPoints($parentLvl5->id, 1.5);
-                } else {
-                    $this->cronJobModel->addPoints($parentLvl5->id, 1);
-                }
-
-                if ($this->checkPromotion($parentLvl5->id)) {
-                    $this->cronJobModel->schedulePromoteJob($parentLvl5->id);
-                }
-            }
-        }
-
-        $this->cronJobModel->jobSucceed($job->id);
-        $this->cronJobModel->finish();
+        $this->cronModel->end();
     }
 
-    private function checkPromotion($userId)
+    private function hasPromotion($user)
     {
-        $count = $this->cronJobModel->totalChildUsers($userId);
-        if ($count === 30) {
-            return true;
+        $childrenCount = $this->cronModel->referralTree($user->id)->all();
+
+        if (!$childrenCount) {
+            return false;
         }
-        return false;
+
+        $totalChildren = 0;
+        $childrenStep = 0;
+        foreach ($childrenCount as $childCount) {
+            $totalChildren += $childCount->children;
+            if (!$childrenStep || $childCount->step < $childrenStep) {
+                $childrenStep = $childCount->step;
+            }
+        }
+        echo ("Total Children : $totalChildren") . PHP_EOL;
+        echo ("Children Step: $childrenStep") . PHP_EOL;
+
+        if ($totalChildren !== 30 || $user->step > $childrenStep || 4 <= $user->step) {
+            return false;
+        }
+
+        if (4 > $childrenStep) {
+            $promotionStep = $childrenStep + 1;
+        } else {
+            $promotionStep = $childrenStep;
+        }
+
+        $this->commission = array_map(
+            [$this, 'aggregateCommission'], $this->commission, $this->commissionMap[$promotionStep]);
+
+        return $promotionStep;
     }
 
-    private function checkStep3Promotion($userId)
+    private function aggregateCommission($prev, $new)
     {
-        $count = $this->cronJobModel->totalStep2ChildUsers($userId);
-        if ($count === 30) {
-            return true;
-        }
-
-        return false;
-    }
-
-    private function runPromoteJob($job)
-    {
-        $this->cronJobModel->begin();
-
-        $issuer = $this->cronJobModel->getUser($job->issuer_id);
-
-        if ($this->checkPromotion($issuer->id)) {
-            $this->cronJobModel->promote($issuer->id, 2);
-        }
-        $parentLvl2 = $this->cronJobModel->getUser($issuer->parent_id);
-
-        if (isset($parentLvl2)) {
-            if ($this->checkStep3Promotion($parentLvl2->id)) {
-                $this->cronJobModel->promote($parentLvl2->id, 3);
-            }
-
-            $parentLvl3 = $this->cronJobModel->getUser($parentLvl2->parent_id);
-        }
-
-        if (isset($parentLvl3)) {
-            if ($this->checkStep3Promotion($parentLvl3->id)) {
-                $this->cronJobModel->promote($parentLvl3->id, 3);
-            }
-
-            $parentLvl4 = $this->cronJobModel->getUser($parentLvl3->parent_id);
-        }
-
-        if (isset($parentLvl4)) {
-            if ($this->checkStep3Promotion($parentLvl4->id)) {
-                $this->cronJobModel->promote($parentLvl4->id, 3);
-            }
-
-            $parentLvl5 = $this->cronJobModel->getUser($parentLvl4->parent_id);
-        }
-
-        if (isset($parentLvl5)) {
-            if ($this->checkStep3Promotion($parentLvl5->id)) {
-                $this->cronJobModel->promote($parentLvl5->id, 3);
-            }
-        }
-
-        $this->cronJobModel->finish();
+        return $prev + $new;
     }
 }
