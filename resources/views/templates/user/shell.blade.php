@@ -30,8 +30,7 @@
 @include('templates.user.top-bar')
 
 <div id="wrapper">
-
-    <!-- Sidebar -->
+   <!-- Sidebar -->
     @include('templates.user.side-bar')
 
     <div id="content-wrapper">
