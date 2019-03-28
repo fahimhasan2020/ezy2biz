@@ -44,9 +44,6 @@
 
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="/a/dashboard">Dashboard</a>
-            </li>
             <li class="breadcrumb-item active">My Tree</li>
         </ol>
 

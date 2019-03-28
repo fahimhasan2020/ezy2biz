@@ -206,4 +206,18 @@ class AdminController extends Controller
 
         return redirect()->back();
     }
+
+    public function dashboard(Admin $admin, User $user)
+    {
+        $countPointRequests = $admin->countPointRequests();
+        $countProductOrders = $admin->countProductOrders();
+        $countWithdrawRequests = $admin->countWithdrawRequests();
+        $countUsers = $user->countTotal();
+
+        return view('admin.dashboard')
+            ->with('totalPointRequests', $countPointRequests)
+            ->with('totalProductOrders', $countProductOrders)
+            ->with('totalWithdrawRequests', $countWithdrawRequests)
+            ->with('totalUsers', $countUsers);
+    }
 }

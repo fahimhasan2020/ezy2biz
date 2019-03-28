@@ -27,10 +27,6 @@ Route::group(['middleware' => ['user-logged']], function () {
 
     Route::get('/u/logout', 'UserController@logout');
 
-    Route::get('/u/dashboard', function () {
-        return view('user.dashboard');
-    });
-
     Route::get('/u/tree', 'UserController@tree');
 
     Route::get('/u/ref-link', 'UserController@getRefLinks')->name('user.ref-link');
@@ -59,6 +55,13 @@ Route::group(['middleware' => ['user-logged']], function () {
 
 });
 
+Route::get('/u/{any}', function () {
+    return redirect('/u/account');
+});
+
+Route::get('/u', function () {
+    return redirect('/u/account');
+});
 
 Route::get('/products', 'ProductController@userAllProducts');
 
@@ -78,9 +81,7 @@ Route::group(['middleware' => ['admin-logged']], function () {
 
     Route::get('/a/logout', 'AdminController@logout');
 
-    Route::get('/a/dashboard', function () {
-        return view('admin.dashboard');
-    });
+    Route::get('/a/dashboard', 'AdminController@dashboard');
 
     Route::get('/a/users', 'AdminController@showAllUsers');
 
@@ -144,4 +145,12 @@ Route::group(['middleware' => ['admin-logged']], function () {
 
     Route::post('/a/account/rocket', 'AdminController@editRocket');
 
+});
+
+Route::get('/a/{any}', function () {
+    return redirect('/a/dashboard');
+});
+
+Route::get('/a', function () {
+    return redirect('/a/dashboard');
 });

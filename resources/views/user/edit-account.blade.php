@@ -6,9 +6,6 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/a/dashboard">Dashboard</a>
-            </li>
-            <li class="breadcrumb-item">
                 <a href="/u/account">My Account</a>
             </li>
             <li class="breadcrumb-item active">Edit Account</li>

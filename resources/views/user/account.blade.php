@@ -9,14 +9,29 @@
 
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="/u/dashboard">Dashboard</a>
-            </li>
             <li class="breadcrumb-item active">My Account</li>
         </ol>
 
         <!-- Page Content -->
-        <h1>Account</h1>
+        <div class="row">
+            <h1 class="col-md-8">Account</h1>
+            <div class="col-md-4">
+                @foreach($bankingAccounts as $account)
+                    @if($account->account_name == 'bkash')
+                        <p class="profile-rating row">
+                            <span class="col-md-4 text-right">bKash:</span> <span class="col-md-8">
+                                {{ $account->account_number }}</span>
+                        </p>
+                    @elseif($account->account_name == 'rocket')
+                        <p class="profile-rating row">
+                            <span class="col-md-4 text-right">Rocket:</span> <span class="col-md-8">
+                                {{ $account->account_number }}</span>
+                        </p>
+                    @endif
+                @endforeach
+            </div>
+        </div>
+
 
         <div class="container emp-profile">
             <div class="row">

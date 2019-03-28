@@ -5,7 +5,7 @@
             <div class="col-lg-6 text-center text-lg-right">
                 <ul class="menu list-inline mb-0">
                     @if(\Illuminate\Support\Facades\Session::has('user'))
-                        <li class="list-inline-item"><a href="/u/dashboard">Dashboard</a></li>
+                        <li class="list-inline-item"><a href="/u/account">Dashboard</a></li>
                         <li class="list-inline-item"><a href="/u/logout">Logout</a></li>
                     @elseif(\Illuminate\Support\Facades\Session::has('admin'))
                         <li class="list-inline-item"><a href="/a/dashboard">Dashboard</a></li>

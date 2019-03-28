@@ -1,10 +1,11 @@
 <ul class="sidebar navbar-nav">
     <li class="nav-item">
-        <a class="nav-link" href="/u/dashboard">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span>
+        <a class="nav-link" href="/u/account">
+            <i class="fas fa-dollar-sign"></i>
+            <span>My Account</span>
         </a>
     </li>
+
     <li class="nav-item">
         <a class="nav-link" href="/">
             <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -33,12 +34,5 @@
             <a class="dropdown-item" href="/u/tree">My Tree</a>
             <a class="dropdown-item" href="/u/ref-link">Referral Links</a>
         </div>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link" href="/u/account">
-            <i class="fas fa-dollar-sign"></i>
-            <span>My Account</span>
-        </a>
     </li>
 </ul>

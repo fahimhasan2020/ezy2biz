@@ -211,4 +211,28 @@ class Admin extends Model
                 ->update(['account_number' => $request->get('rocket')]);
         }
     }
+
+    public function countPointRequests()
+    {
+        return DB::table('point_requests')
+            ->select('id')
+            ->where('response', '=', 'pending')
+            ->count();
+    }
+
+    public function countProductOrders()
+    {
+        return DB::table('product_orders')
+            ->select('id')
+            ->where('order_status', '=', 'pending')
+            ->count();
+    }
+
+    public function countWithdrawRequests()
+    {
+        return DB::table('withdraw_requests')
+            ->select('id')
+            ->where('response', '=', 'pending')
+            ->count();
+    }
 }

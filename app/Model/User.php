@@ -345,4 +345,9 @@ class User extends Model
             ->limit(10)
             ->get();
     }
+
+    public function getBankingAccounts()
+    {
+        return DB::table('banking_accounts')->get();
+    }
 }

@@ -5,7 +5,7 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/u/dashboard">Dashboard</a>
+                <a href="/u/tree">My Tree</a>
             </li>
             <li class="breadcrumb-item active">Referral Links</li>
         </ol>

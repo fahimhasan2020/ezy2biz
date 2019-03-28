@@ -59,7 +59,7 @@ class UserController extends Controller
             $request->session()->put('user-name', "{$userObj->first_name} {$userObj->last_name}");
 
             session()->flash('s', 'Login successful! Welcome!');
-            return redirect('/u/dashboard');
+            return redirect('/u/account');
         }
         //Show unsuccessful login
         session()->flash('e', 'Sorry! Login failed');
@@ -123,9 +123,12 @@ class UserController extends Controller
     {
         $currentUserId = $request->session()->get('user');
         $query = $user->getUser($currentUserId);
+        $bankingAccounts = $user->getBankingAccounts();
+
         return view('user.account')
             ->with('user', $query)
-            ->with('action', strtolower($request->get('action')));
+            ->with('action', strtolower($request->get('action')))
+            ->with('bankingAccounts', $bankingAccounts);
     }
 
     public function transferPoints(Request $request, User $user)
