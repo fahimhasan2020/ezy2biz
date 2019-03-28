@@ -29,7 +29,7 @@
                 <label>Description</label>
                 <textarea name="description" class="form-control" rows="10" required>{{ $bulletin->description }}</textarea>
             </div>
-            <button type="submit" class="btn btn-success mb-5">Create Bulletin</button>
+            <button type="submit" class="btn btn-success mb-5">Edit Bulletin</button>
         </form>
 
     </div>

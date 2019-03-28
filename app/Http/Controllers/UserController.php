@@ -29,6 +29,7 @@ class UserController extends Controller
     public function register(Request $request, RegistrationValidator $validator, User $user, ImageStore $store)
     {
         if (!$validator->validate($request->request)) {
+            $request->session()->flash('e', 'Sorry! Password confirmation failed.');
             return redirect()->back();
         }
         $request->request->add(['image-path' => '']);
@@ -41,9 +42,12 @@ class UserController extends Controller
             $newUserId = $user->register($request);
             $this->populateTree($newUserId, $user);
             $user->finish();
-            return redirect('/u/dashboard');
+
+            $request->session()->flash('s', 'Congratulations! User registration is successful');
+            return redirect('/u/tree');
         }
 
+        $request->session()->flash('e', 'Sorry! User registration failed');
         return redirect()->back();
     }
 
@@ -58,17 +62,18 @@ class UserController extends Controller
             $request->session()->put('user', $userObj->id);
             $request->session()->put('user-name', "{$userObj->first_name} {$userObj->last_name}");
 
-            session()->flash('s', 'Login successful! Welcome!');
+            $request->session()->flash('s', 'Login successful! Welcome!');
             return redirect('/u/account');
         }
         //Show unsuccessful login
-        session()->flash('e', 'Sorry! Login failed');
+        $request->session()->flash('e', 'Login failed! Email/Password did not match');
         return redirect()->back();
     }
 
     public function logout(Request $request)
     {
         $request->session()->flush();
+
         return redirect('/');
     }
 
@@ -107,9 +112,13 @@ class UserController extends Controller
         $currentUserId = $request->session()->get('user');
         $request->request->add(['referrer-id' => $currentUserId]);
         $request->request->add(['referral-key' => $keygen->generateKey($request->request)]);
-        $user->addRefLink($request);
+        if ($user->addRefLink($request)) {
+            $request->session()->flash('s', 'Referral link was successfully generated');
+            return redirect('/u/ref-link');
+        }
 
-        return redirect()->route('user.ref-link');
+        $request->session()->flash('e', 'Sorry! Could not generate referral link');
+        return redirect()->back();
     }
 
     public function getRefLinks(Request $request, User $user)
@@ -137,9 +146,16 @@ class UserController extends Controller
         if ($user->verifyPassword($senderId, $request)) {
             if ($user->checkPointsAvailable($senderId, $request->get('amount'))) {
                 $user->transferPoints($senderId, $request);
+
+                $request->session()->flash('s', 'Congratulations! Point transfer was successful');
                 return redirect('/u/account');
+            } else {
+                $request->session()->flash('e', 'Sorry! You do not have sufficient points');
+                return redirect('/u/account?action=transfer');
             }
         }
+
+        $request->session()->flash('e', 'Sorry! Your password did not match');
         return redirect('/u/account?action=transfer');
     }
 
@@ -148,8 +164,12 @@ class UserController extends Controller
         $userId = $request->session()->get('user');
         if ($user->verifyPassword($userId, $request)) {
             $user->requestPoints($userId, $request);
+
+            $request->session()->flash('s', 'Point request was sent successfully');
             return redirect('u/account');
         }
+
+        $request->session()->flash('e', 'Sorry! Your password did not match');
         return redirect('/u/account?action=request');
     }
 
@@ -159,9 +179,13 @@ class UserController extends Controller
         if ($user->verifyPassword($userId, $request)) {
             if ($user->checkPointsAvailable($userId, $request->get('amount'))) {
                 $user->withdrawalRequest($userId, $request);
+
+                $request->session()->flash('s', 'Cash withdraw request was sent successfully');
                 return redirect('u/account');
             }
         }
+
+        $request->session()->flash('e', 'Sorry! Your password did not match');
         return redirect('/u/account?action=withdraw');
     }
 
@@ -180,13 +204,18 @@ class UserController extends Controller
             $store->removeUserPhoto($query->photo);
             if ($store->addUserPhoto($request)) {
                 $user->edit($userId,$request);
+
+                $request->session()->flash('s', 'Congratulations! Your account is updated');
                 return redirect('/u/account');
             }
         } else {
             $user->edit($userId, $request);
+
+            $request->session()->flash('s', 'Congratulations! Your account is updated');
             return redirect('/u/account');
         }
 
+        $request->session()->flash('e', 'Sorry! Your account could not be updated');
         return redirect()->back();
     }
 
@@ -265,9 +294,12 @@ class UserController extends Controller
             $user->changeCredentials($userId, $request);
 
             $request->session()->flush();
+
+            $request->session()->flash('s', 'Your account settings were changed. Please login again');
             return redirect('/');
         }
 
+        $request->session()->flash('e', 'Something went wrong! Account settings could not be updated');
         return redirect()->back();
     }
 }

@@ -12,7 +12,8 @@ class Product extends Model
     public function add(Request $productData)
     {
         $imagePaths = json_encode($productData->get('image-paths'));
-        DB::table('products')
+
+        return DB::table('products')
             ->insert([
                 'name'              => $productData->get('name'),
                 'description'       => $productData->get('description'),
@@ -21,14 +22,13 @@ class Product extends Model
                 'commission'        => $productData->get('commission'),
                 'image_paths'       => $imagePaths
             ]);
-
-        return true;
     }
 
     public function edit($productId, Request $productData)
     {
         $imagePaths = json_encode($productData->get('image-paths'));
-        DB::table('products')
+
+        return DB::table('products')
             ->where('id', '=', $productId)
             ->update([
                 'name'              => $productData->get('name'),
@@ -38,8 +38,6 @@ class Product extends Model
                 'commission'        => $productData->get('commission'),
                 'image_paths'       => $imagePaths
             ]);
-
-        return true;
     }
 
     public function remove($productId)

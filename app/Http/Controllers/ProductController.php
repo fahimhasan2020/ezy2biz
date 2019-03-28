@@ -17,9 +17,13 @@ class ProductController extends Controller
     {
         $request->request->add(['image-paths' => []]);
         if ($store->addProduct($request)) {
-            $product->add($request);
-            return redirect('/a/products');
+            if ($product->add($request)) {
+                $request->session()->flash('s', 'Congratulations! Product was successfully added');
+                return redirect('/a/products?page=1');
+            }
         }
+
+        $request->session()->flash('e', 'Sorry! Product could not be added');
         return redirect()->back();
     }
 
@@ -39,10 +43,16 @@ class ProductController extends Controller
         }
 
         if($store->addProduct($request)) {
-            $product->edit($productId, $request);
-            $store->removeLeftOvers($request);
-            return redirect('/a/products');
+            if ($product->edit($productId, $request)) {
+                $store->removeLeftOvers($request);
+
+                $request->session()->flash('s', 'Product was updated successfully');
+                return redirect('/a/products?page=1');
+            }
         }
+
+        $request->session()->flash('e', 'Sorry! Product could not be updated');
+        return redirect()->back();
     }
 
     public function delete(Request $request, Product $product, ImageStore $store)
@@ -50,10 +60,14 @@ class ProductController extends Controller
         $query = $product->get($request->get('id'));
         $deletableImages = json_decode($query->image_paths);
 
-        $product->remove($request->get('id'));
-        $store->removeProduct($deletableImages);
+        if ($product->remove($request->get('id'))) {
+            $store->removeProduct($deletableImages);
+            $request->session()->flash('s', 'Product was successfully deleted');
+        } else {
+            $request->session()->flash('e', 'Sorry! Product could not be deleted');
+        }
 
-        return redirect('/a/products');
+        return redirect('/a/products?page=1');
     }
 
     public function adminAllProducts(Request $request, Product $product)
@@ -165,10 +179,13 @@ class ProductController extends Controller
 
             if ($user->checkPointsAvailable($userQuery->id, $totalSalePrice)) {
                 $product->sell($request, $user);
-                return redirect('/products');
+
+                $request->session()->flash('s', 'Congratulation! You have successfully bought the product');
+                return redirect('/u/account');
             }
         }
 
+        $request->session()->flash('e', 'Something went wrong! Product buy was unsuccessful');
         return redirect()->back();
     }
 

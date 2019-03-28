@@ -18,10 +18,12 @@ class AdminController extends Controller
             $request->session()->regenerateToken();
             $request->session()->put('admin-name', "{$adminObj->first_name} {$adminObj->last_name}");
             $request->session()->put('admin', $adminObj->id);
+
+            $request->session()->flash('s', 'Login successful! Welcome');
             return redirect('/a/dashboard');
         }
 
-        //Show unsuccessful login
+        $request->session()->flash('e', 'Login failed! Email/password did not match');
         return redirect()->back();
     }
 
@@ -41,12 +43,18 @@ class AdminController extends Controller
     {
         $response = $request->get('response');
         if ('reject' === strtolower($response)) {
-            $admin->rejectPointRequest($request);
+            if ($admin->rejectPointRequest($request)) {
+                $request->session()->flash('s', 'You have successfully rejected the request');
+                return redirect('/a/point-requests');
+            }
         } elseif ('accept'  === strtolower($response)) {
             $admin->acceptPointRequest($request, $user);
+            $request->session()->flash('s', 'You have successfully accepted the request');
+            return redirect('/a/point-requests');
         }
 
-        return redirect('/a/point-requests');
+        $request->session()->flash('e', 'Your action was unsuccessful');
+        return redirect()->back();
     }
 
     public function getWithdrawRequests(Admin $admin)
@@ -59,15 +67,22 @@ class AdminController extends Controller
     {
         $response = $request->get('response');
         if ('reject' === strtolower($response)) {
-            $admin->rejectWithdrawRequest($request);
+            if ($admin->rejectWithdrawRequest($request)) {
+                $request->session()->flash('s', 'You have successfully rejected the request');
+                return redirect('/a/withdraw-requests');
+            }
         } elseif ('accept'  === strtolower($response)) {
             if ($user->checkPointsAvailable($request->get('applicant-id'), $request->get('points'))) {
                 $admin->acceptWithdrawRequest($request, $user);
+                $request->session()->flash('s', 'You have successfully accepted the request');
+            } else {
+                $request->session()->flash('e', 'User do not have sufficient points for this action');
             }
             return redirect('a/withdraw-requests');
         }
 
-        return redirect('/a/withdraw-requests');
+        $request->session()->flash('e', 'Your action was unsuccessful');
+        return redirect()->back();
     }
 
     public function getProductOrders(Admin $admin)
@@ -125,15 +140,26 @@ class AdminController extends Controller
 
     public function editUser($userId, Request $request, User $user)
     {
-        $user->adminEdit($userId, $request);
-        return redirect('/a/users');
+        if ($user->adminEdit($userId, $request)) {
+
+            $request->session()->flash('s', 'User was successfully updated');
+            return redirect('/a/users?page=1');
+        }
+
+        $request->session()->flash('e', 'Something went wrong! User could not be updated');
+        return redirect()->back();
     }
 
     public function deleteUser(Request $request, User $user)
     {
         $userId = $request->get('user-id');
-        $user->remove($userId);
-        return redirect('/a/users');
+        if ($user->remove($userId)) {
+            $request->session()->flash('s', 'User was deleted successfully');
+            return redirect('/a/users?page=1');
+        }
+
+        $request->session()->flash('s', 'Sorry! User could not be deleted');
+        return redirect()->back();
     }
 
     public function getUser($userId, User $user)
@@ -154,12 +180,16 @@ class AdminController extends Controller
     {
         $adminId = $request->session()->get('admin');
         if ($admin->verifyPassword($adminId, $request->get('password'))) {
-            $admin->changeCredentials($adminId, $request);
+            if ($admin->changeCredentials($adminId, $request)) {
+                $request->session()->flush();
+                $request->session()->flash('s', 'Your account settings were changed. Please login again');
+                return redirect('/a/login');
+            }
 
-            $request->session()->flush();
-            return redirect('/a/login');
+            $request->session()->flash('e', 'Something went wrong! Your account settings could not be updated');
         }
 
+        $request->session()->flash('e', 'Your password did not match');
         return redirect()->back();
     }
 
@@ -178,20 +208,31 @@ class AdminController extends Controller
     public function editProfile(Request $request, Admin $admin)
     {
         $adminId = $request->session()->get('admin');
-        $admin->editAdmin($adminId, $request);
+        if ($admin->editAdmin($adminId, $request)) {
 
-        return redirect('/a/account');
+            $request->session()->flash('s', 'Your account was successfully updated');
+            return redirect('/a/account');
+        }
+
+        $request->session()->flash('e', 'Your account could not be updated');
+        return redirect()->back();
     }
 
     public function editBkash(Request $request, Admin $admin)
     {
         $adminId = $request->session()->get('admin');
         if ($admin->verifyPassword($adminId, $request->get('password'))) {
-            $admin->editBkash($request);
+            if ($admin->editBkash($request)) {
 
-            return redirect('/a/account');
+                $request->session()->flash('s', 'New bKash account was added successfully');
+                return redirect('/a/account');
+            }
+
+            $request->session()->flash('e', 'Something went wrong! New bKash account could not be added');
+            return redirect()->back();
         }
 
+        $request->session()->flash('e', 'Your password did not match');
         return redirect()->back();
     }
 
@@ -199,11 +240,17 @@ class AdminController extends Controller
     {
         $adminId = $request->session()->get('admin');
         if ($admin->verifyPassword($adminId, $request->get('password'))) {
-            $admin->editRocket($request);
+            if ($admin->editRocket($request)) {
 
+                $request->session()->flash('s', 'New Rocket account was successfully added');
+                return redirect('/a/account');
+            }
+
+            $request->session()->flash('s', 'Something went wrong! New Rocket account could not be added');
             return redirect('/a/account');
         }
 
+        $request->session()->flash('e', 'Your password did not match');
         return redirect()->back();
     }
 

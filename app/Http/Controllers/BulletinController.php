@@ -10,20 +10,38 @@ class BulletinController extends Controller
     public function addBulletin(Request $request, Bulletin $bulletin)
     {
         $publisherId = $request->session()->get('admin');
-        $bulletin->add($request->request, $publisherId);
-        return redirect('/a/bulletins');
+        if ($bulletin->add($request->request, $publisherId)) {
+
+            $request->session()->flash('s', 'Bulletin was successfully added');
+            return redirect('/a/bulletins?page=1');
+        }
+
+        $request->session()->flash('e', 'Sorry! Bulletin could not be added');
+        return redirect()->back();
     }
 
     public function editBulletin($bulletinId, Request $request, Bulletin $bulletin)
     {
-        $bulletin->edit($request->request, $bulletinId);
-        return redirect('/a/bulletins');
+        if ($bulletin->edit($request->request, $bulletinId)) {
+
+            $request->session()->flash('s', 'Bulletin was successfully updated');
+            return redirect('/a/bulletins?page=1');
+        }
+
+        $request->session()->flash('e', 'Sorry! Bulletin could not be updated');
+        return redirect()->back();
     }
 
     public function deleteBulletin(Request $request, Bulletin $bulletin)
     {
-        $bulletin->remove($request->get('id'));
-        return redirect('/a/bulletins');
+        if ($bulletin->remove($request->get('id'))) {
+
+            $request->session()->flash('s', 'Bulletin was successfully removed');
+            return redirect('/a/bulletins?page=1');
+        }
+
+        $request->session()->flash('e', 'Sorry! Bulletin could not be deleted');
+        return redirect()->back();
     }
 
     public function adminAllBulletins(Request $request, Bulletin $bulletin)

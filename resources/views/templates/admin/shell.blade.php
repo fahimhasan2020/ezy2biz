@@ -29,6 +29,27 @@
 
 @include('templates.admin.top-bar')
 
+@if(\Illuminate\Support\Facades\Session::has('e'))
+    <div class="col-md-6 offset-md-3 mt-3" style="position: absolute; top: 0; height: 50px;">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ \Illuminate\Support\Facades\Session::get('e') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+
+@elseif(\Illuminate\Support\Facades\Session::has('s'))
+    <div class="col-md-6 offset-md-3 mt-3" style="position: absolute; top: 10px;">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ \Illuminate\Support\Facades\Session::get('s') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+@endif
+
 <div id="wrapper">
 
     <!-- Sidebar -->
