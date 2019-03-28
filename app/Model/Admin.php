@@ -182,8 +182,8 @@ class Admin extends Model
         if (!$idQuery) {
             return DB::table('banking_accounts')
                 ->insert([
-                    ['account_name' => 'bkash'],
-                    ['account_number' => $request->get('bkash')]
+                    'account_name' => 'bkash',
+                    'account_number' => $request->get('bkash')
                 ]);
         } else {
             return DB::table('banking_accounts')
@@ -202,8 +202,8 @@ class Admin extends Model
         if (!$idQuery) {
             return DB::table('banking_accounts')
                 ->insert([
-                    ['account_name' => 'rocket'],
-                    ['account_number' => $request->get('rocket')]
+                    'account_name' => 'rocket',
+                    'account_number' => $request->get('rocket')
                 ]);
         } else {
             return DB::table('banking_accounts')
