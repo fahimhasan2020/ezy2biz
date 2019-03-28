@@ -2,6 +2,7 @@
 @extends('templates.shell')
 
 @section('custom-css')
+
     <link rel="stylesheet" href="{{ URL::asset('/css/bulletin-ticker.css') }}">
 @stop
 
@@ -26,9 +27,10 @@
 @stop
 
 @section('body')
+
     <div id="content">
         <div class="container">
-        <div class="row">
+            <div class="row">
             <div class="col-md-12 banner text-center ">
 
             <div class="box clickable d-flex flex-column justify-content-center mb-0 h-100" style="padding:0;">
@@ -89,6 +91,7 @@
         *** HOT PRODUCT SLIDESHOW ***
         _________________________________________________________
         -->
+
         <div id="hot">
             <div class="box py-4">
                 <div class="container">

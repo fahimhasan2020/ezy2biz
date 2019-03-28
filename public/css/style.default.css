@@ -471,7 +471,7 @@ h1 {
 *
 */
 .box {
-  background: #fff;
+  background:rgba(255,255,255,.65) ;
   margin: 0 0 30px;
   border: solid 1px #e6e6e6;
   padding: 20px;
@@ -1992,7 +1992,9 @@ body {
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
-  background-color: #f0f0f0;
+  background-color: transparent;
+  background:url("https://i.ytimg.com/vi/u71QsZvObHs/maxresdefault.jpg") no-repeat center center fixed;
+  
 }
 
 a {
@@ -3023,3 +3025,6 @@ code {
 .dropdown-item.disabled, .dropdown-item:disabled {
   color: #6c757d;
 }
+
+
+
