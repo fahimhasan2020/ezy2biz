@@ -11,7 +11,7 @@
         <label class="onoffswitch3-label" for="myonoffswitch3">
         <span class="onoffswitch3-inner">
             <span class="onoffswitch3-active">
-                <marquee class="scroll-text">
+                <marquee class="scroll-text"  loop="true"  onmouseover="this.stop();" onmouseout="this.start();">
                     @foreach($bulletins as $bulletin)
                         <i class="fas fa-forward"></i>
                         <a href="/bulletin/{{ $bulletin->id }}">{{ $bulletin->title }}</a>
