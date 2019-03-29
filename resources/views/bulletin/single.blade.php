@@ -31,9 +31,6 @@
                             By <a href="#">{{ $bulletin->first_name }} {{ $bulletin->last_name }}</a> |
                             {{ date('D, F j, Y', strtotime($bulletin->publish_date)) }}
                         </p>
-                        <p class="lead">
-                            This is the lead paragraph of the article. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget.
-                        </p>
                         <div id="post-content">
                             {{ $bulletin->description }}
                         </div>
