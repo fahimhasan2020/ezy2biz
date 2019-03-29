@@ -14,18 +14,26 @@
 
         <!-- Page Content -->
         <div class="row">
-            <h1 class="col-md-8">Account</h1>
-            <div class="col-md-4">
+            <h1 class="col-md-6">Account</h1>
+            <div class="col-md-6">
                 @foreach($bankingAccounts as $account)
                     @if($account->account_name == 'bkash')
-                        <p class="profile-rating row">
-                            <span class="col-md-4 text-right">bKash:</span> <span class="col-md-8">
+                        <p class="profile-rating container clearfix">
+                            <span class="float-right" style="margin-left: 15px;">
                                 {{ $account->account_number }}</span>
+                            <span class="float-right">
+                                <img src="{{ URL::asset('/img/bkash-logo.png') }}" alt="" style="height: 18px; vertical-align: -20%">
+                                bKash:
+                            </span>
                         </p>
                     @elseif($account->account_name == 'rocket')
-                        <p class="profile-rating row">
-                            <span class="col-md-4 text-right">Rocket:</span> <span class="col-md-8">
+                        <p class="profile-rating container">
+                            <span class="float-right" style="margin-left: 15px;">
                                 {{ $account->account_number }}</span>
+                            <span class="float-right">
+                                <img src="{{ URL::asset('/img/rocket-logo.png') }}" alt="" style="height: 18px; vertical-align: -20%">
+                                Rocket:
+                            </span>
                         </p>
                     @endif
                 @endforeach
@@ -141,7 +149,7 @@
                                         <form action="/u/account/req" method="post">
                                             @csrf
                                             <div class="form-group">
-                                                <label for="bkash-num">bKash Number</label>
+                                                <label for="bkash-num">Enter Your bKash/Rocket Number</label>
                                                 <input id="bkash-num" name="bkash-num" type="text" class="form-control" required>
                                             </div>
                                             <div class="form-group">
@@ -149,7 +157,7 @@
                                                 <input id="amount" name="amount" type="number" class="form-control" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="password">Password</label>
+                                                <label for="password">Enter Password to Proceed</label>
                                                 <input id="password" name="password" type="password" class="form-control" required>
                                             </div>
                                             <div>
@@ -162,7 +170,7 @@
                                         <form action="/u/account/withdraw" method="post">
                                             @csrf
                                             <div class="form-group">
-                                                <label for="bkash-num">bKash Number</label>
+                                                <label for="bkash-num">Enter Your bKash/Rocket Number</label>
                                                 <input id="bkash-num" name="bkash-num" type="text" class="form-control" required>
                                             </div>
                                             <div class="form-group">
@@ -170,7 +178,7 @@
                                                 <input id="amount" name="amount" type="number" class="form-control" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="password">Password</label>
+                                                <label for="password">Enter Password to Proceed</label>
                                                 <input id="password" name="password" type="password" class="form-control" required>
                                             </div>
                                             <div>

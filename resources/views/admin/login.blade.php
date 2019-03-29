@@ -40,10 +40,6 @@
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Login</button>
             </form>
-
-            <div class="text-center">
-                <a class="d-block small" href="#">Forgot Password?</a>
-            </div>
         </div>
     </div>
 </div>

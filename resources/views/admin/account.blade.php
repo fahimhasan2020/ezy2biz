@@ -27,22 +27,32 @@
                         <a class="btn btn-sm btn-outline-info btn-block" href="/a/account?action=profile">Change Profile Info</a><br/>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="profile-head">
-                        <h5>
-                            Account Numbers
-                        </h5>
-                        @foreach($accounts as $account)
-                            @if($account->account_name === 'bkash')
-                                <p class="profile-rating">
-                                    bKash : <span>{{ $account->account_number }}</span>
-                                </p>
-                            @elseif($account->account_name === 'rocket')
-                                <p class="profile-rating">
-                                    Rocket : <span>{{ $account->account_number }}</span>
-                                </p>
-                            @endif
-                        @endforeach
+                <div class="col-md-7">
+                    <div class="profile-head row">
+                        <h5 class="col-md-4">Account Numbers</h5>
+                        <div class="col-md-8">
+                            @foreach($accounts as $account)
+                                @if($account->account_name == 'bkash')
+                                    <p class="profile-rating container clearfix">
+                                <span class="float-right" style="margin-left: 15px;">
+                                    {{ $account->account_number }}</span>
+                                        <span class="float-right">
+                                    <img src="{{ URL::asset('/img/bkash-logo.png') }}" alt="" style="height: 18px; vertical-align: -20%">
+                                    bKash:
+                                </span>
+                                    </p>
+                                @elseif($account->account_name == 'rocket')
+                                    <p class="profile-rating container">
+                                <span class="float-right" style="margin-left: 15px;">
+                                    {{ $account->account_number }}</span>
+                                        <span class="float-right">
+                                    <img src="{{ URL::asset('/img/rocket-logo.png') }}" alt="" style="height: 18px; vertical-align: -20%">
+                                    Rocket:
+                                </span>
+                                    </p>
+                                @endif
+                            @endforeach
+                        </div>
                         <ul class="nav nav-tabs mt-2" id="myTab" role="tablist">
                             @if($action)
                                 <?php $profileClass = ''; $editClass = 'show active'; ?>
