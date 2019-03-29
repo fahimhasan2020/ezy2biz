@@ -54,7 +54,7 @@ class AdminController extends Controller
         }
 
         $request->session()->flash('e', 'Your action was unsuccessful');
-        return redirect()->back();
+        return redirect('/a/point-requests');
     }
 
     public function getWithdrawRequests(Admin $admin)
@@ -82,7 +82,7 @@ class AdminController extends Controller
         }
 
         $request->session()->flash('e', 'Your action was unsuccessful');
-        return redirect()->back();
+        return redirect('a/withdraw-requests');
     }
 
     public function getProductOrders(Admin $admin)
@@ -93,7 +93,12 @@ class AdminController extends Controller
 
     public function responseProductOrders(Request $request, Admin $admin)
     {
-        $admin->responseOrder($request->get('order-id'), $request->get('response'));
+        if ($admin->responseOrder($request->get('order-id'), $request->get('response'))) {
+
+            $request->session()->flash('s', 'Your action was successful');
+        } else {
+            $request->session()->flash('e', 'Your action was unsuccessful');
+        }
         return redirect('/a/product-orders');
     }
 
@@ -156,10 +161,10 @@ class AdminController extends Controller
         if ($user->remove($userId)) {
             $request->session()->flash('s', 'User was deleted successfully');
             return redirect('/a/users?page=1');
+        } else {
+            $request->session()->flash('s', 'Sorry! User could not be deleted');
+            return redirect('/a/users?page=1');
         }
-
-        $request->session()->flash('s', 'Sorry! User could not be deleted');
-        return redirect()->back();
     }
 
     public function getUser($userId, User $user)

@@ -38,10 +38,10 @@ class BulletinController extends Controller
 
             $request->session()->flash('s', 'Bulletin was successfully removed');
             return redirect('/a/bulletins?page=1');
+        } else {
+            $request->session()->flash('e', 'Sorry! Bulletin could not be deleted');
+            return redirect('/a/bulletins?page=1');
         }
-
-        $request->session()->flash('e', 'Sorry! Bulletin could not be deleted');
-        return redirect()->back();
     }
 
     public function adminAllBulletins(Request $request, Bulletin $bulletin)
