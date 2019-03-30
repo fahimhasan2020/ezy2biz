@@ -21,7 +21,7 @@
                     <!-- breadcrumb-->
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mt-3">
-                            <li class="breadcrumb-item"><a href="bulletin.html">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
                             <li aria-current="page" class="breadcrumb-item active">Bulletin listing</li>
                         </ol>
                     </nav>
