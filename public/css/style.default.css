@@ -1938,7 +1938,9 @@ body {
   line-height: 1.5;
   color: #212529;
   background-color: transparent;
-  background:url("https://i.ytimg.com/vi/u71QsZvObHs/maxresdefault.jpg") no-repeat center center fixed;
+  background-image:url("https://i.ytimg.com/vi/u71QsZvObHs/maxresdefault.jpg");
+  background-size:cover;
+  background-repeat:no-repeat;
   
 }
 
