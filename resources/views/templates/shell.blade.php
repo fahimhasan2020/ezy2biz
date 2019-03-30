@@ -59,6 +59,7 @@
 
 <div id="all">
     @yield('body')
+    
 </div>
 
 <!--

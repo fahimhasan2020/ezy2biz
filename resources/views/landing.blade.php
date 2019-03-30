@@ -145,4 +145,8 @@
             <!-- *** HOT END ***-->
         </div>
     </div>
+    <div id="copyright">
+    @include('templates.footer')
+</div>
+
 @stop

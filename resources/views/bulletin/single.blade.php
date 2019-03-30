@@ -24,8 +24,8 @@
                         </ol>
                     </nav>
                 </div>
-                <div id="blog-post" class="col-lg-9">
-                    <div class="box">
+                <div id="blog-listing" class="col-lg-9">
+                    <div class="post">
                         <h1>{{ $bulletin->title }}</h1>
                         <p class="author-date">
                             By <a href="#">{{ $bulletin->first_name }} {{ $bulletin->last_name }}</a> |

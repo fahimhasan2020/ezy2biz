@@ -386,64 +386,6 @@ h1 {
 * ======================================================================
 *
 */
-#footer {
-  background: #e0e0e0;
-  padding: 100px 0;
-}
-
-#footer ul {
-  padding-left: 0;
-  list-style: none;
-}
-
-#footer ul a {
-  color: #999;
-}
-
-#footer .social {
-  text-align: left;
-}
-
-#footer .social a {
-  margin: 0 10px 0 0;
-  color: #fff;
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
-  line-height: 26px;
-  font-size: 15px;
-  text-align: center;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
-  vertical-align: bottom;
-  background-color: #555;
-}
-
-#footer .social a i {
-  vertical-align: bottom;
-  line-height: 30px;
-}
-
-#footer .social a.facebook:hover {
-  background-color: #4460ae;
-}
-
-#footer .social a.gplus:hover {
-  background-color: #c21f25;
-}
-
-#footer .social a.twitter:hover {
-  background-color: #3cf;
-}
-
-#footer .social a.instagram:hover {
-  background-color: #cd4378;
-}
-
-#footer .social a.email:hover {
-  background-color: #4a7f45;
-}
 
 /*
 *
@@ -457,6 +399,9 @@ h1 {
   color: #ccc;
   padding: 20px 0;
   font-size: 0.738rem;
+ 
+
+  
 }
 
 #copyright p {
