@@ -5,7 +5,6 @@
         .table-tree-container {
             position: relative;
             height: 535px;
-            width: 80vw;
             overflow: auto;
             background-image: url("{{ URL::asset('/img/wood-background.jpg') }}");
             background-repeat: no-repeat;
