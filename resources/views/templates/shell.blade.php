@@ -32,6 +32,7 @@
 </head>
 <body>
 <!-- navbar-->
+<div class="full-view">
 <header class="header">
     @include('templates.top-bar')
 </header>
@@ -66,6 +67,7 @@
 *** COPYRIGHT ***
 _________________________________________________________
 -->
+</div>
 <div id="copyright">
     @include('templates.footer')
 </div>

@@ -399,6 +399,7 @@ h1 {
   color: #ccc;
   padding: 20px 0;
   font-size: 0.738rem;
+  min-height:5vh;
 }
 
 #copyright p {
@@ -538,8 +539,8 @@ h1 {
 * ======================================================================
 *
 */
-#content {
-  min-height: 71vh;
+.full-view {
+  min-height: 95vh;
 }
 
 #content .card.sidebar-menu {
