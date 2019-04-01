@@ -59,7 +59,7 @@ marquee a:visited {
 }
 .onoffswitch3-active .onoffswitch3-switch {
     background: #4fbfa8; left: 0;
-    width: 160px;
+    width: 100px;
 }
 .onoffswitch3-inactive{
     background: #A1A1A1; right: 0;

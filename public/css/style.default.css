@@ -1940,7 +1940,7 @@ body {
   line-height: 1.5;
   color: #212529;
   background-color: transparent;
-  background-image:url("https://i.ytimg.com/vi/u71QsZvObHs/maxresdefault.jpg");
+  background-image:url('../img/bg_image.jpg');
   background-size:cover;
   background-repeat:no-repeat;
   

@@ -21,6 +21,20 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ URL::asset('/sb-admin/css/sb-admin.css') }}" rel="stylesheet">
+
+    <style>
+        .sidebar {
+            background-color: #28a745;
+        }
+
+        .sidebar .nav-item .nav-link span {
+            color: yellow;
+        }
+
+        .bg-dark {
+            background-color: #23903c !important;
+        }
+    </style>
     @yield('specific-css')
 
 </head>

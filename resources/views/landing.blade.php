@@ -35,7 +35,7 @@
 
                 <div class="box clickable d-flex flex-column justify-content-center mb-0 h-100" style="padding:0;">
 
-                    <img src="{{ URL::asset('/img/banner_top.jpg') }}" alt="ezy2biz banner">
+                    <img src="{{ URL::asset('/img/banner_top.jpg') }}" alt="ezy2biz banner" style="width: 100%">
                 </div>
             </div>
 
