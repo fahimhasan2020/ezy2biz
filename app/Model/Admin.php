@@ -100,6 +100,7 @@ class Admin extends Model
                 'response'   => 'accept'
             ]);
         $user->addPoints($request->get('applicant-id'), $request->get('points'));
+        $user->makeActive($request->get('applicant-id'));
         DB::commit();
     }
 

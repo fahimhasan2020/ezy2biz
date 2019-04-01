@@ -74,7 +74,6 @@ class Product extends Model
         $user->deductPoints($request->get('buyer-id'), $request->get('cost'));
         $commission = $request->get('wholesale') * $request->get('commission') / 100;
         $user->addPoints($request->get('referrer-id'), $commission);
-        $user->makeActive($request->get('buyer-id'));
         DB::commit();
     }
 

@@ -162,11 +162,12 @@ class User extends Model
 
     public function checkPointsAvailable($userId, $amount)
     {
+        $minBalance = 10 + (float) $amount;
         return
             DB::table('users')
                 ->where([
                     ['id', '=', $userId],
-                    ['points', '>=', $amount]
+                    ['points', '>=', $minBalance]
                 ])->count();
     }
 
@@ -285,21 +286,27 @@ class User extends Model
 
     public function makeActive($userId)
     {
-        DB::table('users')
+        DB::beginTransaction();
+
+        $isActive = DB::table('users')
             ->where([
                 ['id', '=', $userId],
-                ['is_active', '=', false]
+                ['is_active', '=', false],
+                ['points', '>=', 10]
             ])
             ->update([
                 'is_active' => true
             ]);
 
-        DB::table('cron_job_schedules')
-            ->insert([
-                'job_type'          => 'promote',
-                'issuer_id'         => $userId,
-                'issue_datetime'    => date('Y-m-d H:i:s', time())
-            ]);
+        if ($isActive) {
+            DB::table('cron_job_schedules')
+                ->insert([
+                    'job_type' => 'promote',
+                    'issuer_id' => $userId,
+                    'issue_datetime' => date('Y-m-d H:i:s', time())
+                ]);
+        }
+        DB::commit();
     }
 
     public function begin()
@@ -349,5 +356,26 @@ class User extends Model
     public function getBankingAccounts()
     {
         return DB::table('banking_accounts')->get();
+    }
+
+    public function checkTree($userId)
+    {
+        return DB::table('referral_tree')
+            ->select('child_id')
+            ->where([
+                ['user_id', '=', $userId],
+                ['level', '=', 2]
+            ])
+            ->count();
+    }
+
+    public function checkRefLinks($referrerId, $parentId)
+    {
+        return DB::table('referral_links')
+            ->where([
+                ['referrer_id', '=', $referrerId],
+                ['parent_id', '=', $parentId]
+            ])
+            ->count();
     }
 }

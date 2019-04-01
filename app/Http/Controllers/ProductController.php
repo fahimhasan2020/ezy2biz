@@ -183,6 +183,9 @@ class ProductController extends Controller
                 $request->session()->flash('s', 'Congratulation! You have successfully bought the product');
                 return redirect('/u/account');
             }
+
+            $request->session()->flash('e', 'Sorry! You do not have sufficient points to buy the product');
+            return redirect()->back();
         }
 
         $request->session()->flash('e', 'Something went wrong! Product buy was unsuccessful');

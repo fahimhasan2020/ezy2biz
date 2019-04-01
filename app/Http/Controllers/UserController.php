@@ -19,6 +19,12 @@ class UserController extends Controller
             ];
             return view('user.register')->with('refInfo', $refInfo);
         }
+
+        if ($user->checkTree($query->p_id) >= 2) {
+            $request->session()->flash('e', 'Sorry the parent user is already full. Register under another user');
+            return redirect()->back();
+        }
+
         $refInfo = [
             'p_fn' => $query->p_fn, 'p_ln' => $query->p_ln, 'p_id' => $query->p_id,
             'r_fn' => $query->r_fn, 'r_ln' => $query->r_ln, 'r_id' => $query->r_id
@@ -32,6 +38,12 @@ class UserController extends Controller
             $request->session()->flash('e', 'Sorry! Password confirmation failed.');
             return redirect()->back();
         }
+
+        if ($user->checkTree($request->get('parent-id')) >= 2) {
+            $request->session()->flash('e', 'Sorry the parent user is already full. Register under another user');
+            return redirect()->back();
+        }
+
         $request->request->add(['image-path' => '']);
         if (!$user->exists($request)) {
             if ($request->hasFile('image')) {
@@ -110,6 +122,12 @@ class UserController extends Controller
     public function generateRefLink(Request $request, User $user, ReferralKeyGenerator $keygen)
     {
         $currentUserId = $request->session()->get('user');
+
+        if ($user->checkRefLinks($currentUserId, $request->get('parent-id')) >= 2 ) {
+            $request->session()->flash('e', 'Can not generate referral link! May be you have already generated two referral links for this parent.');
+            return redirect('/u/tree');
+        }
+
         $request->request->add(['referrer-id' => $currentUserId]);
         $request->request->add(['referral-key' => $keygen->generateKey($request->request)]);
         if ($user->addRefLink($request)) {
@@ -146,6 +164,7 @@ class UserController extends Controller
         if ($user->verifyPassword($senderId, $request)) {
             if ($user->checkPointsAvailable($senderId, $request->get('amount'))) {
                 $user->transferPoints($senderId, $request);
+                $user->makeActive($request->get('recipient'));
 
                 $request->session()->flash('s', 'Congratulations! Point transfer was successful');
                 return redirect('/u/account');
@@ -183,6 +202,9 @@ class UserController extends Controller
                 $request->session()->flash('s', 'Cash withdraw request was sent successfully');
                 return redirect('u/account');
             }
+
+            $request->session()->flash('e', 'Sorry! You do not have sufficient points');
+            return redirect('/u/account?action=withdraw');
         }
 
         $request->session()->flash('e', 'Sorry! Your password did not match');
