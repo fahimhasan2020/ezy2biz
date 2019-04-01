@@ -27,7 +27,7 @@
             background-color: #28a745;
         }
 
-        .sidebar .nav-item .nav-link span {
+        .sidebar .nav-item .nav-link {
             color: yellow;
         }
 
