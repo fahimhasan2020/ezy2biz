@@ -24,15 +24,15 @@
 
     <style>
         .sidebar {
-            background-color: #28a745;
+            background-color: #2a3f54;
         }
 
         .sidebar .nav-item .nav-link {
-            color: yellow;
+            color: #eee;
         }
 
         .bg-dark {
-            background-color: #23903c !important;
+            background-color: #253a4f !important;
         }
     </style>
     @yield('specific-css')
