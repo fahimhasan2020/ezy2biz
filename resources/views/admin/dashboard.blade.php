@@ -103,7 +103,69 @@
         </div>
     </div>
 
+    <h3 class="mt-4">Landing Page Slides</h3>
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Photo</th>
+                        <th scope="col">Path</th>
+                        <th scope="col" class="text-center">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
+                    @foreach($images as $image)
+                        <tr>
+                            <td><img src="{{ Storage::url($image->image_path) }}" alt="" height="60"></td>
+                            <td>{{ $image->image_path }}</td>
+                            <td class="text-center">
+                                <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteImage{{ $image->id }}">
+                                    <i class="fa fa-trash" title="Delete"></i>
+                                </a>
+                            </td>
+                        </tr>
 
+                        <div class="modal fade" id="deleteImage{{ $image->id }}" tabindex="-1" role="dialog" aria-labelledby="image{{ $image->id }}" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="image{{ $image->id }}">Confirmation</h5>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">Do you really want to delete the product? Select "Yes" below if you want to proceed and remove the product. Remember, this action is irreversible.</div>
+                                    <div class="modal-footer">
+                                        <form class="d-inline" action="/a/dashboard" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="hidden" name="id" value="{{ $image->id }}">
+                                            <input type="hidden" name="image-path" value="{{ $image->image_path }}">
+                                            <button class="btn btn-secondary" type="button" data-dismiss="modal">No</button>
+                                            <button class="btn btn-danger">Yes</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <form action="/a/dashboard" method="post" enctype="multipart/form-data">
+        @csrf
+        <div class="form-group">
+            <label>Add new photos (You can select multiple photos)</label>
+            <input type="file" name="images[]" class="form-control-file" multiple>
+        </div>
+        <button type="submit" class="btn btn-info mb-3">Add Image</button>
+    </form>
 </div>
 @stop

@@ -12,9 +12,11 @@ class LandingPageController extends Controller
     {
         $bulletins = $bulletin->getLatest()->all();
         $users = $user->getTopUsers()->all();
+        $slides = $user->getSlides()->all();
 
         return view('landing')
             ->with('bulletins', $bulletins)
-            ->with('users', $users);
+            ->with('users', $users)
+            ->with('slides', $slides);
     }
 }

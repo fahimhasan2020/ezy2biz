@@ -83,6 +83,10 @@ Route::group(['middleware' => ['admin-logged']], function () {
 
     Route::get('/a/dashboard', 'AdminController@dashboard');
 
+    Route::post('/a/dashboard', 'AdminController@addSlideImages');
+
+    Route::delete('/a/dashboard', 'AdminController@deleteSlideImage');
+
     Route::get('/a/users', 'AdminController@showAllUsers');
 
     Route::get('/a/user/{id}', 'AdminController@getUser');

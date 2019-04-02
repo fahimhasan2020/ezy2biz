@@ -57,4 +57,24 @@ class ImageStore
     {
         return Storage::delete($path);
     }
+
+    public function addSlideImages(Request $request)
+    {
+        if (!$request->hasFile('images')) {
+            return true;
+        }
+
+        $imagePaths = [];
+        $files = $request->file('images');
+        foreach($files as $file) {
+            $imagePaths[] = $file->store('public/slides');
+        }
+        $request->request->add(['image-paths' =>  $imagePaths]);
+        return true;
+    }
+
+    public function removeImage($path)
+    {
+        return Storage::delete($path);
+    }
 }

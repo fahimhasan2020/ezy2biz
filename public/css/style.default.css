@@ -1941,6 +1941,7 @@ body {
   color: #212529;
   background-color: transparent;
   background-image:url('../img/bg_image.jpg');
+  height: 100%;
   background-size:cover;
   background-repeat:no-repeat;
   

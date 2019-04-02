@@ -44,10 +44,10 @@
 
             <div class="col-md-12">
                 <div id="main-slider" class="owl-carousel owl-theme">
-                    @for($i = 1; $i <= 6; $i++) <div class="item">
-                        <img src="{{ URL::asset('/img/main-slider' . $i . '.jpg') }}" alt="" class="img-fluid">
+                    @foreach($slides as $slide)
+                        <img src="{{ Storage::url($slide->image_path) }}" alt="" class="img-fluid">
+                    @endforeach
                 </div>
-                @endfor
             </div>
             <!-- /#main-slider-->
         </div>

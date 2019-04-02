@@ -236,4 +236,31 @@ class Admin extends Model
             ->where('response', '=', 'pending')
             ->count();
     }
+
+    public function getSlideImages()
+    {
+        return DB::table('landing_page_slides')
+            ->get();
+    }
+
+    public function addImages(Array $images)
+    {
+        $imagePaths = [];
+
+        if (!empty ($images)) {
+            foreach ($images as $image) {
+                $imagePaths[] = ['image_path' => $image];
+            }
+        }
+
+        return DB::table('landing_page_slides')
+            ->insert($imagePaths);
+    }
+
+    public function deleteImage($id)
+    {
+        return DB::table('landing_page_slides')
+            ->where('id', '=', $id)
+            ->delete();
+    }
 }

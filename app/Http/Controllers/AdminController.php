@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Core\ImageStore;
 use App\Core\LoginValidator;
 use App\Model\Admin;
 use App\Model\User;
@@ -266,10 +267,42 @@ class AdminController extends Controller
         $countWithdrawRequests = $admin->countWithdrawRequests();
         $countUsers = $user->countTotal();
 
+        $getSlideImages = $admin->getSlideImages()->all();
+
         return view('admin.dashboard')
             ->with('totalPointRequests', $countPointRequests)
             ->with('totalProductOrders', $countProductOrders)
             ->with('totalWithdrawRequests', $countWithdrawRequests)
-            ->with('totalUsers', $countUsers);
+            ->with('totalUsers', $countUsers)
+            ->with('images', $getSlideImages);
+    }
+
+    public function addSlideImages(Request $request, Admin $admin, ImageStore $store)
+    {
+        $request->request->add(['image-paths' => []]);
+        if ($store->addSlideImages($request)) {
+            if ($admin->addImages($request->get('image-paths'))) {
+                $request->session()->flash('s', 'Congratulations! Images were successfully added to slide');
+                return redirect('/a/dashboard');
+            } else {
+                $request->session()->flash('e', 'Sorry! Could not add images to slide');
+                return redirect('/a/dashboard');
+            }
+        }
+
+        $request->session()->flash('e', 'Oops! Something went wrong!');
+        return redirect('/a/dashboard');
+    }
+
+    public function deleteSlideImage(Request $request, Admin $admin, ImageStore $store)
+    {
+        if ($admin->deleteImage($request->get('id'))) {
+            $store->removeImage($request->get('image-path'));
+            $request->session()->flash('s', 'Images was successfully removed');
+            return redirect('/a/dashboard');
+        }
+
+        $request->session()->flash('e', 'Sorry! Could not remove the image');
+        return redirect('/a/dashboard');
     }
 }

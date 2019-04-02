@@ -378,4 +378,10 @@ class User extends Model
             ])
             ->count();
     }
+
+    public function getSlides()
+    {
+        return DB::table('landing_page_slides')
+            ->get();
+    }
 }
