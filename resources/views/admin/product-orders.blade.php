@@ -36,7 +36,7 @@
                                 <td>{{ $order->first_name }} {{ $order->last_name }}</td>
                                 <td>{{ $order->phone }}</td>
                                 <td>{{ $order->address }}</td>
-                                <td>{{ $order->name }}</td>
+                                <td>{{ $order->product_name }}</td>
                                 <td class="text-right">{{ $order->sale_price }}</td>
                                 <td class="text-right">{{ $order->quantity }}</td>
                                 <td class="text-right">{{ $order->total_cost }}</td>

@@ -64,16 +64,27 @@ class Product extends Model
     public function sell(Request $request, User $user)
     {
         DB::beginTransaction();
-        DB::table('product_orders')
-            ->insert([
-                'buyer_id'      => $request->get('buyer-id'),
-                'product_id'    => $request->get('product-id'),
-                'quantity'      => $request->get('qty'),
-                'total_cost'    => $request->get('cost')
-            ]);
-        $user->deductPoints($request->get('buyer-id'), $request->get('cost'));
-        $commission = $request->get('wholesale') * $request->get('commission') / 100;
-        $user->addPoints($request->get('referrer-id'), $commission);
+        $product = DB::table('products')
+            ->select('name', 'sale_price', 'wholesale_price', 'commission')
+            ->where('id', '=', $request->get('product-id'))
+            ->first();
+
+        if ($product) {
+            DB::table('product_orders')
+                ->insert([
+                    'buyer_id'          => $request->get('buyer-id'),
+                    'product_name'      => $product->name,
+                    'sale_price'        => $product->sale_price,
+                    'wholesale_price'   => $product->wholesale_price,
+                    'commission'        => $product->commission,
+                    'quantity'          => $request->get('qty'),
+                    'total_cost'        => $request->get('cost')
+                ]);
+            $user->deductPoints($request->get('buyer-id'), $request->get('cost'));
+            $commission = $request->get('wholesale') * $request->get('commission') / 100;
+            $user->addPoints($request->get('referrer-id'), $commission);
+        }
+
         DB::commit();
     }
 

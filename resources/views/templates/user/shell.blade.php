@@ -24,7 +24,7 @@
 
     <style>
         .sidebar {
-            background-color: #2a3f54;
+            background-color: #253a4f;
         }
 
         .sidebar .nav-item .nav-link {
@@ -32,7 +32,7 @@
         }
 
         .bg-dark {
-            background-color: #253a4f !important;
+            background-color: #2e4358 !important;
         }
     </style>
     @yield('specific-css')

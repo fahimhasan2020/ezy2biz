@@ -35,6 +35,35 @@
             font-size: 14px;
             margin: 0;
         }
+
+        .tree-overview-container {
+            overflow-x: auto;
+            background-image: url("{{ URL::asset('/img/wood-background.jpg') }}");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .tree-overview-container table tr {
+            margin: 0;
+            padding: 0;
+        }
+
+        .tree-overview-container table tr td {
+            margin: 0;
+            padding: 5px 5px;
+        }
+
+        .tree-overview-container table tr td a:link {
+            color: black;
+        }
+
+        .tree-overview-container table tr td a:hover {
+            color: white;
+        }
+
+        .tree-overview-container table tr td a:visited {
+            color: black;
+        }
     </style>
 @stop
 
@@ -47,7 +76,167 @@
         </ol>
 
         <!-- Page Content -->
-        <h1>Referral Tree</h1>
+        <h3>Tree Overview</h3>
+        <hr>
+
+        <div class="mb-5 tree-overview-container">
+            <table class="table text-center" align="center" border="1">
+            <tr>
+                <td colspan="16"><a href="#"><i class="fas fa-user-circle"></i></a></td>
+            </tr>
+            <tr>
+                @for($i = 1; $i <= 2; $i++)
+                    <td colspan="8">
+                        @if (is_object($tree[$i]))
+                            <a href="#"><i class="fas fa-user-circle"></i></a>
+
+                        @elseif (!is_null($tree[$i]))
+                            <a href="#" data-toggle="modal" data-target="#refLink{{ $i }}">
+                                <i class="fas fa-plus-circle"></i>
+                            </a>
+
+                            <form action="/u/ref-link" method="post">
+                                @csrf
+                                <div class="modal fade" id="refLink{{ $i }}" tabindex="-1" role="dialog" aria-labelledby="refLink{{ $i }}Label" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="refLink{{ $i }}Label">Confirmation</h5>
+                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">Do you want to create a registration referral link? Click the 'Generate' button below to proceed.</div>
+                                            <div class="modal-footer">
+                                                <input type="hidden" name="parent-id" value="{{ $tree[$i] }}">
+                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                                <button type="submit" class="btn btn-primary" href="/a/logout">Generate</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        @else
+                            <i class="far fa-circle"></i>
+                        @endif
+                    </td>
+                @endfor
+            </tr>
+            <tr>
+                @for($i = 3; $i <= 6; $i++)
+                    <td colspan="4">
+                        @if (is_object($tree[$i]))
+                            <a href="#"><i class="fas fa-user-circle"></i></a>
+                        @elseif (!is_null($tree[$i]))
+                            <a href="#" data-toggle="modal" data-target="#refLink{{ $i }}">
+                                <i class="fas fa-plus-circle"></i>
+                            </a>
+
+                            <form action="/u/ref-link" method="post">
+                                @csrf
+                                <div class="modal fade" id="refLink{{ $i }}" tabindex="-1" role="dialog" aria-labelledby="refLink{{ $i }}Label" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="refLink{{ $i }}Label">Confirmation</h5>
+                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">Do you want to create a registration referral link? Click the 'Generate' button below to proceed.</div>
+                                            <div class="modal-footer">
+                                                <input type="hidden" name="parent-id" value="{{ $tree[$i] }}">
+                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                                <button type="submit" class="btn btn-primary" href="/a/logout">Generate</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        @else
+                            <i class="far fa-circle"></i>
+                        @endif
+                    </td>
+                @endfor
+            </tr>
+            <tr>
+                @for($i = 7; $i <= 14; $i++)
+                    <td colspan="2">
+                        @if (is_object($tree[$i]))
+                            <a href="#"><i class="fas fa-user-circle"></i></a>
+                        @elseif (!is_null($tree[$i]))
+                            <a href="#" data-toggle="modal" data-target="#refLink{{ $i }}">
+                                <i class="fas fa-plus-circle"></i>
+                            </a>
+
+                            <form action="/u/ref-link" method="post">
+                                @csrf
+                                <div class="modal fade" id="refLink{{ $i }}" tabindex="-1" role="dialog" aria-labelledby="refLink{{ $i }}Label" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="refLink{{ $i }}Label">Confirmation</h5>
+                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">Do you want to create a registration referral link? Click the 'Generate' button below to proceed.</div>
+                                            <div class="modal-footer">
+                                                <input type="hidden" name="parent-id" value="{{ $tree[$i] }}">
+                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                                <button type="submit" class="btn btn-primary" href="/a/logout">Generate</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        @else
+                            <i class="far fa-circle"></i>
+                        @endif
+                    </td>
+                @endfor
+            </tr>
+            <tr>
+                @for($i = 15; $i <= 30; $i++)
+                    <td>
+                        @if (is_object($tree[$i]))
+                            <a href="#"><i class="fas fa-user-circle"></i></a>
+                        @elseif (!is_null($tree[$i]))
+                            <a href="#" data-toggle="modal" data-target="#refLink{{ $i }}">
+                                <i class="fas fa-plus-circle"></i>
+                            </a>
+
+                            <form action="/u/ref-link" method="post">
+                                @csrf
+                                <div class="modal fade" id="refLink{{ $i }}" tabindex="-1" role="dialog" aria-labelledby="refLink{{ $i }}Label" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="refLink{{ $i }}Label">Confirmation</h5>
+                                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">Do you want to create a registration referral link? Click the 'Generate' button below to proceed.</div>
+                                            <div class="modal-footer">
+                                                <input type="hidden" name="parent-id" value="{{ $tree[$i] }}">
+                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                                <button type="submit" class="btn btn-primary" href="/a/logout">Generate</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        @else
+                            <i class="far fa-circle"></i>
+                        @endif
+                    </td>
+                @endfor
+            </tr>
+        </table>
+        </div>
+
+        <h2>Referral Tree</h2>
         <hr>
 
         <div class="table-tree-container mb-5">
@@ -100,6 +289,8 @@
                                         </div>
                                     </div>
                                 </form>
+                            @else
+                                <i class="far fa-circle fa-2x"></i>
                             @endif
                         </td>
                     @endfor
@@ -142,6 +333,8 @@
                                         </div>
                                     </div>
                                 </form>
+                            @else
+                                <i class="far fa-circle fa-2x"></i>
                             @endif
                         </td>
                     @endfor
@@ -184,6 +377,8 @@
                                         </div>
                                     </div>
                                 </form>
+                            @else
+                                <i class="far fa-circle fa-2x"></i>
                             @endif
                         </td>
                     @endfor
@@ -226,6 +421,8 @@
                                         </div>
                                     </div>
                                 </form>
+                            @else
+                                <i class="far fa-circle fa-2x"></i>
                             @endif
                         </td>
                     @endfor

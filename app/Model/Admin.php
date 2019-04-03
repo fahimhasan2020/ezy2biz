@@ -146,15 +146,15 @@ class Admin extends Model
         return
             DB::table('product_orders')
                 ->join('users', 'users.id', '=', 'product_orders.buyer_id')
-                ->join('products', 'products.id', '=', 'product_orders.product_id')
-                ->select('product_orders.*',
+                ->select('product_orders.id',
                     'users.first_name',
                     'users.last_name',
                     'users.phone',
                     'users.address',
-                    'products.name',
-                    'products.description',
-                    'products.sale_price')
+                    'product_name',
+                    'sale_price',
+                    'quantity',
+                    'total_cost')
                 ->where('order_status', '=', 'pending')
                 ->get();
     }
