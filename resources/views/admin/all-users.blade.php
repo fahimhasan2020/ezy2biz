@@ -47,10 +47,10 @@
                                     <a href="/a/user/{{ $user->parent_id }}">{{ $user->referrer_fn }} {{ $user->referrer_ln }}</a>
                                 </td>
                                 <td class="text-center">
-                                    <a href="/a/user/{{ $user->id }}" class="btn btn-sm btn-success">
+                                    <a href="/a/user/{{ $user->id }}" class="btn btn-sm btn-success my-1">
                                         <i class="fas fa-eye" title="View"></i>
                                     </a>
-                                    <a href="/a/user/{{ $user->id }}/edit" class="btn btn-sm btn-info">
+                                    <a href="/a/user/{{ $user->id }}/edit" class="btn btn-sm btn-info my-1">
                                         <i class="far fa-edit" title="Edit"></i>
                                     </a>
                                     {{--<a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteUser{{ $user->id }}">

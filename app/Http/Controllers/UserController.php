@@ -56,7 +56,7 @@ class UserController extends Controller
             $user->finish();
 
             $request->session()->flash('s', 'Congratulations! User registration is successful');
-            return redirect('/u/tree');
+            return redirect('/');
         }
 
         $request->session()->flash('e', 'Sorry! User registration failed');

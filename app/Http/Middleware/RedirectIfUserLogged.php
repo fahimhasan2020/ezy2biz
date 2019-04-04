@@ -22,7 +22,7 @@ class RedirectIfUserLogged
                 ->count();
 
             if ($user) {
-                return redirect('u/dashboard');
+                return redirect('/u/account');
             }
 
             $request->session()->flush();

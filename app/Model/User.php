@@ -4,6 +4,7 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Model
 {
@@ -18,6 +19,7 @@ class User extends Model
 
     public function register(Request $userData)
     {
+        $hashedPass = Hash::make($userData->get('password'));
         $newUserId = DB::table('users')
             ->insertGetId([
                 'first_name'    => $userData->get('first-name'),
@@ -25,7 +27,7 @@ class User extends Model
                 'phone'         => $userData->get('phone'),
                 'address'       => $userData->get('address'),
                 'email'         => $userData->get('email'),
-                'password'      => $userData->get('password'),
+                'password'      => $hashedPass,
                 'parent_id'     => $userData->get('parent-id'),
                 'referrer_id'   => $userData->get('referrer-id'),
                 'photo'         => $userData->get('image-path')
@@ -41,23 +43,29 @@ class User extends Model
 
     public function verify(Request $credentials)
     {
-        return
-            DB::table('users')
-                ->select('id', 'first_name', 'last_name')
-                ->where([
-                    ['email', '=', $credentials->get('email')],
-                    ['password', '=', $credentials->get('password')]
-                ])->first();
+        $user = DB::table('users')
+            ->select('id', 'password' , 'first_name', 'last_name')
+            ->where('email', '=', $credentials->get('email'))
+            ->first();
+
+        if (Hash::check($credentials->get('password'), $user->password)) {
+            return $user;
+        }
+
+        return null;
     }
 
     public function verifyPassword($id, Request $credentials)
     {
-        return
-            DB::table('users')
-                ->where([
-                    ['id', '=', $id],
-                    ['password', '=', $credentials->get('password')]
-                ])->first();
+        $user = DB::table('users')
+            ->where('id', '=', $id)
+            ->first();
+
+        if (Hash::check($credentials->get('password'), $user->password)) {
+            return $user;
+        }
+
+        return null;
     }
 
     public function get($userId)

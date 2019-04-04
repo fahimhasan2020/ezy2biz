@@ -33,13 +33,13 @@
                                 <td>{{ $bulletin->first_name }} {{ $bulletin->last_name }}</td>
                                 <td>{{ strftime('%a, %B %e, %Y', strtotime($bulletin->publish_date)) }}</td>
                                 <td class="text-center">
-                                    <a href="/bulletin/{{ $bulletin->id }}" class="btn btn-sm btn-success">
+                                    <a href="/bulletin/{{ $bulletin->id }}" class="btn btn-sm btn-success my-1">
                                         <i class="fas fa-eye" title="View"></i>
                                     </a>
-                                    <a href="/a/bulletin/{{ $bulletin->id }}/edit" class="btn btn-sm btn-info">
+                                    <a href="/a/bulletin/{{ $bulletin->id }}/edit" class="btn btn-sm btn-info my-1">
                                         <i class="far fa-edit" title="Edit"></i>
                                     </a>
-                                    <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteBulletin{{$bulletin->id}}">
+                                    <a href="#" class="btn btn-sm btn-danger my-1" data-toggle="modal" data-target="#deleteBulletin{{$bulletin->id}}">
                                         <i class="fa fa-trash" title="Delete"></i>
                                     </a>
                                 </td>

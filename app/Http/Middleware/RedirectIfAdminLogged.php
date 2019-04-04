@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\DB;
 
 class RedirectIfAdminLogged
 {
@@ -16,8 +17,17 @@ class RedirectIfAdminLogged
     public function handle($request, Closure $next)
     {
         if ($request->session()->has('admin')) {
-            return redirect('a/dashboard');
+            $admin = DB::table('admins')
+                ->where('id', '=', $request->session()->get('admin'))
+                ->count();
+
+            if ($admin) {
+                return redirect('/a/dashboard');
+            }
+
+            $request->session()->flush();
         }
+
         return $next($request);
     }
 }

@@ -37,13 +37,13 @@
                                 <td class="text-right">{{ $product->commission }}</td>
                                 <td class="text-right">{{ count($product->image_paths) }}</td>
                                 <td class="text-center">
-                                    <a href="/product/{{ $product->id }}" class="btn btn-sm btn-success">
+                                    <a href="/product/{{ $product->id }}" class="btn btn-sm btn-success my-1">
                                         <i class="fas fa-eye" title="View"></i>
                                     </a>
-                                    <a href="/a/product/{{ $product->id }}/edit" class="btn btn-sm btn-info">
+                                    <a href="/a/product/{{ $product->id }}/edit" class="btn btn-sm btn-info my-1">
                                         <i class="far fa-edit" title="Edit"></i>
                                     </a>
-                                    <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteProduct{{ $product->id }}">
+                                    <a href="#" class="btn btn-sm btn-danger my-1" data-toggle="modal" data-target="#deleteProduct{{ $product->id }}">
                                         <i class="fa fa-trash" title="Delete"></i>
                                     </a>
                                 </td>

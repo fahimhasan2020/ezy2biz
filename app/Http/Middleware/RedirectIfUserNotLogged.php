@@ -26,7 +26,7 @@ class RedirectIfUserNotLogged
 
         if (!$user) {
             $request->session()->flush();
-            return redirect('u/dashboard');
+            return redirect('/register');
         }
 
         return $next($request);
