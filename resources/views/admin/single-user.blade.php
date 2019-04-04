@@ -1,3 +1,4 @@
+<?php $dashboardActive = $productsActive = $bulletinsActive = $ordersActive = $requestsActive = $usersActive = $accountActive = ''; $usersActive = 'active'; ?>
 @extends('templates.admin.shell')
 
 @section('specific-css')

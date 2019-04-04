@@ -28,7 +28,7 @@
         }
 
         .sidebar .nav-item .nav-link {
-            color: #eee;
+            color: #bbb;
         }
 
         .bg-dark {

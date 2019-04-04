@@ -1,3 +1,4 @@
+<?php $dashboardActive = $productsActive = $bulletinsActive = $ordersActive = $requestsActive = $usersActive = $accountActive = ''; $dashboardActive = 'active'; ?>
 @extends('templates.admin.shell')
 
 @section('body')
@@ -165,7 +166,7 @@
             <label>Add new photos (You can select multiple photos)</label>
             <input type="file" name="images[]" class="form-control-file" multiple>
         </div>
-        <button type="submit" class="btn btn-info mb-3">Add Image</button>
+        <button type="submit" class="btn btn-info mb-3">Add Images</button>
     </form>
 </div>
 @stop

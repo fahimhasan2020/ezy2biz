@@ -28,18 +28,18 @@
                                         <div class="flipper">
                                             <div class="front">
                                                 <a href="/product/{{ $product->id }}">
-                                                    <img src="{{ Storage::url('' . current($product->image_paths)) }}" alt="" class="img-fluid" style="max-height: 250px;">
+                                                    <img src="{{ Storage::url('' . current($product->image_paths)) }}" alt="" class="img-fluid" style="max-height: 250px; width: 100%;">
                                                 </a>
                                             </div>
                                             <div class="back">
                                                 <a href="/product/{{ $product->id }}">
-                                                <img src="{{ Storage::url('' . current($product->image_paths)) }}" alt="" class="img-fluid" style="max-height: 250px;">
+                                                <img src="{{ Storage::url('' . current($product->image_paths)) }}" alt="" class="img-fluid" style="max-height: 250px; width: 100%;">
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
                                     <a href="/product/{{ $product->id }}" class="invisible">
-                                        <img src="{{ Storage::url('' . current($product->image_paths)) }}" alt="" class="img-fluid" style="max-height: 250px;">
+                                        <img src="{{ Storage::url('' . current($product->image_paths)) }}" alt="" class="img-fluid" style="max-height: 250px; width: 100%">
                                     </a>
                                     <div class="text">
                                         <h3>

@@ -1,7 +1,8 @@
+<?php $accountActive = 'active'; $treeActive = ''; ?>
 @extends('templates.user.shell')
 
 @section('specific-css')
-    <style>
+    {{--<style>
         .rounded-list ol
         {
             counter-reset:li; /* Initiate a counter */
@@ -41,7 +42,7 @@
             font-weight: bold;
             border-radius: 2em;
         }
-    </style>
+    </style>--}}
 @stop
 
 @section('body')
@@ -49,6 +50,9 @@
 
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/u/account">My Account</a>
+            </li>
             <li class="breadcrumb-item active">Buy Product</li>
         </ol>
 
@@ -58,7 +62,7 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-md-7 mb-3">
+                <div class="col-md-7 mb-4">
                     <div class="profile-head">
                         <h5>
                             {{ $user->first_name }} {{ $user->last_name }}
@@ -105,7 +109,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
+
+                        {{--<div class="col-md-12">
                             <div class="card text-center">
                                 <div class="card-header">
                                     How to pay for the product?
@@ -125,9 +130,27 @@
                                             </td>
                                         </tr>
                                     </table>
+
+                                    <hr>
+
+                                    <h4 class="mb-3">Send money via Rocket</h4>
+                                    <table border="0" class="rounded-list ml-3 mr-3">
+                                        <tr>
+                                            <td>
+                                                <ol>
+                                                    <li><p>Step 1</p></li>
+                                                    <li><p>Step 2</p></li>
+                                                    <li><p>Step 3</p></li>
+                                                    <li><p>Step 4</p></li>
+                                                    <li><p>Step 5</p></li>
+                                                </ol>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
-                        </div>
+                        </div>--}}
+
                     </div>
                 </div>
             </div>

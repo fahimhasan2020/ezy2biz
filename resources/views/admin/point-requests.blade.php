@@ -1,3 +1,4 @@
+<?php $dashboardActive = $productsActive = $bulletinsActive = $ordersActive = $requestsActive = $usersActive = $accountActive = ''; $requestsActive = 'active'; ?>
 @extends('templates.admin.shell')
 
 @section('body')
@@ -46,11 +47,11 @@
                                             <input type="hidden" name="request-id" value="{{ $request->id }}">
                                             <input type="hidden" name="applicant-id" value="{{ $request->applicant_id }}">
                                             <input type="hidden" name="response" value="accept">
-                                            <button type="submit" class="btn btn-sm btn-success">
+                                            <button type="submit" class="btn btn-sm btn-success my-1">
                                                 <i class="fas fa-check" title="Accept"></i>
                                             </button>
 
-                                        <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#productOrder{{$request->id}}">
+                                        <a href="#" class="btn btn-sm btn-danger my-1" data-toggle="modal" data-target="#productOrder{{$request->id}}">
                                             <i class="fas fa-times" title="Reject"></i>
                                         </a>
                                     </td>

@@ -19,7 +19,6 @@ class User extends Model
 
     public function register(Request $userData)
     {
-        $hashedPass = Hash::make($userData->get('password'));
         $newUserId = DB::table('users')
             ->insertGetId([
                 'first_name'    => $userData->get('first-name'),
@@ -27,7 +26,7 @@ class User extends Model
                 'phone'         => $userData->get('phone'),
                 'address'       => $userData->get('address'),
                 'email'         => $userData->get('email'),
-                'password'      => $hashedPass,
+                'password'      => $userData->get('password'),
                 'parent_id'     => $userData->get('parent-id'),
                 'referrer_id'   => $userData->get('referrer-id'),
                 'photo'         => $userData->get('image-path')
@@ -43,29 +42,23 @@ class User extends Model
 
     public function verify(Request $credentials)
     {
-        $user = DB::table('users')
-            ->select('id', 'password' , 'first_name', 'last_name')
-            ->where('email', '=', $credentials->get('email'))
-            ->first();
-
-        if (Hash::check($credentials->get('password'), $user->password)) {
-            return $user;
-        }
-
-        return null;
+        return
+            DB::table('users')
+                ->select('id', 'first_name', 'last_name')
+                ->where([
+                    ['email', '=', $credentials->get('email')],
+                    ['password', '=', $credentials->get('password')]
+                ])->first();
     }
 
     public function verifyPassword($id, Request $credentials)
     {
-        $user = DB::table('users')
-            ->where('id', '=', $id)
-            ->first();
-
-        if (Hash::check($credentials->get('password'), $user->password)) {
-            return $user;
-        }
-
-        return null;
+        return
+            DB::table('users')
+                ->where([
+                    ['id', '=', $id],
+                    ['password', '=', $credentials->get('password')]
+                ])->first();
     }
 
     public function get($userId)
@@ -345,8 +338,7 @@ class User extends Model
             $updates['email'] = $request->get('change-email');
         }
         if ($request->has('change-password') && !empty($request->get('change-password'))) {
-            $hashedPass = Hash::make($request->get('change-password'));
-            $updates['password'] = $hashedPass;
+            $updates['password'] = $request->get('change-password');
         }
 
         return DB::table('users')->where('id', '=', $userId)->update($updates);

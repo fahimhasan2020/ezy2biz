@@ -1,3 +1,4 @@
+<?php $accountActive = ''; $treeActive = 'active'; ?>
 @extends('templates.user.shell')
 
 @section('specific-css')

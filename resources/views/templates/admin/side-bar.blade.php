@@ -1,12 +1,12 @@
 <ul class="sidebar navbar-nav">
-    <li class="nav-item">
+    <li class="nav-item {{ $dashboardActive }}">
         <a class="nav-link" href="/a/dashboard">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
         </a>
     </li>
 
-    <li class="nav-item dropdown">
+    <li class="nav-item dropdown {{ $productsActive }}">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-shopping-bag"></i>
             <span>Products</span>
@@ -17,7 +17,7 @@
         </div>
     </li>
 
-    <li class="nav-item dropdown">
+    <li class="nav-item dropdown {{ $bulletinsActive }}">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-newspaper"></i>
             <span>Bulletins</span>
@@ -28,13 +28,13 @@
         </div>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item {{ $ordersActive }}">
         <a class="nav-link" href="/a/product-orders">
             <i class="fas fa-shopping-cart"></i>
             <span>Product Orders</span></a>
     </li>
 
-    <li class="nav-item dropdown">
+    <li class="nav-item dropdown {{ $requestsActive }}">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-exchange-alt"></i>
             <span>Requests</span>
@@ -45,18 +45,13 @@
         </div>
     </li>
 
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <li class="nav-item {{ $usersActive }}">
+        <a class="nav-link" href="/a/users">
             <i class="fas fa-users"></i>
-            <span>Users</span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <a class="dropdown-item" href="/a/users">View Users</a>
-            <a class="dropdown-item" href="/a/user/ref-link">Reference Link</a>
-        </div>
+            <span>Users</span></a>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item {{ $accountActive }}">
         <a class="nav-link" href="/a/account">
             <i class="fas fa-toolbox"></i>
             <span>Account</span></a>

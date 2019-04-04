@@ -2,18 +2,6 @@
 @extends('templates.shell')
 
 @section('body')
-    {{--@foreach($bulletins as $bulletin)
-        <hr>
-        <h3>{{ $bulletin->title }}</h3>
-        <ul>
-            <li>{{ $bulletin->first_name }} {{$bulletin->last_name}}</li>
-            <li>{{ date('D, j F Y', strtotime($bulletin->publish_date)) }}</li>
-        </ul>
-        <p>{{ \Illuminate\Support\Str::words($bulletin->description, 100) }}
-            <a href="/bulletin/{{ $bulletin->id }}">Read more</a>
-        </p>
-    @endforeach--}}
-
     <div id="content">
         <div class="container">
             <div class="row">

@@ -1,3 +1,4 @@
+<?php $dashboardActive = $productsActive = $bulletinsActive = $ordersActive = $requestsActive = $usersActive = $accountActive = ''; $productsActive = 'active'; ?>
 @extends('templates.admin.shell')
 
 @section('body')

@@ -1,3 +1,4 @@
+<?php $dashboardActive = $productsActive = $bulletinsActive = $ordersActive = $requestsActive = $usersActive = $accountActive = ''; $ordersActive = 'active'; ?>
 @extends('templates.admin.shell')
 
 @section('body')
@@ -45,11 +46,11 @@
                                         @csrf
                                         <input type="hidden" name="order-id" value="{{ $order->id }}">
                                         <input type="hidden" name="response" value="complete">
-                                        <button type="submit" class="btn btn-sm btn-success">
+                                        <button type="submit" class="btn btn-sm btn-success my-1">
                                             <i class="fas fa-check" title="Complete"></i>
                                         </button>
                                     </form>
-                                    <a href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#productOrder{{$order->id}}">
+                                    <a href="#" class="btn btn-sm btn-danger my-1" data-toggle="modal" data-target="#productOrder{{$order->id}}">
                                         <i class="fas fa-times" title="Reject"></i>
                                     </a>
                                 </td>
@@ -86,33 +87,3 @@
         </div>
     </div>
 @stop
-
-
-{{--@foreach($orders as $order)
-    <hr>
-    Order ID: {{ $order->id }} <br>
-    Buyer ID: {{ $order->buyer_id }} <br>
-    Buyer Name: {{ $order->first_name }} {{ $order->last_name }} <br>
-    Buyer Phone: {{ $order->phone }} <br>
-    Buyer Address: {{ $order->address }} <br>
-    Product ID: {{ $order->product_id }} <br>
-    Product Name: {{ $order->name }} <br>
-    Product Quantity: {{ $order->quantity }} <br>
-    Product Sale Price: {{ $order->sale_price }} <br>
-    Total Cost: {{ $order->total_cost }} <br>
-    Order Status: {{ $order->order_status }} <br>
-
-    <form action="/a/product-orders" method="post">
-        @csrf
-        <input type="hidden" name="order-id" value="{{ $order->id }}">
-        <input type="hidden" name="response" value="complete">
-        <input type="submit" name="submit" value="Complete Order">
-    </form>
-
-    <form action="/a/product-orders" method="post">
-        @csrf
-        <input type="hidden" name="order-id" value="{{ $order->id }}">
-        <input type="hidden" name="response" value="reject">
-        <input type="submit" name="submit" value="Reject Order">
-    </form>
-@endforeach--}}

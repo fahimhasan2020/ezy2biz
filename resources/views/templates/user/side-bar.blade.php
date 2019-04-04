@@ -1,5 +1,5 @@
 <ul class="sidebar navbar-nav">
-    <li class="nav-item">
+    <li class="nav-item {{ $accountActive }}">
         <a class="nav-link" href="/u/account">
             <i class="fas fa-dollar-sign"></i>
             <span>My Account</span>
@@ -25,7 +25,7 @@
         </a>
     </li>
 
-    <li class="nav-item dropdown">
+    <li class="nav-item dropdown {{ $treeActive }}">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-sitemap"></i>
             <span>Referral Tree</span>
