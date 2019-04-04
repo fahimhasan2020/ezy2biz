@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a2c13a5-7e6d-4be9-8f31-72e36d14fd02" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAdminLogged.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAdminLogged.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAdminNotLogged.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAdminNotLogged.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfUserLogged.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfUserLogged.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfUserNotLogged.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfUserNotLogged.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Model/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/all-bulletins.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/all-bulletins.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/all-products.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/all-products.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/all-users.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/all-users.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/dashboard.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/product-buy.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/product-buy.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,7 +44,41 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/web.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1029">
+              <caret line="87" column="67" selection-start-line="87" selection-start-column="67" selection-end-line="87" selection-end-column="67" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="237">
+              <caret line="314" column="26" lean-forward="true" selection-start-line="314" selection-start-column="26" selection-end-line="314" selection-end-column="26" />
+              <folding>
+                <element signature="e#39#63#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Model/User.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="329">
+              <caret line="347" column="71" lean-forward="true" selection-start-line="347" selection-start-column="71" selection-end-line="347" selection-end-column="71" />
+              <folding>
+                <element signature="e#28#67#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -159,11 +183,11 @@
         <option value="$PROJECT_DIR$/resources/views/admin/all-users.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/all-products.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/all-bulletins.blade.php" />
-        <option value="$PROJECT_DIR$/app/Model/User.php" />
         <option value="$PROJECT_DIR$/app/Http/Middleware/RedirectIfUserNotLogged.php" />
         <option value="$PROJECT_DIR$/app/Http/Middleware/RedirectIfUserLogged.php" />
         <option value="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAdminNotLogged.php" />
         <option value="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAdminLogged.php" />
+        <option value="$PROJECT_DIR$/app/Model/User.php" />
       </list>
     </option>
   </component>
@@ -259,7 +283,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -267,21 +290,11 @@
               <item name="ezy2biz" type="b2602c69:ProjectViewProjectNode" />
               <item name="ezy2biz" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="ezy2biz" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ezy2biz" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ezy2biz" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ezy2biz" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -352,16 +365,18 @@
       <workItem from="1554113739321" duration="6190000" />
       <workItem from="1554286317655" duration="4309000" />
       <workItem from="1554359151810" duration="4596000" />
+      <workItem from="1554365776307" duration="281000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="205777000" />
+    <option name="totallyTimeSpent" value="206058000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24357034" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2473525" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -530,13 +545,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="87" column="67" selection-start-line="87" selection-start-column="67" selection-end-line="87" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.editorconfig">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -700,22 +708,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/User.php">
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="393" column="5" lean-forward="true" selection-start-line="393" selection-start-column="5" selection-end-line="393" selection-end-column="5" />
-          <folding>
-            <element signature="e#28#67#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="1029">
+          <caret line="87" column="67" selection-start-line="87" selection-start-column="67" selection-end-line="87" selection-end-column="67" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="68" column="26" selection-start-line="68" selection-start-column="26" selection-end-line="68" selection-end-column="26" />
+        <state relative-caret-position="237">
+          <caret line="314" column="26" lean-forward="true" selection-start-line="314" selection-start-column="26" selection-end-line="314" selection-end-column="26" />
           <folding>
             <element signature="e#39#63#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="347" column="71" lean-forward="true" selection-start-line="347" selection-start-column="71" selection-end-line="347" selection-end-column="71" />
+          <folding>
+            <element signature="e#28#67#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

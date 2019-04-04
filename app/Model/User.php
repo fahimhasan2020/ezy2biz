@@ -345,7 +345,8 @@ class User extends Model
             $updates['email'] = $request->get('change-email');
         }
         if ($request->has('change-password') && !empty($request->get('change-password'))) {
-            $updates['password'] = $request->get('change-password');
+            $hashedPass = Hash::make($request->get('change-password'));
+            $updates['password'] = $hashedPass;
         }
 
         return DB::table('users')->where('id', '=', $userId)->update($updates);
