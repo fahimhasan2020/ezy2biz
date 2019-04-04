@@ -45,19 +45,21 @@
             <div class="col-md-12">
                 <div id="main-slider" class="owl-carousel owl-theme">
                     @foreach($slides as $slide)
-                        <img src="{{ Storage::url($slide->image_path) }}" alt="" class="img-fluid">
+                        <div class="item">
+                            <img src="{{ Storage::url($slide->image_path) }}" alt="" class="img-fluid" style="max-height: 80vh;">
+                        </div>
                     @endforeach
                 </div>
+                <!-- /#main-slider-->
             </div>
-            <!-- /#main-slider-->
         </div>
     </div>
-</div>
+
 <!--
         *** ADVANTAGES HOMEPAGE ***
         _________________________________________________________
         -->
-<div id="advantages">
+    <div id="advantages">
     <div class="container">
         <div class="row mb-4">
             <div class="col-md-4">
@@ -85,19 +87,19 @@
                         No 10 Michael Dell ( Net worth: $20.4 billion)</p>
                 </div>
             </div>
-            <!-- /.row-->
         </div>
+            <!-- /.row-->
+    </div>
         <!-- /.container-->
     </div>
     <!-- /#advantages-->
-</div>
 <!-- *** ADVANTAGES END ***-->
 <!--
         *** HOT PRODUCT SLIDESHOW ***
         _________________________________________________________
         -->
 
-<div id="hot">
+    <div id="hot">
     <div class="box py-4">
         <div class="container">
             <div class="row">
@@ -142,12 +144,12 @@
                 <!-- /.product-->
             </div>
             @endforeach
-            <!-- /.product-slider-->
         </div>
-        <!-- /.container-->
+            <!-- /.product-slider-->
     </div>
+        <!-- /.container-->
+</div>
     <!-- /#hot-->
     <!-- *** HOT END ***-->
 </div>
-
 @stop

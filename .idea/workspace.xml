@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8a2c13a5-7e6d-4be9-8f31-72e36d14fd02" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/Admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Admin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/Product.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_03_17_000723_create_product_orders_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_03_17_000723_create_product_orders_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/product-orders.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/product-orders.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/templates/user/shell.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/templates/user/shell.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/tree.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/tree.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/landing.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/landing.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +59,22 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/landing.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="48" column="128" selection-start-line="48" selection-start-column="128" selection-end-line="48" selection-end-column="128" />
+              <folding>
+                <element signature="e#1886#1911#0#HTML" expanded="true" />
+                <element signature="e#2180#4112#0#HTML" />
+                <element signature="e#4279#6201#0#HTML" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -163,7 +173,6 @@
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/app/Model/User.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/LandingPageController.php" />
-        <option value="$PROJECT_DIR$/resources/views/landing.blade.php" />
         <option value="$PROJECT_DIR$/public/css/style.default.css" />
         <option value="$PROJECT_DIR$/resources/views/admin/dashboard.blade.php" />
         <option value="$PROJECT_DIR$/app/Core/ImageStore.php" />
@@ -174,6 +183,7 @@
         <option value="$PROJECT_DIR$/resources/views/admin/product-orders.blade.php" />
         <option value="$PROJECT_DIR$/app/Model/Admin.php" />
         <option value="$PROJECT_DIR$/resources/views/templates/user/shell.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/landing.blade.php" />
       </list>
     </option>
   </component>
@@ -269,8 +279,29 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
       <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ezy2biz" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ezy2biz" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ezy2biz" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ezy2biz" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ezy2biz" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ezy2biz" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -344,12 +375,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="200365000" />
+    <option name="totallyTimeSpent" value="201181000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23600605" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2397882" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -493,13 +525,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/templates/user/top-bar.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/templates/user/top-bar.blade.php" />
     <entry file="file://$PROJECT_DIR$/resources/views/user/account.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -583,16 +609,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/landing.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="18" column="31" lean-forward="true" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/templates/user/side-bar.blade.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/templates/user/side-bar.blade.php" />
     <entry file="file://$PROJECT_DIR$/app/Core/ImageStore.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1444">
@@ -705,17 +722,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/templates/user/shell.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="34" column="38" selection-start-line="34" selection-start-column="38" selection-end-line="34" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/templates/user/shell.blade.php" />
     <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_17_000723_create_product_orders_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
           <caret line="19" column="40" lean-forward="true" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/landing.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="48" column="128" selection-start-line="48" selection-start-column="128" selection-end-line="48" selection-end-column="128" />
+          <folding>
+            <element signature="e#1886#1911#0#HTML" expanded="true" />
+            <element signature="e#2180#4112#0#HTML" />
+            <element signature="e#4279#6201#0#HTML" />
+          </folding>
         </state>
       </provider>
     </entry>
