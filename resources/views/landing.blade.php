@@ -46,7 +46,7 @@
                 <div id="main-slider" class="owl-carousel owl-theme">
                     @foreach($slides as $slide)
                         <div class="item">
-                            <img src="{{ Storage::url($slide->image_path) }}" alt="" class="img-fluid" style="max-height: 80vh;">
+                            <img src="{{ Storage::url($slide->image_path) }}" alt="" class="img-fluid" style="max-height: 90vh;">
                         </div>
                     @endforeach
                 </div>
