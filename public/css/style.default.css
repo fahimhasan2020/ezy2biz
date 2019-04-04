@@ -672,7 +672,7 @@ h1 {
 }
 
 #content .product {
-  background: #fff;
+  background: rgba(255,255,255,.65);
   border: solid 1px #e6e6e6;
   margin-bottom: 30px;
   /* entire container, keeps perspective */
