@@ -300,6 +300,8 @@ class User extends Model
             ]);
 
         if ($isActive) {
+            $this->distributeCommission($userId);
+
             DB::table('cron_job_schedules')
                 ->insert([
                     'job_type' => 'promote',
@@ -308,6 +310,59 @@ class User extends Model
                 ]);
         }
         DB::commit();
+    }
+
+    private function distributeCommission($newUserId)
+    {
+        $issuer = $this->getUser($newUserId);
+
+        $parentLvl2 = $this->getUser($issuer->parent_id);
+
+        if (isset($parentLvl2)) {
+            if ($parentLvl2->is_active) {
+                if ($issuer->referrer_id === $parentLvl2->id) {
+                    $this->addPoints($parentLvl2->id, 1.5);
+                } else {
+                    $this->addPoints($parentLvl2->id, 1);
+                }
+            }
+
+            $parentLvl3 = $this->getUser($parentLvl2->parent_id);
+        }
+
+        if (isset($parentLvl3)) {
+            if ($parentLvl3->is_active) {
+                if ($issuer->referrer_id === $parentLvl3->id) {
+                    $this->addPoints($parentLvl3->id, 1.5);
+                } else {
+                    $this->addPoints($parentLvl3->id, 1);
+                }
+            }
+
+            $parentLvl4 = $this->getUser($parentLvl3->parent_id);
+        }
+
+        if (isset($parentLvl4)) {
+            if ($parentLvl4->is_active) {
+                if ($issuer->referrer_id === $parentLvl4->id) {
+                    $this->addPoints($parentLvl4->id, 1.5);
+                } else {
+                    $this->addPoints($parentLvl4->id, 1);
+                }
+            }
+
+            $parentLvl5 = $this->getUser($parentLvl4->parent_id);
+        }
+
+        if (isset($parentLvl5)) {
+            if ($parentLvl5->is_active) {
+                if ($issuer->referrer_id === $parentLvl5->id) {
+                    $this->addPoints($parentLvl5->id, 1.5);
+                } else {
+                    $this->addPoints($parentLvl5->id, 1);
+                }
+            }
+        }
     }
 
     public function begin()

@@ -249,27 +249,11 @@ class UserController extends Controller
         if (isset($parentLvl2)) {
             $user->addToTree($parentLvl2->id, $issuer->id, 2);
 
-            if ($parentLvl2->is_active) {
-                if ($issuer->referrer_id === $parentLvl2->id) {
-                    $user->addPoints($parentLvl2->id, 1.5);
-                } else {
-                    $user->addPoints($parentLvl2->id, 1);
-                }
-            }
-
             $parentLvl3 = $user->getUser($parentLvl2->parent_id);
         }
 
         if (isset($parentLvl3)) {
             $user->addToTree($parentLvl3->id, $issuer->id, 3);
-
-            if ($parentLvl3->is_active) {
-                if ($issuer->referrer_id === $parentLvl3->id) {
-                    $user->addPoints($parentLvl3->id, 1.5);
-                } else {
-                    $user->addPoints($parentLvl3->id, 1);
-                }
-            }
 
             $parentLvl4 = $user->getUser($parentLvl3->parent_id);
         }
@@ -277,27 +261,11 @@ class UserController extends Controller
         if (isset($parentLvl4)) {
             $user->addToTree($parentLvl4->id, $issuer->id, 4);
 
-            if ($parentLvl4->is_active) {
-                if ($issuer->referrer_id === $parentLvl4->id) {
-                    $user->addPoints($parentLvl4->id, 1.5);
-                } else {
-                    $user->addPoints($parentLvl4->id, 1);
-                }
-            }
-
             $parentLvl5 = $user->getUser($parentLvl4->parent_id);
         }
 
         if (isset($parentLvl5)) {
             $user->addToTree($parentLvl5->id, $issuer->id, 5);
-
-            if ($parentLvl5->is_active) {
-                if ($issuer->referrer_id === $parentLvl5->id) {
-                    $user->addPoints($parentLvl5->id, 1.5);
-                } else {
-                    $user->addPoints($parentLvl5->id, 1);
-                }
-            }
         }
     }
 
