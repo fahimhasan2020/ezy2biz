@@ -292,4 +292,11 @@ class UserController extends Controller
         $request->session()->flash('e', 'Something went wrong! Account settings could not be updated');
         return redirect()->back();
     }
+
+    public function commissionHistory(Request $request, User $user)
+    {
+        $userId = $request->session()->get('user');
+        $histories = $user->getCommissionHistory($userId)->all();
+        return view('user.history')->with('histories', $histories);
+    }
 }

@@ -1,4 +1,4 @@
-<?php $accountActive = 'active'; $treeActive = ''; ?>
+<?php $accountActive = 'active'; $treeActive = ''; $historyActive = ''; ?>
 @extends('templates.user.shell')
 
 @section('specific-css')

@@ -49,6 +49,8 @@ Route::group(['middleware' => ['user-logged']], function () {
 
     Route::post('/u/buy/product/{id}', 'ProductController@buyProduct');
 
+    Route::get('/u/commission-history', 'UserController@commissionHistory');
+
     Route::get('/u/settings', 'UserController@getSettings');
 
     Route::put('/u/settings', 'UserController@editSettings');
@@ -132,6 +134,8 @@ Route::group(['middleware' => ['admin-logged']], function () {
     Route::get('/a/withdraw-requests', 'AdminController@getWithdrawRequests');
 
     Route::post('/a/withdraw-requests', 'AdminController@responseWithdrawRequest');
+
+    Route::get('/a/withdraw-requests/history', 'AdminController@getWithdrawHistory');
 
     Route::get('/a/product-orders', 'AdminController@getProductOrders');
 

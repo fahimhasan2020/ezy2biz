@@ -30,7 +30,7 @@ class CronJobModel
     public function getUser($userId)
     {
         return DB::table('users')
-            ->select('id', 'parent_id', 'step', 'is_active')
+            ->select('id', 'first_name', 'last_name', 'parent_id', 'step', 'is_active')
             ->where('id', '=', $userId)
             ->first();
     }
@@ -48,7 +48,7 @@ class CronJobModel
 
     public function promote($userId, $step, $commission)
     {
-        echo "$userId promotes to $step and gets $commission" . PHP_EOL;
+        //echo "$userId promotes to $step and gets $commission" . PHP_EOL;
         return DB::table('users')
             ->where('id', '=', $userId)
             ->update([
@@ -59,7 +59,7 @@ class CronJobModel
 
     public function addCommission($userId, $commission)
     {
-        echo "$userId gets $commission" . PHP_EOL;
+        //echo "$userId gets $commission" . PHP_EOL;
         return DB::table('users')
             ->where('id', '=', $userId)
             ->update(['points'    => DB::raw("points + $commission")]);
@@ -73,5 +73,11 @@ class CronJobModel
                 ['job_status', '=', 'pending']
                 ])
             ->update(['job_status' => 'complete']);
+    }
+
+    public function populateCommissionHistory(array $data)
+    {
+        return DB::table('commission_history')
+            ->insert($data);
     }
 }

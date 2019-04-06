@@ -64,6 +64,41 @@ class AdminController extends Controller
         return view('admin.withdraw-requests')->with('requests', $pointRequests);
     }
 
+    public function getWithdrawHistory(Request $request, Admin $admin)
+    {
+        if (!$request->get('page') || !(int) $request->get('page')) {
+            return redirect('/a/withdraw-requests/history?page=1');
+        } else {
+            $curPage = (int) $request->get('page');
+        }
+
+        $count = $admin->countWithdrawHistory();
+        $perPage = 20;
+        $totalPages = ceil($count / $perPage);
+        $offset = $perPage * ($curPage - 1);
+
+        if (1 <= $curPage - 1) {
+            $prevPage = $curPage - 1;
+        } else {
+            $prevPage = null;
+        }
+
+        if ($curPage + 1 <= $totalPages) {
+            $nexPage = $curPage + 1;
+        } else {
+            $nexPage = null;
+        }
+
+        $query = $admin->paginateWithdrawHistory($perPage, $offset)->all();
+
+        return view('admin.withdraw-history')
+            ->with('requests', $query)
+            ->with('totalPages', $totalPages)
+            ->with('curPage', $curPage)
+            ->with('prevPage', $prevPage)
+            ->with('nextPage', $nexPage);
+    }
+
     public function responseWithdrawRequest(Request $request, Admin $admin, User $user)
     {
         $response = $request->get('response');

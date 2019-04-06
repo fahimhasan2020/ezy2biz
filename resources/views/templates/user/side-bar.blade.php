@@ -35,4 +35,11 @@
             <a class="dropdown-item" href="/u/ref-link">Referral Links</a>
         </div>
     </li>
+
+    <li class="nav-item {{ $historyActive }}">
+        <a class="nav-link" href="/u/commission-history">
+            <i class="fas fa-history"></i>
+            <span>Commission History</span>
+        </a>
+    </li>
 </ul>

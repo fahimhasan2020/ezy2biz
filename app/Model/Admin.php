@@ -115,6 +115,39 @@ class Admin extends Model
                     'users.email',
                     'users.phone')
                 ->where('withdraw_requests.response', '=', 'pending')
+                ->orderBy('timestamp', 'asc')
+                ->get();
+    }
+
+    public function getWithdrawHistory()
+    {
+        return
+            DB::table('withdraw_requests')
+                ->join('users', 'withdraw_requests.applicant_id', '=', 'users.id')
+                ->select('withdraw_requests.*',
+                    'users.first_name',
+                    'users.last_name',
+                    'users.email',
+                    'users.phone')
+                ->where('withdraw_requests.response', '<>', 'pending')
+                ->orderBy('timestamp', 'desc')
+                ->get();
+    }
+
+    public function paginateWithdrawHistory($limit, $offset)
+    {
+        return
+            DB::table('withdraw_requests')
+                ->join('users', 'withdraw_requests.applicant_id', '=', 'users.id')
+                ->select('withdraw_requests.*',
+                    'users.first_name',
+                    'users.last_name',
+                    'users.email',
+                    'users.phone')
+                ->where('withdraw_requests.response', '<>', 'pending')
+                ->orderBy('timestamp', 'desc')
+                ->limit($limit)
+                ->offset($offset)
                 ->get();
     }
 
@@ -234,6 +267,14 @@ class Admin extends Model
         return DB::table('withdraw_requests')
             ->select('id')
             ->where('response', '=', 'pending')
+            ->count();
+    }
+
+    public function countWithdrawHistory()
+    {
+        return DB::table('withdraw_requests')
+            ->select('id')
+            ->where('response', '<>', 'pending')
             ->count();
     }
 

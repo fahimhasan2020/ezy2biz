@@ -312,8 +312,9 @@ class User extends Model
         DB::commit();
     }
 
-    private function distributeCommission($newUserId)
+    public function distributeCommission($newUserId)
     {
+        $commissionLog = [];
         $issuer = $this->getUser($newUserId);
 
         $parentLvl2 = $this->getUser($issuer->parent_id);
@@ -322,8 +323,20 @@ class User extends Model
             if ($parentLvl2->is_active) {
                 if ($issuer->referrer_id === $parentLvl2->id) {
                     $this->addPoints($parentLvl2->id, 1.5);
+                    $commissionLog[] = [
+                        'receiver_id'       => $parentLvl2->id,
+                        'amount'            => 1.5,
+                        'commission_type'    => 'Reg',
+                        'description'       => "{$issuer->first_name} {$issuer->last_name} registered on level 2"
+                    ];
                 } else {
                     $this->addPoints($parentLvl2->id, 1);
+                    $commissionLog[] = [
+                        'receiver_id'       => $parentLvl2->id,
+                        'amount'            => 1,
+                        'commission_type'   => 'Reg',
+                        'description'       => "{$issuer->first_name} {$issuer->last_name} registered on level 2"
+                    ];
                 }
             }
 
@@ -334,8 +347,20 @@ class User extends Model
             if ($parentLvl3->is_active) {
                 if ($issuer->referrer_id === $parentLvl3->id) {
                     $this->addPoints($parentLvl3->id, 1.5);
+                    $commissionLog[] = [
+                        'receiver_id'       => $parentLvl3->id,
+                        'amount'            => 1.5,
+                        'commission_type'   => 'Reg',
+                        'description'       => "{$issuer->first_name} {$issuer->last_name} registered on level 3"
+                    ];
                 } else {
                     $this->addPoints($parentLvl3->id, 1);
+                    $commissionLog[] = [
+                        'receiver_id'       => $parentLvl3->id,
+                        'amount'            => 1,
+                        'commission_type'   => 'Reg',
+                        'description'       => "{$issuer->first_name} {$issuer->last_name} registered on level 3"
+                    ];
                 }
             }
 
@@ -346,8 +371,20 @@ class User extends Model
             if ($parentLvl4->is_active) {
                 if ($issuer->referrer_id === $parentLvl4->id) {
                     $this->addPoints($parentLvl4->id, 1.5);
+                    $commissionLog[] = [
+                        'receiver_id'       => $parentLvl4->id,
+                        'amount'            => 1.5,
+                        'commission_type'   => 'Reg',
+                        'description'       => "{$issuer->first_name} {$issuer->last_name} registered on level 4"
+                    ];
                 } else {
                     $this->addPoints($parentLvl4->id, 1);
+                    $commissionLog[] = [
+                        'receiver_id'       => $parentLvl4->id,
+                        'amount'            => 1,
+                        'commission_type'   => 'Reg',
+                        'description'       => "{$issuer->first_name} {$issuer->last_name} registered on level 4"
+                    ];
                 }
             }
 
@@ -358,11 +395,34 @@ class User extends Model
             if ($parentLvl5->is_active) {
                 if ($issuer->referrer_id === $parentLvl5->id) {
                     $this->addPoints($parentLvl5->id, 1.5);
+                    $commissionLog[] = [
+                        'receiver_id'       => $parentLvl5->id,
+                        'amount'            => 1.5,
+                        'commission_type'   => 'Reg',
+                        'description'       => "{$issuer->first_name} {$issuer->last_name} registered on level 5"
+                    ];
                 } else {
                     $this->addPoints($parentLvl5->id, 1);
+                    $commissionLog[] = [
+                        'receiver_id'       => $parentLvl5->id,
+                        'amount'            => 1,
+                        'commission_type'   => 'Reg',
+                        'description'       => "{$issuer->first_name} {$issuer->last_name} registered on level 5"
+                    ];
                 }
             }
         }
+
+        $this->logCommission($commissionLog);
+    }
+
+    public function logCommission(array $commissions)
+    {
+        if (empty($commissions)) return null;
+
+        return DB::table('commission_history')
+            ->insert($commissions);
+
     }
 
     public function begin()
@@ -438,6 +498,14 @@ class User extends Model
     public function getSlides()
     {
         return DB::table('landing_page_slides')
+            ->get();
+    }
+
+    public function getCommissionHistory($userId)
+    {
+        return DB::table('commission_history')
+            ->where('receiver_id', '=', $userId)
+            ->orderBy('issue_datetime', 'desc')
             ->get();
     }
 }
