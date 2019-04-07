@@ -31,6 +31,7 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
+                            <th scope="col" class="text-center">Date</th>
                             <th scope="col">Applicant Name</th>
                             <th scope="col" class="text-center">Contact Info</th>
                             <th scope="col" class="text-right">Amount (Points)</th>
@@ -45,6 +46,7 @@
                             <form action="/a/withdraw-requests" method="post">
                                 @csrf
                                 <tr>
+                                    <td class="text-center">{{ $request->timestamp }}</td>
                                     <td>{{ $request->first_name }} {{ $request->last_name }}</td>
                                     <td class="text-center">{{ $request->phone }}</td>
                                     <td class="text-right">{{ $request->amount }}</td>

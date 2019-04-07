@@ -218,7 +218,8 @@ class User extends Model
                 ->insert([
                     'applicant_id'  => $applicantId,
                     'amount'        => $request->get('amount'),
-                    'bkash_no'      => $request->get('bkash-num')
+                    'bkash_no'      => $request->get('bkash-num'),
+                    'timestamp'     => date('Y-m-d H:i:s', time())
                 ]);
     }
 
