@@ -19,7 +19,7 @@ class CreateCommissionHistoryTable extends Migration
             $table->integer('receiver_id')->unsigned()->index();
             $table->string('description');
             $table->float('amount');
-            $table->dateTime('issue_date');
+            $table->dateTime('issue_datetime');
 
             $table
                 ->foreign('receiver_id')

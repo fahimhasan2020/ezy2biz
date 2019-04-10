@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8a2c13a5-7e6d-4be9-8f31-72e36d14fd02" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_03_16_122256_create_withdraw_requests_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_03_16_122256_create_withdraw_requests_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/withdraw-history.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/withdraw-history.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/withdraw-requests.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/withdraw-requests.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_04_06_101601_create_commission_history_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_04_06_101601_create_commission_history_table.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,27 +52,30 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/templates/shell.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
+            <state relative-caret-position="722">
+              <caret line="38" selection-start-line="38" selection-end-line="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/admin/login.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="338">
+              <caret line="33" column="94" selection-start-line="33" selection-start-column="94" selection-end-line="33" selection-end-column="94" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/admin/login.blade.php">
+        <entry file="file://$PROJECT_DIR$/database/migrations/2019_04_06_101601_create_commission_history_table.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="33" column="94" selection-start-line="33" selection-start-column="94" selection-end-line="33" selection-end-column="94" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#1067#1074#1#HTML" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#1546#1553#1#HTML" expanded="true" />
-              </folding>
+            <state relative-caret-position="361">
+              <caret line="21" column="47" lean-forward="true" selection-start-line="21" selection-start-column="47" selection-end-line="21" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -171,7 +170,6 @@
         <option value="$PROJECT_DIR$/resources/views/templates/user/shell.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/settings.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/product/all.blade.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_04_06_101601_create_commission_history_table.php" />
         <option value="$PROJECT_DIR$/resources/views/user/account.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/user/edit-account.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/user/product-buy.blade.php" />
@@ -191,6 +189,7 @@
         <option value="$PROJECT_DIR$/database/migrations/2019_03_16_122256_create_withdraw_requests_table.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/login.blade.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_04_06_101601_create_commission_history_table.php" />
       </list>
     </option>
   </component>
@@ -286,7 +285,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -297,25 +295,19 @@
             <path>
               <item name="ezy2biz" type="b2602c69:ProjectViewProjectNode" />
               <item name="ezy2biz" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ezy2biz" type="b2602c69:ProjectViewProjectNode" />
               <item name="ezy2biz" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ezy2biz" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ezy2biz" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+              <item name="migrations" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -390,18 +382,19 @@
       <workItem from="1554385431169" duration="643000" />
       <workItem from="1554441579832" duration="1998000" />
       <workItem from="1554524068504" duration="18679000" />
-      <workItem from="1554615132363" duration="887000" />
+      <workItem from="1554615132363" duration="1481000" />
+      <workItem from="1554908013451" duration="34000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="231823000" />
+    <option name="totallyTimeSpent" value="232451000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2602118" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26399395" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -582,13 +575,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2019_04_06_101601_create_commission_history_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="16" column="37" lean-forward="true" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://239f6cae-3135-4428-acaf-f84f7ab57740/schema/ezy2biz/table/commission_history">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -764,8 +750,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/templates/shell.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
+        <state relative-caret-position="722">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
         </state>
       </provider>
     </entry>
@@ -773,12 +759,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="338">
           <caret line="33" column="94" selection-start-line="33" selection-start-column="94" selection-end-line="33" selection-end-column="94" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#1067#1074#1#HTML" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#1546#1553#1#HTML" expanded="true" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_04_06_101601_create_commission_history_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="21" column="47" lean-forward="true" selection-start-line="21" selection-start-column="47" selection-end-line="21" selection-end-column="47" />
         </state>
       </provider>
     </entry>
